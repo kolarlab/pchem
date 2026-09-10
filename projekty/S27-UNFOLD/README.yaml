@@ -1,0 +1,16 @@
+title: Rozbalování proteinů
+difficulty: 5
+supervisor: Michal Kolář
+keywords:
+    - protein
+    - teplotní denaturace
+    - molekulová dynamika
+    - GROMACS
+story:
+    - Molekulově dynamické simulace poskytují konformační soubor biomolekul.
+    - Umožňují studovat strukturu a dynamiku biomolekul na časových škálách mikrosekund s atomárním rozlišením.
+instructions:
+    - Zvolte si malý protein neobsahující disulfidické můstky a vyhledejte jeho exprimentálně zjištěnou terciární strukturu.
+    - Proveďte molekulově dynamické simulace proteinu při tlaku 1 bar pro teploty 310 K a 370 K. Potřeba budou simulace na časových škálách stovek nanosekund.
+    - Projeví se při vyšší teplotě teplotní denaturace? Popište dynamiky proteinu vhodnými metrikami.
+    - Výsledky a pozorování diskutujte.

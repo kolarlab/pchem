@@ -1,0 +1,20 @@
+title: Stavební kameny bakteriálního ribozomu
+difficulty: 3
+supervisor: Michal Kolář
+keywords:
+    - ribozom
+    - protein
+    - RNA
+    - PDB
+    - VMD
+    - Mol*
+    - Chimera
+    - Pymol
+story:
+    - Ribozom je biomolekulový komplex zodpovědný za syntézu proteinů.
+    - V bakteriích se skládá z asi 50 ribozomálních proteinů a 3 vláken ribozomální RNA.
+instructions:
+    - V PDB vyhledejte strukturní model bakteriálního ribozomu s rozlišením alespoň 3,0 \AA.
+    - Vytvořte vizualizace celého ribozomu.
+    - Každou jeho část vizualizujte zvlášť.
+    - Části ribozomu (ribozomální RNA a proteiny) seřaďte podle různých kritérií, např. počtu reziduí, gyračního poloměru, počtu bazických reziduí, atp.

@@ -1,0 +1,14 @@
+title: Simulace hromadné obsluhy
+difficulty: 2
+supervisor: Jiří Kolafa
+keywords:
+    - Monte Carlo
+story:
+    - Při hromadné obsluze zákazníků vznikají fronty. Úkolem modelů je minimalizovat fronty a přitom neplýtvat s personálem.
+instruction:
+    - Uloženka obsluhuje jednoho zákazníka jednu minutu, otevřeno má od 8 do 18 h (t minut), za tu dobu přijde n=500 zákazníků.
+    - Zákazníci přicházejí zcela náhodně (rovnoměrné rozdělení) v průběhu celé otvírací doby.
+    - Není-li v Uložence volno, čekají ve frontě (mohou čekat i po zavírací době, ale další již nepřicházejí).
+    - Simulujte tento proces a stanovte průměrnou dobu čekání zákazníka a pravděpodobnost, že zákazník bude čekat déle než 5 minut (tj. bude naštvaný).
+    - Bonus: Podaří se vám odvodit analytický vztah pro průměrnou dobu čekání za předpokladu n→∞ a n<t?
+    - Bonus: Úlohu si můžete libovolným způsobem upravit (více míst obsluhy, nerovnoměrný přísun zákazníků aj.).

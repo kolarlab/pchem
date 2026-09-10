@@ -1,0 +1,30 @@
+﻿Jevy jako rychlost reakce, difuze, elektrická vodivost iontových roztoků a roztavených solí či viskozita lze vysvětlit pomocí překonání určité bariéry neboli aktivační energie procesu (E*). Důsledkem je charakteristická závislost na teplotě:
+  veličina = const × exp(−E*/kB T) (pro viskozitu se znaménkem +)
+
+Koeficient difuze lze spočítat z tzv. MSD (mean square displacement) v závislosti na čase. Platí
+  MSD(t) = ⟨ [r(t) - r(0)]² ⟩ = bt (případně po odstranění přechodových jevů v krátkých časech a+bt).
+V simulaci se počítá průměr veličiny MSD(t) přes všechny částice.  
+
+V simulaci v periodických okrajových podmínkách je nutno počítat MSD tak, že algoritmus sleduje, ve kterém periodickém boxu se částice nachází. Pokud se neumí algoritmus rozhodnout, ohlásí chybu "Cannot follow the periodic boundary conditions". Je nutno zvětšit systém, zkrátit velikost bloku apod.
+
+1) Nastavení:
+  - menu → [Prepare system] → [Periodic liquid]
+  - menu → [Show] → [Volume convergence profile]
+  - simulation speed na maximum
+  - measurement block 10–30 (maximum 100 může vést k chybě "Cannot follow the periodic boundary conditions")
+
+2) Výpočet:
+  - vhodný tlak je P=1
+  - nastavte teplotu odpovídající tekutině (T>0.6)
+  - include → [Convergence prof.] (Expert panel)
+  - stiskněte [▫ record]
+  - spočtěte 10–30 bloků
+  - stiskněte [▫ record] znovu a uložte
+  - otevřete simolant.csv a zobrazte sloupce MSDx a MSDy (případně jejich součet) jako funkci t
+  - stanovte směrnici b (v hustších systémech po vynechání začátku): MSD(t)=a+bt
+  - vypočtěte difuzivitu podle vzorce D=b/2 (v 1 dimenzi) resp D=b/4 (pro MSDx + MSDy)
+  - opakujte pro stejnou teplotu několikrát, abyste měli lepší statistiku
+
+3) Zopakujte bod 2 pro jinou teplotu (jiné teploty)
+
+4) Nakreslete graf závislosti ln D na reciproké teplotě 1/T. Pro Arrheniovské chování je tento graf lineární. Nastane-li tento případ, určete aktivační energii difuze. Nezapomeňte, že Boltzmannova konstanta je zde definována jako 1.

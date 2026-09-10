@@ -1,0 +1,11 @@
+title: Střední kvadratické posunutí
+difficulty: 1
+supervisor: Jiří Kolafa
+keywords:
+    - SIMOLANT
+story:
+    - Střední kvadratické posunutí (Mean Square Displacement) částice je definováno vztahem MSD(t)=⟨[r(0)−r(t)]²⟩.
+instruction:
+    - Pro 2D systém stanovte vlastnosti MSD v různých skupenstvích a okrajových podmínkách.
+literature:
+    - https://github.com/kolafaj/SIMOLANT

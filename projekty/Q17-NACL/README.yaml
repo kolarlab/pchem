@@ -1,0 +1,15 @@
+title: Disociace NaCl
+difficulty: 4
+supervisor: Petr Slavíček
+keywords:
+    - chemie v roztoku
+    - UV-VIS spektroskopie
+instructions:
+    - Zvolte kvantově-chemickou metodu, kterou budete používat při následujících výpočtech.
+    - Zoptimalizujte strukturu NaCl.
+    - Ověřte, že se struktura nachází v minimu na hyperploše potenciální energie.
+    - Na jaké fragmenty bude disociovat NaCl v plynné fázi a na jaké ve vodě? Rozpouštědlo modelujte jako spojité dielektrikum.
+    - Kolik molekul vody je třeba, aby došlo k disociaci molekuly NaCl?
+    - Výpočítejte excitační energie, a odhadněte, jakou barvu by měla molekula NaCl v plynné fázi?
+literature:
+    - J. Phys. Chem. A 104 (2000) 145.

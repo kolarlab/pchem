@@ -1,0 +1,152 @@
+Následující podrobný návod je pro MACSIMUS. Můžete použít i jiný software, pokud ho ovládáte.
+
+Simulujte metodou MD ve slab geometrii vodu TIP4P/2005 s párou za teploty 200 °C a stanovte rovnovážné hustoty a tlak.  Stanovte také povrchové napětí.
+
+Budete používat cookewslc nebo cookewslcP1 (paralelní verze – rychlejší)
+
+
+================= 0 ===================
+
+Pro hustotní profil (zde ve směru osy z, tj. „z-profil“) jednoho fázového rozhraní, např. z plynu do kapaliny, se uvádí tvar funkce tanh (hyperbolický tangens)
+
+  rho(z) = rho_g + (rho_l-rho_g)/2*tanh((z-z0)/σ)
+
+kde σ = pološířka rozhraní, z0=poloha rozhraní, rho_g a rho_l = hustotu plynu a kapaliny.
+V simulaci vrstvy máme dvě ovlivňující se rozhraní a periodické okrajové podmínky, kombinací dostaneme:
+
+  rho(z) = rho_g + SUM_i (rho_l-rho_g)/2*[tanh((i*Lz+z-Lz/2+d/2)/σ)-tanh((i*Lz+z-Lz/2-d/2)/σ)]
+
+kde se předpokládá je plyn centrovaný do z=0 a kapalina do z=Lz/2, Lz je velikost boxu ve směru z (kterou znáte resp. najdete v *.prt souboru), SUM_i je součet od −∞ do +∞, ale v praxi stačí tři členy i=-1,0,1.
+((Není-li hustotní profil centrovaný, nahraďte druhé d ve vzorci jinou proměnnou, třeba dd.))
+
+Simulace vám poskytne funkci rho(z), kterou nafitujeje na výše uvedenou funkci. Máte čtyři neznámé parametry:
+  rho_g, rho_l, d, σ ((příp. dd))
+K fitování můžete použít Maple, funkci Statistics[Fit].  Stanovte i odhady chyb!
+
+Povrchové napětí viz kapitola "15.7.1 Surface tension via pressure tensor" v manuálu http://old.vscht.cz/fch/software/macsimus/macsimus.pdf#page=217
+
+
+==================== 1 ==================
+----- Připravte soubor TIP4P05.che s tímto obsahem: ------
+
+-------------------- TIP4P05.che -------------------
+TIP4P/2005
+parameter_set = water
+
+      H405p.55640
+     /
+   O405-M405n1.1128
+     \
+      H405p.55640
+-----------------------------------------------------
+
+a vygenerujte silové pole takto:
+   blend -o voda -h TIP4P05
+
+Simulační box by měl být ve směru osy z asi 2.5–3 x delší než v x a y. (Delší poměr by byl přesnější, ale výpočet pomalejší). Použijte ALESPOŇ 300 molekul vody, spočtěte velikost boxu tak, aby ve vašem boxu byla asi polovina kapalná voda a zbytek vakuum (ve skutečnosti trochu vody vypaří), dosaďte níže v Å, vyzkoušejte a případně změňte. V konečném boxu by kapalná voda měla být zhruba krychle a zbytek pára.
+
+---------- Vstupní soubor pro simulaci, vhodné jméno = voda300.def --------------------------
+n=POCET_MOLEKUL       ! pomocna promenna - pripadne zkusit pro ruzne velikosti
+N[0]=n                ! pocet molekul
+
+x=SPOCITAT            ! pomocna promenna [AA] (x velikost boxu)
+y=x
+z=3*x                 ! nebo L[2]=2.5*x ! velikost boxu [AA]
+
+L[0]=x L[1]=y L[2]=z  ! dosazeni do ocekavane velikosti boxu
+cutoff=x/2            ! elst cutoff [AA]
+                      ! nastavit na polovinu boxu
+                      ! u vetsich systemu i o neco mene (ovlivnuje rychlost vypoctu)
+LJcutoff=cutoff       ! LJ cutoff  [AA]
+                      ! nesmi byt vetsi nez cutoff, obv. 10 AA je OK
+
+el.epsk=0.1 el.epsr=0.1 ! presnost elst sil
+el.diff=0.3           ! omezi urcita varovani
+
+equalize.cfg=0.8      ! zpusobi zvetseni hmostnosti H a zmenseni O - lze pak delsi krok
+noint=5 h=0.002       ! pocet kroku/cyklus a delka kroku [ps]
+no=1000               ! pocet cyklu (budete menit dale)
+dt.plb=1              ! jak casto se bude zapisovat "playback" [ps]
+dt.prt=1              ! 1 radek protokolu/1 [ps]
+
+thermostat="Berendsen"! termostat
+
+tau.T=2               ! casova konstanta termostatu [ps] - default
+
+!init="slab"          ! vytvori vrstvu (kterou nutno dale zrovnovaznit)
+!init="start"         ! start z predchozi konfigurace; nove mereni a zaznam
+tau.rho=1             ! pokud se nepovede napoprve vlozit molekuly, pouzije
+                      ! se vetsi box, ktery se pak musi zase zmensit
+
+slab.K=10             ! Lennard-Jones cutoff correction v ose z
+                      ! Fourierova rada do cos(9*2*pi*x/L[2])
+corr=0                ! vypne ostatni typy korekci
+slab.grid=100         ! 100 chlivecku histogramu z-profilu
+slab.mode=1           ! bude se merit i povrchove napeti
+slab.sp=0             ! vrstva se bude pro mereni z-profilu centrovat
+slab.prt=19           ! 1=num.density profiles [AA-3]
+                      ! 2=rho density profiles [kg/m3]
+                      ! 16=charge density profile [e/AA3]
+
+el.corr="z"           ! Yeh–Berkowitz slab dipole correction
+;
+---------------------------------------------
+
+Řídicí soubor simulace pro start - případně několik podle počtu částic
+----------- vhodné jméno = voda300.get -------------
+init="slab"           ! vytvori vrstvu (kterou nutno dale zrovnovaznit)
+T=TEPLOTA             ! [K] teplota
+no=500 tau.T=.2;      ! pocatecni michani
+no=200 tau.T=1;       ! dalsi michani
+---------------------------------------------------------------
+
+Na klastru (Argon):
+Start simulace na klastru (sériově):
+  jsub -q aq -n JMENOJOBU cookewslc voda voda300
+Start simulace (paralelně, 3 vlákna, doporučeno):
+  jsub -q aq -p 3 -n JMENOJOBU cookewslcP1 voda voda300
+Doma (linux, Cygwin, WSL):
+  NSLOTS=4 cookewslcP1 voda voda300
+kde NSLOTS je počet dostupných procesorů (ne vláken!)
+
+Analýza michani výsledků:
+1) podívat se na voda300.cp:
+  showcp -p voda300.cp
+2) na konfiguraci voda300.plb:
+  show voda300.plb
+3) v souboru voda300.prt najít speed = a podle toho plánovat práci
+   Přiměřeně přesný výsledek při použití paralelizace lze dostat za hodinu dvě
+   pro 300 molekul, pro 500 molekul přes noc
+
+-------- úprava simulace ------------
+----- SOUBOR voda.def:
+opravit x a cutoff, je-li potřeba
+------ SOUBOR voda300.get:
+init="start"           ! start z predchozi konfigurace; nove mereni a zaznam
+T=TEPLOTA
+no=POCET_CYKLU         ! aby to bylo za rozumnou dobu
+;
+--------------------------------------
+
+Je třeba sledovat i tlak ve směru z, to se zajisti vytvořením souboru voda300.cpi s následujícím řádkem
+--------------------------------------
+Ptzz
+--------------------------------------
+
+============ Analýza výsledků ================
+1) voda300.cp – je vše v pořádku (tj. hlavně už musíme být v rovnováze)?
+2) grafy hustoty v kg/m3:
+  plot voda300.cm.kgm-3.z:1:2 :3 :4
+3) tlak: najít poslední řádek =Ptens.zz [Pa]=
+  # HODNOTA STDERR ...  =Ptens.zz [Pa]=
+  k tlaku přičtete "Yeh-Berkowitz correction of pressure tensor components", tj. "Delta Ptens.zz ="
+STDERR (standarní chyba) by měla být několikrát menší než hodnota
+4) nafitovat hustotní profil dle bodu === 0 === a stanovit rho_g
+
+TIPY PRO DALŠÍ POSTUP:
+- Není-li dost přesné, provést podle možností delší simulaci
+- Zkusit větší počet molekul (cca 500; 1000 a více by už bylo dost pomalé). Jak se změní pološířka rozhraní σ?
+- Odpovídá hustota stavové rovnici idálního plynu?
+- Vyskytují se v páře dimery?
+- Srovnat s experimentem.
+- Stanovit povrchové napětí: v souboru *.prt najdete poslední tabulku "surface tension in N/m" a v ní řádek "from full Pt (incl.kin.part)". Použijte sloupce "FF-corrected" a "stderr".

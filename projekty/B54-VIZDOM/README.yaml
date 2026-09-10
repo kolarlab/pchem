@@ -1,0 +1,17 @@
+title: Vizualizace multidoménového proteinu
+difficulty: 2
+supervisor: Michal Kolář
+keywords:
+    - protein
+    - PDB
+    - VMD
+    - Mol*
+    - Chimera
+    - Pymol
+story:
+    - Proteiny s dlouhou sekvencí jsou obvykle orgranizované do několika domén. K funkci proteinu pak přispívá jejich vzájemná dynamika.
+instructions:
+    - V PDB vyhledejte strukturní model proteinu, který se skládá alespoň ze 3 domén. Typicky půjde o proteiny s délkou sekvence > 500.
+    - Vyberte strukturní model, který má rozlišení alespoň 3,5 \AA.
+    - Vytvořte vizualizace proteinu tak, aby každá doména byla vykreslena jinou barvou.
+    - Vytvořte vizualizace funkčně kritických částí biomolekulového komplexu, zvolte vhodnou reprezentaci.

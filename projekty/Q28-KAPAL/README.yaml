@@ -1,0 +1,14 @@
+title: Ztužení helia a vodíku
+difficulty: 2
+supervisor: Petr Slavíček
+keywords:
+    - ionizace
+    - vazebná energetika
+story:
+    - Zkapalnění helia byl triumf kryogenní vědy přelomu 19. a 20. století, zkapalnit vodík je podstatně snazší.
+    - Podívejme se na interakci sodíku s klastry vody konečné velikosti.
+instructions:
+    - Studujte vazebné křivky mezi dvěma atomy vodíku a dvěma molekulami vodíku (v kolineárním i kolmém uspořádání).
+    - K výpočtům vazebné energie použijte metodu CCSD(T)/aug-cc-pVQZ.
+    - Studujte také ionizační energii a polarizovatelnost vodíku a helia.
+    - V úvodu protokolu pojednejte o teorii disperzních sil a historii zkapalňování.

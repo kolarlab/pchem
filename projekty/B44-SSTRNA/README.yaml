@@ -1,0 +1,15 @@
+title: Analýza sekundární struktury tRNA
+difficulty: 2
+supervisor: Michal Kolář
+keywords:
+    - tRNA
+    - sekundární struktura
+    - PDB
+    - RNAfold
+    - ViennaRNA
+story:
+    - Transferové RNA jsou evolučně staré biomolekuly účastnící se translace.
+instructions:
+    - Zvolte si transferovou RNA, jejíž terciární struktura je určená experimentálně s rozlišením lepším než 3,0 \AA.
+    - Predikujte sekundární strukturu tRNA pomocí několika predikčních nástrojů.
+    - Výsledky predikčních metod provnejte mezi sebou a srovnejte je s výsledky odvozenými ze známé 3D struktury.

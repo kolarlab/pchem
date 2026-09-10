@@ -1,0 +1,16 @@
+title: Vlastnosti benzynu
+difficulty: 2
+supervisor: Petr Slavíček
+keywords:
+    - vibrační analýza
+    - termochemie
+story:
+    - Benzyn je důležitým reaktivním meziproduktem v některých organických reakcích.
+instructions:
+    - Popiště základní vlastnosti benzynu a pojednejte o jeho významu.
+    - Zvolte si, kterou kvantově-chemickou metodu použijete při následujících výpočtech.
+    - Zoptimalizujte molekulu benzynu.
+    - Vibrační analýzou ověřte, že se systém nachází v minimu hyperplochy potenciální energie.
+    - Spočtené vibrační frekvence přiřaďte jednotlivým pohybům v molekule.
+    - Vypočítejte entalpii a Gibbsovu energii hydrogenace v plynné fázi při 300 K.
+

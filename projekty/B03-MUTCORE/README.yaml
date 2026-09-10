@@ -1,0 +1,17 @@
+title: Vliv bodové mutace na hydrofobní jádro proteinu
+difficulty: 3
+supervisor: Michal Kolář
+keywords:
+    - AlphaFold
+    - protein
+    - aminokyselina
+    - terciární struktura
+story:
+    - Hydrofobní jádro je část proteinu, která se nachází v jeho nitru a obyčejně obsahuje rezidua s nepolárními postranními řetězci.
+    - Kolaps hydrofobních reziduí pomáhá během proteinového balení při tvorbě správné terciární struktury.
+instructions:
+    - Zvolte si protein s hydrofobním jádrem, jehož experimentálně zjištěný strukturní model je dostupný v PDB s rozlišením alespoň 3,0 \AA.
+    - Vytvořte tři analogy zvoleného proteinu. Každý analog nechť má jedno reziduum z hydrofobního jádra mutované na serin.
+    - Pomocí modelu AlphaFold určete terciární struktury mutovaných analogů.
+    - Pomocí vhodné metriky srovnejte struktury mutovaného a nemutovaného proteinu.
+    - Diskutujte i přesnost AlphaFold modelu srovnání experiemntální a predikované struktury nemutovaného analogu.

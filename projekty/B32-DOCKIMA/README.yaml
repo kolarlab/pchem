@@ -1,0 +1,17 @@
+title: Docking imatinibu
+difficulty: 4
+supervisor: Michal Kolář
+keywords:
+    - dokování
+    - docking
+    - SwissDock
+    - protein-ligand interakce
+story:
+    - Imatinib patří mezi orálně užívané léky účinné proti některým typům nádorů.
+instructions:
+    - Pomocí nástroje SwissDock analyzujte, jak se váže imatinib na tyrosin-kinázu c-ABL.
+    - Jako výchozí použijte experimentálně zjištěnou strukturu protein-ligandového komplexu (PDB 1IEP)
+    - Pomocí vhodné metriky porovnejte predikovanou polohu ligandu s experimentálně určenou polohou.
+    - Popište roli dílčích nekovalentních interakcí mezi ligandem a c-ABL.
+literature:
+    - https://aacrjournals.org/cancerres/article/62/15/4236/509099/Crystal-Structures-of-the-Kinase-Domain-of-c-Abl

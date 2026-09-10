@@ -1,0 +1,17 @@
+title: Rayleighova nestabilita
+difficulty: 3
+supervisor: Jiří Kolafa
+keywords:
+    - molekulová dynamika
+    - MACSIMUS
+story:
+    - Padající čúrek vody se rozpadá na kapky, což je příklad nestability v hydrodynamice tekutin.
+    - Podobné jevy vedou ke vzniku některých druhů mraků, ovlivňují chování vody v turbínách aj.
+instruction:
+    - Nejprve si najděte v literatuře teorii tohoto jevu.
+    - Simulujte tento jev pomocí dlouhého válce kapalného argonu (případně vody – další informace na požádání).
+    - Vzniknou kapky o teoreticky předpovězené velikosti?
+    - Otázka pro česky mluvíci: Je správně čůrek nebo čúrek? 
+    - Otázka pro česky nemluvící: Jak se řekne čúrek ve vašem rodném jazyce?
+literature:
+    - https://old.vscht.cz/fch/cz/pomucky/kolafa/pchemlm.pdf

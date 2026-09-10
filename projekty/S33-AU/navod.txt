@@ -1,0 +1,89 @@
+Následující podrobný návod je pro MACSIMUS. Můžete použít i jiný software, pokud ho ovládáte.
+
+Vytvořte krystalky zlata ve tvaru dvacetistěnu. Použijte potenciál typu tight-binding (implementaci dostanete na požádání). Studujte hustotu ve středu krystalku za nulové teploty v závislosti na počtu atomů. Zkuste krystalek roztavit a pomalu zchladit – zkrystalizuje opět?
+
+K simulaci použijte metalfree (přiložen, rozzipujte do vašeho pracovního adresáře), pro argon cookfree (~guest/macsimus/bin/cookfree); v případě problémů/nekompatibility se ozvěte.
+
+=============== 1 ===============
+Zlato krystalizuje v soustavě fcc. Napište počítačový program, který vám vyrobí klastr zlata ve tvaru dvacetistěnu. Dostanete ho tak, že vyrobíte krychli a uříznete rohy. Krychli vyrobíte asi takto (použijte jakýkoliv jazyk):
+
+for i:=-n to n do
+  for j:=-n to n do
+    for k:=-n to n do
+      if (i+j+k je sudé) then
+        zapiš vektor i,j,k
+      endif
+    enddo
+  enddo
+enddo
+
+Výsledkem výše uvedeného kódu je fcc mřížka s mřížkovou konstantou 2. Znásobte ještě vhodným číslem, abyste dostali správnou mřížkovou konstantu (v Å), kterou vypočtete z hustoty zlata. Z těchto výsledků vytvořte textový soubor s následujícím formátem
+------ test.txt -------
+N 0
+X1 Y1 Z1
+X2 Y2 Z2
+...
+XN YN ZN
+-----------------------
+kde N je počet atomů.
+
+========= 2 ==========
+Proveďte konverzi příkazy:
+  asc2plb test.txt test.plb
+  plb2cfg test.plb test.cfg N
+
+========= 3 ==========
+Vytvořte soubor test.def s obsahem:
+------- test.def -------
+N[0]=N          ! misto N dosadte pocet atomu
+rho=10000       ! hustota v kg/m3
+LJcutoff=8      ! cutoff v AA
+cutoff=LJcutoff ! cutoff v AA (v jinych modelech pro elst interakce)
+dt.plb=1        ! jak casto zapisovat "playback", v ps
+dt.prt=1        ! jak casto zapisovat radek s energii, teplotou aj., v ps
+h=0.005         ! delka MD kroku v ps
+noint=20        ! pocet kroku v cyklu
+;
+----------
+
+Vytvořte soubor test.get s obsahem:
+------- test.get -------
+init="start"
+T=0       ! minimalizace energie
+thermostat="Berendsen"
+tau.T=0.2 ! casova konstanta termostatu
+no=100;   ! pocet cyklu
+----------
+
+Spusťte:
+  metalfree au test
+
+Pro dlouhé běhy na klastru:
+  jsub metalfree au test
+a kontrolujte pomocí
+  jstat
+
+========= 4 ==========
+Změřte velikost pomocí show (z mc kliknout na test.plb):
+Klikejte na koule v dostatečném zvětšení, vhodné je koule zmenšit, případně použít mode 6 nebo 7.
+
+========= 5 ==========
+Zkopírujte .def, .get, .plb a roztavte a zase nechte zchladit příkazem typu (v get-souboru):
+  init="start" T=1000 thermostat="Berendsen" tau.T=0.2 no=300;
+
+a pak zase POMALU ochlaďte
+  T=300 thermostat="Berendsen" tau.T=20 no=1000;
+  ! čas simulace no*noint*h = několikanásobek tau.T
+
+========= 6 ==========
+Obdobná simulace pro argon potřebuje cookfree a silové pole, které se vyrobí takto:
+(i) Vytvořte soubor AR.che s obsahem:
+------------ AR.che -------------
+molecule Ar
+AR
+---------------------------------
+(ii) Vygenerujte silové pole:
+  blend -o ar AR
+(vytvoří se ar.ble)
+(iii) Zvětšete parametry cutoff a LJcutoff na aspoň 12.
+Další postup je stejný, jen místo 'metalfree au test' budete mít 'cookfree ar test'. Argon také krystalizuje v fcc, jen asi budete muset změnit mřížkovou konstantu počátečního krystalu.

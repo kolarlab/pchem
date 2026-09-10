@@ -1,0 +1,69 @@
+﻿Analogií povrchového napětí ve 2D je lineární napětí (line tension), rozměr je J/m = N. SIMOLANT ovšem používá bezrozměrné jednotky, takže rozměr je 1.
+
+Ve 3D pro "slab-geometrii" (1 vrstva kapaliny se dvěma povrchy kolmá k ose z) platí pro povrchové napětí:
+    γ = (2 Pzz − Pxx − Pyy)*Lz/4
+kde Lz je velikost simulační buňky ve směru osy z a Pzz,Pyy,Pzz jsou diagonální složky tenzoru tlaku.
+
+Ve 2D obdobně pro lineární napětí γ a vrstvu kolmou k ose y platí
+    γ = (Pyy – Pxx)*Ly/2
+
+Povrchové/lineární napětí γ je formou Gibbsovy energie. Za konstantního tlaku lze tedy napsat:
+   γ = η − T σ
+kde η je povrchová entalpie a σ = −∂γ/∂T je povrchová entropie (vzpomeňte si na vzorce dG = −S dT + V dp a G = H − TS).
+
+V úloze stanovíme změnu teploty ΔT přímo ze simulace dvou kapek a změnu entaplie, ΔH = ΔT*Cp porovnáme s teoretickou hodnotou spočtenou nezávislou simulací, −η Δ, kde Δl je změna délky obvodu kapek (ve 3D to bude změna plochy povrchu kapek) a Cp je izobarická tepelná kapacita.
+
+A) Splynutí kapek
+
+1) Pro stanovení ΔT splynutí kapek připravte:
+- N=300 vyhovuje
+- Panel vpravo dole: "simulation speed" nechte, "measurement block" je možné trochu zkrátit (např. stride*block=3*3 ve 4. řádku) – vyzkoušejte si
+- Panel Expert → include: [Convergence profile]
+
+2) Koalescence kapek
+- Nastavte v poli cmd: následující parametry:
+  drop.T = počáteční teplota kapky (default = 0.45, vhodné je i 0.4); vzhledem ke způsobu výroby kapky (greedy minimalizace + MC) to není přesně výsledná teplota kapky
+  drop.v = v = kapky se pohybují proti sobě stejnou rychlostí drop.v, vhodná hodnota je okolo 0.2 (default=0.5 je příliš rychlý); lze použít i drop.v=0, ale koalescence kapek trvá velmi dlouho
+- Menu: [Prepare system] → Two droplets
+- Počkejte, až zmizí MC (mělo by být rychle) a kapky se začnou pohybovat k sobě
+- Stiskněte [▫ record] a počkejte, až kapky splynou a chvilku ještě simulujte
+- Vypněte [▫ record] a uložte
+- Opakujte krok 2 několikrát, abyste získali aspoň hrybý odhad nejistoty
+
+3) Analýza dat
+- Vykreslete soubory simolant-CP?.csv (sloupce 1=t a 3=Tkin) a odhadněte zvýšení teploty:
+  ΔTeff = Tout − Tin,
+Tout je naměřená průměrná teplota po splynutí, Tin před splynutím.  
+Další analýza viz krok C.
+
+B) Termodynamika povrchu
+
+4)
+- panel dole: "simulation speed" na maximum
+- panel dole: "measurement block" na maximum
+- panel Expert → include: [Density profile]
+
+5) Zvolte si teplotu, např. T1=drop.T+0.05
+- menu: [Prepare system] → [Horizontal slab]
+- Stiskněte [▫ record] a měřte poměrně dlouho (numerická derivace je nepřesná)
+- ignorujte hlášku "Cannot follow periodic boundary conditions"
+- Zapište pomocí [▫ record]
+- opakujte pro nižší teplotu, např. 
+- vypočtěte σ = −∂γ/∂T ≈ −[γ(T2)−γ(T1)]/(T2−T1) včetně odhadu chyby
+- vypočtěte η = γ + T σ, kde T=(T1+T2)/2=drop.T, γ=[γ(T2)+γ(T1)]/2
+
+6) Protože simulace vrstvy jsou přibližně za P=0, je entalpie na částici rovna prakticky Etot. Z výše uvedených dvou simulací tedy dostanete
+   Cp = [Etot(T2)−Etot(T1)]/(T2−T1)
+
+7) Nakreslete soubory simolant-VDP?.csv a odhadněte průměrnou číselnou hustotu uprostřed vrstvy ≈ hustota kapaliny.
+
+C) Porovnání obou částí
+
+8) Korekce na drop.v
+- Kdyby byla rychlost drop.v=0, platilo by ΔT=ΔTeff a ΔH=ΔT*Cp.
+- Pokud je drop.v nenulové, jsou potřeba dvě korekce:
+  1) Teplota kapek před splynutím (Tin) hlášená SIMOLANTem je o v²/2 vyšší, protože se počítá z kinetické energie, a rychlost každé částice je o drop.v vyšší.
+  2) V bilanci energie mám kinetickou energii obou kapek, Nv²/2, navíc. Proto
+  ΔH = ΔT*Cp − Nv²/2 = (ΔTeff + v²/2)*Cp − Nv²/2
+9) Ze známého počtu částic, číselné hustoty a vzorce pro plochu kruhu vypočtěte poloměry obou menších kapek a poloměr výsledné kapky a z toho rozdíl obvodů, Δl (ten je záporný). Vypočtěte  ΔH = −η Δl a srovnejte s hodnotou z bodu 8).
+

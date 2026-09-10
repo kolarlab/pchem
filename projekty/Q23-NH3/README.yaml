@@ -1,0 +1,30 @@
+title: Syntéza amoniaku v plynné fázi
+difficulty: 4
+supervisor: Petr Slavíček
+keywords:
+    - energetika reakce
+    - chemické rovnováhy
+    - IR spektroskopie
+story:
+    - Katalytické syntéze amoniaku dle Habera a Bosche vděčíme za přežití většiny z 8 miliard současných obyvatel planety.
+    - Mluvíme o deštníkovém efektu nebo o planární inverzi.
+    - Hwang a Mebel navrhli následující mechanismus
+    - mechanismus:
+        - N2 + H2 arrow NNH2
+        - NNH2 + H2 arrow H2NNH2
+        - H2NNH2 arrow HNNH3
+        - HNNH3+ H2 arrow NH3 + NH3
+instructions:
+    - Následující výpočty počítejte na B3LYP/6-31+G* úrovni.
+    - Zoptimalizujte zmíněné struktury.
+    - Ověřte, že se struktury nachází v minimu na hyperploše potenciální energie.
+    - Stanovte energetiku jednotlivých reakčních kroků.
+    - První reakce je rychlost určujícím krokem, nalezněte pro ni tranzitní stav.
+    - Spočítejte aktivační energii této reakce.
+    - Hodnotu této energie přepočítejte na CCSD(T) úrovni s aug-cc-pVTZ bází.
+    - Vypočítejte rovnovážnou konstantu celkové reakce vzniku amoniaku pro 700 K a 1000 K.
+    - Vypočtenou konstantu srovnejte s experimentem.
+    - Pro meziprodukty vypočítejte IR spektrum na B3LYP/6-31+G* úrovni.
+    - V úvodu protokolu se dotkněte etických otázek vědeckého výzkumu na příkladu Fritze Habera.
+literature:
+    - J. Phys. Chem. A 2003, 107, 2865–2874

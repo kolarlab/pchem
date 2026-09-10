@@ -1,0 +1,24 @@
+﻿Newtonovy pohybové rovnice jsou
+  d²R/dt² = F/m
+kde R = {r_i}, i=1..N, je N vektorů polohy hvězd (3N čísel), F je N vektorů sil.
+Sílu (vektor) působící na hvězdu i spočteme takto
+  f_i = ∑_j G m² r_ij/|r_ij|³, j=1..N, j≠i
+kde
+  G je gravitační konstanta, r_ij = r_j−r_i (vektor) a |r_ij| je jeho velikost (skalár).
+Celková potenciální energie je
+  Epot =  ∑_ij G m²/|r_ij|,
+kde se sčítá přes všechny páry.  
+K integraci použijte numerickou metodu s adaptivním krokem pro přesný a efektivní popis blízkých průletů. Chcete-li si napsat sami i integrační metodu, doporučuji metodu Runge-Kutta 4. řádu pro rovnice 2. stupně (viz Wikipedie nebo Ralston: Základy numerické matematiky nebo https://old.vscht.cz/fch/cz/pomucky/kolafa/simul04.pdf#page=7). Adaptivní krok znamená, že testujete poloviční a dvojnásobný časový krok a podle toho, jak výsledky souhlasí, měníte krok.
+
+Zvolte hustotu hvězdokupy, např. 1 hvězda/LY³ (LY = světelný rok) ve středu. Přesnější výpočty najdete v literatuře, ale pro základní simulaci lze použít následující postup:
+
+1) Nastřílejte náhodně hvězdy do koule tak, aby hustota odpovídala zvolené. O něco lepší aproximací je Gaussovský mrak. Existují vzorce pro rozdělení hustoty hvězd, ale váš úkol je získat rovnovážnou hvězdokupu získat simulací.
+
+2) Vypočtěte nebo odhadněte potenciální energii. Na základě věty o viriálu
+  2 ⟨Ekin⟩ + ⟨Epot⟩ = 0
+odhadněte typickou rychlost hvězd. Počáteční rychlosti hvězd by měly mít zhruba tuto rychlost a faktor náhody, např. Maxwellovo–Boltzmannovo rozdělení ve 3D.
+
+3) Simulujte a sledujte:
+- graficky, zda hvězdokupa kolabuje (pak zvětšete počáteční rychlosti) nebo exploduje (zmenšete je).
+- celkovou energii Ekin + Epot (měla by být konstantní = kontrola správnosti)
+- veličinu 2 Ekin + Epot (tzv. viriál: měl by konvergovat k 0 a pak fluktuovat)

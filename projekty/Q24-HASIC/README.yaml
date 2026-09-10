@@ -1,0 +1,24 @@
+title: Požární chemie
+difficulty: 4
+supervisor: Petr Slavíček
+keywords:
+    - termochemie
+    - energetika reakce
+    - chemické rovnováhy
+story:
+    - Látka označovaná jako HFC-227ea (1,1,1,2,3,3,3-heptafluorpropan) se používá jako hasicí činidlo.
+    - Je známé také pod označením FM-200.
+    - Tato látka má vysokou tepelnou kapacitu a je schopna reagovat s některými volnými radikály.
+    - Při vysoké teplotě může ale docházet k eliminaci fluorovodíku za vzniku perfluorpropenu (viz příloha).
+    - Experimentálně byla aktivační energie této reakce stanovena na 291 kJ/mol (měřeno při 1200 K).
+    - Reakční entalpie byla stanovena na 146 kJ/mol (při teplotě 298 K).
+instructions:
+    - Následující výpočty počítejte na B3LYP/6-31G* úrovni.
+    - Zoptimalizujte zmíněné struktury.
+    - Ověřte, že se struktury nachází v minimu na hyperploše potenciální energie.
+    - Vypočítejte entalpii reakce.
+    - Srovnejte s energií odhadnutou pomocí průměrných disociačních entalpií vazeb.
+    - Vypočítejte tepelnou kapacitu reaktantu a srovnejte s experimentem.
+    - Vypočítejte rovnovážnou konstantu reakce při 1200 K.
+    - V úvodu protokolu pojednejte o vlastnostech tohoto hasicího činidla.
+    - Jako volitelný bonus vypočítejte aktivační energii této reakce.

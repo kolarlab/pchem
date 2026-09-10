@@ -1,0 +1,19 @@
+title: XY model
+difficulty: 2
+supervisor: Jiří Kolafa
+keywords:
+    - SIMOLANT
+    - Nobelova cena
+    - topologický vír
+    - m596kov7 model
+story:
+    - XY model je soustava „magnetických střelek“ na čvercové mřížce
+    - Topologické víry se chovají jako kladné a záporné náboje
+    - Nad BKT (Berezinskii–Kosterlitz–Thouless) teplotou máme plazma složené z navzájem interagujících vírů
+    - Pod BKT teplotou máme vázané +− excitace
+instruction:
+    - XY model bude implementován v SIMOLANTu; pokud to nestihnu, můžete dostat samostatný kód pro linux.
+    - Studujte víry za různých podmínek
+    - Odhadněte hodnotu BKT teploty s t9m, že víry vizualizujete rychlým ochlazením
+literature:
+    - https://github.com/kolafaj/SIMOLANT

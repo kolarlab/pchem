@@ -1,0 +1,17 @@
+title: Monte Carlo plazení
+difficulty: 3
+supervisor: Jiří Kolafa
+keywords:
+    - Monte Carlo
+    - entropická pružina
+story:
+    - V Monte Carlo simulaci polymeru je obtížné efektivně generovat nové konformace řetězce, které by odpovídaly skutečné dynamice.
+    - Situaci může řešit tzv reptation krok, kdy je článek polymeru na jedné straně odstraněn a na druhé straně přidán.
+    - Pohyb polymeru pak vypadá jako plazení hada nebo píďalkovitý pohyb.
+instruction:
+    - Napište MC program pro simulaci řetízku N atomů s pevnými délkami vazeb metodou reptation.  Výhodné je měřit energii a teplotu ve stejných jednotkách (kB=1).
+    - Mezi atomy není (kromě pevných vazeb) žádná interakce, je tedy modelem tzv. ideálního řetězce. Koncové body jsou však natahovány stejně velkými opačně orientovanými silami ve směru osy x.
+    - Stanovte závislost střední výchylky pružiny ⟨x1 − xN⟩ na síle a stanovte energii. Jaká hodnota ⟨x1 − xN⟩ odpovídá „tepelnému kvantu“ kB*T?
+    - Proč se tomuto modelu říká „entropická pružina“? 
+literature:
+    - M. Rubinstein, R.H. Colby: Polymer Physics (Oxford University Press, 2003)

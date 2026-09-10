@@ -1,0 +1,19 @@
+title: Chladniho obrazce
+difficulty: 2
+supervisor: Jiří Kolafa
+keywords:
+    - vibrace
+    - MACSIMUS
+    - experiment
+story:
+    - Chladniho obrazce jsou obrazce vznikající na povrchu kmitající desky (např. kovové nebo skleněné), když se na ni nasype jemný prášek.
+    - Podobně vibruje např. plátek grafenu.
+instruction:
+    - Vypočtěte a vizualizujte vibrace kousku grafenu tak, aby byly vidět uzlové křivky.
+    - Přišroubujte na podstavec rezonanční desku tvaru šestiúhelníku a za pomoci smyčce a prášku nám předveďte Chladniho obrazce.
+    - Pokud se Vám reálný experiment nepovede, spokojíme se i s nějakým pěkným videem z YouTube.
+    - Můžete si také v A402 půjčit zařízení vyrobené generacemi studentů. 
+    - Vysvětlete souvislosti. 
+    - Na závěr přidejte několik zajímavostí o grafenu.
+literature:
+    - https://old.vscht.cz/fch/cz/pomucky/kolafa/pchemlm.pdf

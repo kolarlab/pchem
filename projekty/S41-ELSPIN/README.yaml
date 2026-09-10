@@ -1,0 +1,19 @@
+title: Elektrospinning
+difficulty: 3
+supervisor: Jiří Kolafa
+keywords:
+    - molekulová dynamika
+    - MACSIMUS
+story:
+    - Elektrospinning je metoda výroby nanovláken působením silného elektrického pole.
+    - Jev lze simulovat tak, že hladinu roztoku polymeru vystavíme silnému elektrickému poli.
+    - Povrch se začne deformovat a vznikne rostoucí nestabilita zvaná Taylorův kužel.
+    - Pro kvalitativní popis jevu můžeme použít vodu.
+instruction:
+    - Simulujte vrstvu SPC/E vody v silném elektrickém poli.
+    - Pozorujte vznik Taylorova kužele a vlákna.
+    - Diskutujte svá pozorování.
+    - Která česká VŠ je známá výzkumem v oblasti nanovláken?
+literature:
+    - https://old.vscht.cz/fch/cz/pomucky/kolafa/pchemlm.pdf
+    - https://doi.org/10.1021/ie404268f

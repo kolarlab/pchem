@@ -1,0 +1,15 @@
+title: Docking libovolné molekuly
+difficulty: 5
+supervisor: Michal Kolář
+keywords: 
+    - dokování
+    - docking
+    - SwissDock
+    - protein-ligand interakce
+story:
+    - Docking je výpočetní metoda predikující vazby nízkomolekulární látky do biomolekuly.
+instructions:
+    - Pomocí nástroje SwissDock analyzujte, jak se váže ligand do vámi vybraného receptoru.
+    - Jako výchozí použijte experimentálně zjištěnou strukturu protein-ligandového komplexu.
+    - Pomocí vhodné metriky porovnejte predikovanou polohu ligandu s experimentálně určenou polohou.
+    - Popište roli dílčích nekovalentních interakcí mezi ligandem a receptorem

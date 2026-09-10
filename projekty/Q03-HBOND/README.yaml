@@ -1,0 +1,20 @@
+title: Pravá a nepravá vodíková vazba
+difficulty: 3
+supervisor: Petr Slavíček
+keywords:
+    - vibrační analýza
+    - strukturní analýza
+    - slabé interakce
+story:
+    - Objev tzv. nepravé vodíkové vazby má silnou českou stopu.
+    - Patří mezi objevy, kvůli kterým se musely - jak se říká - přepisovat učebnice.
+instructions:
+    - Zvolte si, kterou kvantově-chemické metodu použijete při následujících výpočtech.
+    - Zoptimalizujte strukturu dimeru fluorovodíku a dimeru difluormethanu.
+    - Ověřte, že se struktury nachází v minimu na hyperploše potenciální energie.
+    - Jak se mění frekvence X-H vazeb v komplexu v porovnání s monomerem?
+    - Jak se mění geometrie monomeru v komplexu?
+    - Porovnejte vazebné energie vodíkové vazby s typickou vazebnou energií kovalentní vazby.
+    - Do protokolu přidejte kratší pojednání o významu nekovalentních interakcí v přírodních vědách.
+literature:
+    - Chem. Listy 102 (2008) 884.

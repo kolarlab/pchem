@@ -1,0 +1,19 @@
+title: Vizualizace proteazomu
+difficulty: 3
+supervisor: Michal Kolář
+keywords:
+    - proteazom
+    - protein
+    - PDB
+    - VMD
+    - Mol*
+    - Chimera
+    - Pymol
+story:
+    - Proteazom je biomolekulový komplex složený z několika desítek proteinů zodpovědný za degradaci proteinů.
+instructions:
+    - V PDB vyhledejte strukturní model 20S proteazomu s rozlišením alespoň 3,0 \AA.
+    - Vytvořte vizualizace celého proteazomu.
+    - Každou jeho část vizualizujte zvlášť.
+    - Části proteazomu (proteiny) seřeďte podle různých kritérií, např. počtu reziduí, gyračního poloměru, počtu bazických reziduí, atp.
+    - Vytvořte vizualizace horizontálním a vertikálním řezem proteazomu a diskutujte tvar jeho katalytické kavity.

@@ -1,0 +1,18 @@
+title: Vizualizace ribozomálního tunelu
+difficulty: 5
+supervisor: Michal Kolář
+keywords:
+    - ribozom
+    - PDB
+    - programování
+    - python
+story:
+    - Ribozom je velký biomolekulový komplex zodpovědný za syntézu proteinů.
+    - Rodící se proteiny opouští ribozom asi 10 nm dlouhým tunelem.
+    - Tunely v ribozomech různých organismů se liší, ale je obtížné jejich rozdíly efektivně vizualizovat.
+    - Cílem úlohy je vytvořit skript, který bude různé vlastnosti tunelu šikovně projektovat na povrch válce.
+instructions:
+    - Vyjděte ze záznamu PDB 5AFI.
+    - Pomocí vhodně zvolených residuí v katalytickém místě a u ústí tunelu definujte osu tunelu.
+    - Vytvořte graf, na jehož vodorovné ose bude poloha na ose tunelu a na svislé ose bude úhel natočení okolo osy.
+    - Pomocí barev (tzv. heatmap), projektujte různé vlastnosti tunelu do předdefinovaného 2D prostoru. Jako první můžete zvolit např. vzdálenost residua od osy tunelu.

@@ -1,0 +1,64 @@
+Následující podrobný návod je pro MACSIMUS. Můžete použít i jiný software, pokud ho ovládáte.
+
+Budete používat cookewslcP1, tj. verzi s paralelizací, dále potřebujete naclcryst (je také k dispozici) a data.zip. Ten rozbalíte do vhodné složky příkazem
+  unzip data.zip
+
+Protože množství výpočtů je dost velké, připravil jsem skripty, které vám usnadní simulace. Návod ke skriptu dostanete jeho spuštěním bez parametru.
+
+Rada: Můžete zadat několik výpočtů (pro různé teploty) najednou.
+
+* krystal.sh = výpočet krystalu Na256Cl256 pro zadanou teplotu (v K) a tlak (v MPa). Příklad použití (jako job):
+    jsub -n crT1300P0 -p 4 krystal.sh 1300 0
+  Doba výpočtu = 3–10 minut
+  Pozn.: crT1300P0=jméno jobu, 4=použít 4 vlákna, 1300 0 = parametry skriptu krystal.sh
+
+* tavenina.sh = výpočet taveniny pro zadanou teplotu (v K) a tlak (v MPa). Příklad použití (jako job):
+    jsub -n tT1300P0 -p 4 tavenina.sh 1300 0
+  Doba výpočtu = 7–20 minut
+
+* vrstva.sh = simulace vrstvy pro zadanou teplotu (v K) a tlak (v MPa).  Musí být provedena po simulaci krystalu za stejné teploty a tlaku, protože systém spočte x,y velikost boxu ze středního objemu krystalu. Příklad použití (jako job):
+    jsub -n vT1300P0 -p 4 vrstva.sh 1300 0
+  Maximální doba výpočtu je cca hodina, ale často lze výpočet přerušit dřív.
+
+Prohlédněte si skripty, abyste věděli, co dělají!
+
+*** POSTUP ***
+
+Nejprve je potřeba stanovit teplotu tání pro dva tlaky. Jako jeden zvolte tlak atmosférický nebo (což je při dostupné přesnosti jedno) tlak 0 MPa. V úloze pchem31.pdf jste stanovili za pomocí malého systému (krystal Na108Cl108) bod tání za tlaku 0.1 MPa asi 1300 K. To je potřeba ověřit pro systém Na256Cl256, resp. zpřesnit.  Postupujte takto:
+
+1) simulace krystalu za teploty 1300 K a tlaku 0 MPa:
+    jsub -n kT1300P0 -p 4 krystal.sh 1300 0
+  Po skončení si prohlédněte trajektorie (z Midnight Commanderu dvojklikem na crT1300P0.plb - to je příklad, po opakovaném výpočtu se jméno souboru změní!):
+    show crT1300P0.plb
+  a záznam veličin (též dvojklikem na crT1300P0.cp)
+    showcp -p crT1300P0.cp
+  Všechny grafy se zavřou stiskem [KILL ALL] nebo klávesou K
+
+2) simulace vrstvy
+    jsub -n vT1300P0 -p 4 vrstva.sh 1300 0
+  Prohlédněte si slab1300P0.plb pomocí
+    show slabT1300P0
+  nebo
+    show.sh slabT1300P0
+  V prvním případě použijte k otočení a úpravě [std], [proj], případně zmenšete atomy.
+  Také pomůže zobrazení slab1300P0.cp.
+  Prohlížet slab1300P0.plb a slab1300P0.cp můžete v průběhu simulace; zjistíte-li jasný výsledek (taje/tuhne), můžete simulaci přerušit příkazem:
+    touch slab1300P0.loc
+
+3) interpretace výsledků:
+  * pokud se box roztaví, snižte teplotu (cca o 10 K) a opakujte od bodu 1)
+  * pokud box zmrzne, zvyšte teplotu (cca o 10 K) a opakujte od bodu 1)
+  * pokud během 1 ns (tj. 1000*10 cyklů) je systém dvoufázový, je daná teplota teplotou tání
+  * pokud budete mít dvě teploty a při jedné bude systém tát a při druhé mrznout, je teplota tání aritmetickým průměrem obou (a také objem a entalpii krystalu pak stanovíte jako průměr)
+
+4) Až budete mít stanovenu teplotu tání za menšího tlaku, spusťte výpočet taveniny. V obou prt-souborech (pro krystal a taveninu, např. crT1300P0.prt a meltT1300P0.prt) najděte POSLEDNÍ řádek obsahující =V=, to je objem v Å³.  Odečtením obou hodnot (převedených na m³), znásobením Avogadrovou konstantou a vydělením 256 (počet NaCl) získáte změnu objemu tání ΔV na mol NaCl. Obdobně stanovíte entalpii tání ΔH z POSLEDNÍHO řádku označeného =enthalpy [J/mol]= odečtením krystalu od taveniny a vydělením 256.
+
+5) Z Clapeyronovy rovnice spočtěte dP/dT.
+
+6) Nyní si zvolte teplotu o cca 200–400 K vyšší než je teplota tání a odhadněte rovnovážný tlak.  Pro tento tlak zopakujte výpočet teploty tání (asi budete muset provést několik pokusů) a pak ΔV a ΔH jako výše
+
+7) Nakonec provnejte tři výsledky:
+  1) z ΔV,ΔH za nižšího tlaku a teploty (to již jste udělali)
+  2) z ΔV,ΔH za vyššího tlaku a teploty
+  3) z obou stanovených teplot tání
+  a výsledky porovnejte

@@ -1,0 +1,15 @@
+title: Sloučeniny vzácných plynů
+difficulty: 4
+supervisor: Petr Slavíček
+keywords:
+    - termochemie
+    - IR spektroskopie
+    - UV-VIS spektroskopie
+instructions:
+    - Zvolte si, kterou kvantově-chemickou metodu použijete při následujících výpočtech.
+    - Zoptimalizujte molekulu KrF2 a její izoelektrickou strukturu KrO2(2-).
+    - Ověřte, že se molekuly nachází v minimu na hyperploše potenciální energie.
+    - Namodelujte jejich infračervená spektra.
+    - Vypočítejte jejich termodynamické vlastnosti v plynné fázi při 300 K.
+    - Vypočítejte jejich spektrální vlastnosti pro prvních 5 excitovaných stavů.
+    - V protokolu diskutujte rozdíly vlastností těchto dvou struktur.

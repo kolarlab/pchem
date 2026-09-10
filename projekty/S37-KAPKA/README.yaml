@@ -1,0 +1,14 @@
+title: Kapka v elektrickém poli
+difficulty: 3
+supervisor: Jiří Kolafa
+keywords:
+    - molekulová dynamika
+    - voda
+    - MACSIMUS
+story:
+    - Polární molekuly (jako např. voda) se v elektrickém poli orientují podél směru pole, což může deformovat tvar makroskopických objektů, které se z molekul skládají.
+instruction:
+    - Simulujte kapku SPC/E vody v silném elektrickém poli.
+    - Diskutuje svá pozorování.
+literature:
+    - https://old.vscht.cz/fch/cz/pomucky/kolafa/pchemlm.pdf

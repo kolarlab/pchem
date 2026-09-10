@@ -1,0 +1,69 @@
+Následující podrobný návod je pro MACSIMUS. Můžete použít i jiný software, pokud ho ovládáte.
+
+0)
+Instalujte MACSIMUS. Ve složce macsimus/cook zkonfigurujte „ošizenou“ verzi bez Ewaldovy sumace (bude rychlejší):
+  configure.sh cutpar
+Potvrďte pomocí Enter všechny volby kromě:
+===== Select algorithm for ELECTROSTATIC calculations:
+  0 = Cut-and-shift approximation (MACSIMUS style)
+
+===== Select DETAILS of boundary conditions:
+  s = Slab: z-forces (incl. walls), dens.profiles, surf.tension, NPzzE melting
+      also more geometries (droplet, trickle, cavities)
+
+===== Select PARALLELIZATION (using linux threads):
+      (Not all combinations with the pair-forces method are valid)
+  1 = Linked-cell list method parallelized in x-slabs, Ewald parallelized
+
+Můžete zvolit i sériovou verzi, pak nebudete zadávat NSLOTS nebo jsub -p
+
+1)
+V souboru ...macsimus/blend/data/trappe_ua.par naleznete literaturu k silovému poli. Je dobré se mrknout a citovat.
+
+V souboru VLE.zip naleznete následující textové soubory:
+  ethanol.che
+  SPC.che
+  mix60+240.def
+  mix60+240.get
+
+Definici silového pole vytvoříte příkazem
+  blend -o ff ethanol -h SPC
+
+2)
+Vhodná velikost vzorku pro dostatečně rychlý výpočet je zhruba krychle o hraně 24 Å, případně (protože se něco vypaří) je možno pár molekul přidat. Bude umístěna v boxu, který by ve směru z měl být cca 3x delší, tedy 72 Å, ve směrech x,y 24 Å.
+
+Pro zvolené složení si přibližně spočtěte počet obou molekul a upravte soubor mix60+240.def.
+
+3)
+Vhodná data pro start (viz mix60+240.get):
+  init="slab" no=1000; ! cca 10 minut
+Spuštěni simulace:
+  NSLOTS=2 cookceslcP1 ff mix60+240
+Spuštěni simulace na klastru:
+  jsub -p 2 cookceslcP1 ff mix60+240
+Zkotrolovat konvergenci:
+  showcp -p mix60+240
+Zkotrolovat trajektorii:
+  show -I%i mix60+240
+
+4)
+Produktivní běh (několik hodin nebo přes noc), data:
+    init="append" no=NASTAVIT; ! cca pres noc
+(Oba kroky lze spojit, ale musíte si být jist(a), že první část je zkonvergovaná)
+
+5)
+Analýza dat -- zobrazit mix60+240.cm.AA-3.z, sloupce 1:2 a 1:3, např.
+  plot mix60+240.cm.AA-3.z:1:2 :1:3
+Zobrazen je „hustotní profil“, tedy číselná hustota (v 1/Å^3) alkoholu (bílá, sloupec 2) a vody (žlutá, sloupec 3).  Na vodorovné ose je pozice (z) v Å.
+Z číselných hustot plynu a kapaliny stanovit složení obou fází.
+
+Případně lze rovnou zobrazit molární zlomky (sloupec 4 = D = B+C = součet číselných hustot)
+  plot mix60+240.cm.AA-3.z:A:B/D :A:C/D
+
+6)
+Případně stanovit i tlak -- ve výpisu hledejte poslední řádek obsahující =Ptens.zz [Pa]= (tlak ve změry osy z), nebo sloupec Ptzz v konvergenčním profilu.  Např. řádek
+#     704768.751 7.62e+04     0.108   60000 =Ptens.zz [Pa]=
+znamená tlak 705 ± 76 kPa (za ± je odhad standardní chyby „1σ“)
+
+7)
+Opakovat pro různá složení. Vhodné je rovnoměrně několik objemových zlomků (molekula alkoholu je větší), výsledný diagram lze uvést v molárních zlomcích (abyste nemusel* stanovovat hustoty čistých fází).

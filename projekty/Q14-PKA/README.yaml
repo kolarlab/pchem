@@ -1,0 +1,17 @@
+title: Konstanty kyselosti methylaminů
+difficulty: 4
+supervisor: Petr Slavíček
+keywords:
+    - chemie v roztoku
+    - chemické rovnováhy
+instructions:
+    - Zvolte kvantově-chemickou metodu, kterou budete používat při následujících výpočtech.
+    - Zoptimalizujte strukturu primárního a sekundárního methylaminu.
+    - Ověřte, že se struktury nachází v minimu na hyperploše potenciální energie.
+    - Vypočítejte pKa methylaminů v plynné fázi.
+    - Vypočítejte pKa methylaminů ve vodě. Rozpouštědlo modelujte coby spojité dielektrikum.
+    - K výpočtům v kapalné fázi se doporučuje počítat přes tzv. termodynamický cyklus (viz literatura).
+    - V úvodu protokolu diskutujte pojmy kyseliny slabé a silné, superkyseliny a fotokyseliny. 
+literature:
+    - Skripta z předmětu Praktikum z kvantové chemie (str. 54-56)
+    - https://ufch.vscht.cz/files/uzel/0024844/0006~~CyhKzC7JzC7Nja-Kzy5LzCvJL0uNT85Izc1MBQA.pdf?redirected

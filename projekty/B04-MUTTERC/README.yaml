@@ -1,0 +1,15 @@
+title: Vliv bodové mutace na terciární strukturu proteinu
+difficulty: 2
+supervisor: Michal Kolář
+keywords: 
+    - protein
+    - AlphaFold
+    - terciární struktura
+    - mutace
+story:
+    - Terciární struktura proteinů je definována složitou sítí nekovalentních interakcí mezi aminokyselinovými zbytky.
+instructions:
+    - Pomocí algoritmu AlphaFold predikujte terciární strukturu vámi vybraného proteinu. Vyberte protein o 150-250 reziduích.
+    - Predikujte terciární strukturu sady alespoň tří analogů, které v různých polohách obsahují bodovou mutaci daného rezidua na alanin.
+    - Pomocí vhodných metrik porovnejte terciární struktury původího proteinu a jeho mutantů.
+    - Výsledky diskutujte a určete, které mutace mají nejvýznamější vliv na terciární strukturu.

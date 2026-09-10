@@ -1,0 +1,22 @@
+title: Vlastnosti histidinu
+difficulty: 5
+supervisor: Petr Slavíček
+keywords:
+    - chemie v roztoku
+    - chemické rovnováhy
+    - UV/VIS spektroskopie
+instructions:
+    - Zvolte kvantově-chemickou metodu, kterou budete používat při následujících výpočtech.
+    - Zoptimalizujte struktury histidinu na schématu (viz příloha).
+    - Ověřte, že se struktury nachází v minimu na hyperploše potenciální energie.
+    - Vypočítejte rovnovážné konstanty pKa1, pKa2 a pKa3.
+    - K výpočtům ve vodní fázi se doporučuje počítat přes tzv. termodynamický cyklus (viz přiložená literatura).
+    - Rozpouštědlo modelujte jako dielektrické kontinuum.
+    - Na základě zjištěných hodnot odhadněte isoelektrický bod histidinu.
+    - V úvodu protokolu pojednejte o významu acidobazických vlastností histidinu v biochemii dýchání (tzv. Bohrův efekt).
+    - Diskutujte o vlivu reprodukčních schopností Christiana Bohra na vývoj kvantové mechaniky.
+    - Jako bonus vypočítejte UV/VIS absorpční spektra zwitteriontových forem histidinu, fenylalaninu, tryptofanu a tyrosinu.
+    - Jaké jsou příspěvky jednotlivých aminokyselin k absorpci polypeptidů při 280 nm?
+literature:
+    - Skripta z předmětu Praktikum z kvantové chemie (str. 54-56)
+    - https://ufch.vscht.cz/files/uzel/0024844/0006~~CyhKzC7JzC7Nja-Kzy5LzCvJL0uNT85Izc1MBQA.pdf?redirected

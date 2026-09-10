@@ -1,0 +1,17 @@
+title: Simulované žíhání
+difficulty: 3
+supervisor: Jiří Kolafa
+keywords:
+    - Monte Carlo
+    - simulované žíhání
+story:
+    - Běžné metody mohou mít problém s nalezením globálních minim složitých funkcí.
+    - Simulované žíhání (angl. simulated annealing) je levnou metodou ke zvýšení efektivity hledání minima.
+instruction:
+    - Pracujete v e-shopu, kde stříháte řetízky na kousky různé délky podle požadavků zákazníků. 
+    - Řetízky máte na rolích o délce 10 m.
+    - Každý den dostanete seznam požadavků zákazníků. 
+    - Napište počítačový program, který navrhne stříhání řetízků na kousky tak, aby se spotřebovalo co nejméně rolí (zbytek z role, který je kratší než nejkratší požadavek, je odpad).
+    - Navrhněte vhodnou hodnoticí funkci (interakční energii) U.
+    - Navrhněte MC metodu; jeden zkušební krok může být např. přesun kousku z jedné role na druhou. 
+    - Simulujte za snižující se zobecněné teploty.

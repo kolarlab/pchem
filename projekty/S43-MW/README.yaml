@@ -1,0 +1,16 @@
+title: Voda a solanka v mikrovlnce
+difficulty: 5
+supervisor: Jiří Kolafa
+keywords:
+    - molekulová dynamika
+    - MACSIMUS
+    - pokus
+story:
+    - Slané maso se v mikrovlnce ohřívá rychleji než neslaný brambor.
+    - Mikrovlnná trouba generuje elektromagnetické záření o vlnové délce, které interaguje s polárními molekulami jako je voda, ale i ionty.
+instruction:
+    - Simulujte vodu (SPC/E) a solanku (model JC) v elektrickém poli o frekvenci 2.45 GHz a stanovte rychlost zahřívání.
+    - Proveďte reálný experiment a/nebo najděte a ukažte graf dielektrických ztrát vody v závislosti na frekvenci.
+literature:
+    - https://old.vscht.cz/fch/cz/pomucky/kolafa/pchemlm.pdf
+    - http://old.vscht.cz/fch/cz/pomucky/kolafa/wateran.pdf#page=47

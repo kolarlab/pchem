@@ -1,0 +1,16 @@
+title: Kvazikrystaly
+difficulty: 5
+supervisor: Jiří Kolafa
+keywords:
+    - SIMOLANT
+    - Nobelova cena
+story:
+    - Kvazikrystaly jsou pevné látky, které vykazují uspořádanost na malých škálách, ale na velkých škálách jsou neuspořádané.
+instruction:
+    - Seznamte se s pojmy kvazikrystal a Penroseovo dláždění (Penrose tiling).
+    - Pokuste se získat tuto strukturu v simulaci potenciálu se dvěma minimy implementovanou v SIMOLANTu (Menu: Force field → Double well).
+    - Autor této úlohy neví, zda to jde. Bude nutno si pohrát s parametry (a,b,c), tlakem a pomalu chladit. Nicméně lokální struktury s pětičetnou symetrií se podařilo získat.
+    - Je také možné zapsat známou strukturu do souboru simolant.txt, načíst a simulovat.
+    - Kdo dostal Nobelovu cenu za kvazikrystaly? Za co dostal Nobelovu cenu Roger Penrose?
+literature:
+    - https://github.com/kolafaj/SIMOLANT

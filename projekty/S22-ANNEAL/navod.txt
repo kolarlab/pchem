@@ -1,0 +1,127 @@
+Následující podrobný návod je pro MACSIMUS. Můžete použít i jiný software, pokud ho ovládáte.
+
+Metodou simulovaného žíhání (simulated annealing) lze získat celkem dobrou aproximaci minima energie (optimální struktury, základního stavu).  Pokud zastavíme chlazení za konstantní teploty, získáme (v principu) rovnovážný tvar krystalu.
+
+Simulace bude ve vakuových okrajových podmínkách, použijte tedy cookfree.
+Nejprve zkusíme tavení, pak zpětnou krystalizaci.
+
+=============== 1 ===============
+
+Rozbalte data.zip, získáte následující soubory:
+  Na+.che
+  Cl-.che
+
+Připravte silové pole (soubor nacl.ble) příkazem
+  blend -o nacl Na+ Cl-
+
+Připravíte krystal příkazem
+  naclcryst 4 0 0 -m64 -n64 -x1
+Pokud se nenajde naclcryst, pokuste se ho najít příkazem
+  locate naclcryst
+
+Test:
+  show nacl-0000.plb
+
+---------- Vstupní soubor pro simulaci, vhodné jméno = nacl.def
+n=32                  ! pomocná proměnná
+N[0]=n N[1]=n         ! počet Na+ a Cl-
+
+rho=100               ! => velikost počátečního mraku, pokud init="random" nebo "crystal"
+
+cutoff=1000           ! elst cutoff [Å]
+LJcutoff=cutoff       ! LJ cutoff   [Å] - nesmí být větší než cutoff, alespoň
+                      ! 10 Å je OK (a o trochu rychlejší než LJcutoff=cutoff)
+noint=30 h=0.1/noint  ! pocet kroků/cyklus a délka kroku [ps]
+no=100                ! počet cyklů (budete měnit dále)
+dt.plb=1              ! jak často se bude zapisovat "playback" [ps]
+dt.prt=1              ! jak často se bude zapisovat řádek protokolu [ps]
+
+thermostat="Berendsen"! termostat
+;
+
+----------- Řídicí soubor simulace - příklad -----------------------
+----------- vhodné jméno = taveni.get ----------------
+init="plb"            ! načte nacl-0000.plb
+T=500                 ! počáteční teplota [K]
+no=10 tau.T=.2;       ! start: rychle ohřát na 500 K
+T=1500                ! pomalé tavení s cílovou teplotou 1500 K
+no=10000 tau.T=100;   ! tau.T [K] je časová konstanta termostatu
+
+---------------------------------------------------------------
+
+Simulace lokálně:
+  cookfree nacl taveni nacl-0000.plb
+Na klastru:  
+  jsub -n JMENO cookfree nacl taveni nacl-0000.plb
+
+Zobrazte průběh teploty a celkové energie: taveni.cp
+Bod tání modelu je asi 1275 K. Jak se liší získaná teplota a proč?
+
+=============== 2 ===============
+
+Po roztavení zkuste zkrystalizovat.
+Kopie:
+  cp taveni.cfg krystalizace.cfg
+
+----------- Řídicí soubor simulace - příklad -----------------------
+----------- krystalizace.get ----------------
+init="start"          ! z krystalizace.cfg
+T=500                 ! konečná teplota
+no=100000 tau.T=1000; ! ještě pomaleji (zkuste si hrát s parametry)
+---------------------------------------------------------------
+
+Job:
+  jsub -n JMENO cookfree nacl krystalizace
+
+Pozn.: průběh lze sledovat pomocí
+  show krystalizace
+
+Přerušit lze příkazem
+  touch krystalizace.stp
+(do asi minuty skončí)
+
+=============== 3 ===============
+
+Zkuste zopakovat pro větší počáteční krystal, např.:
+  naclcryst 6 0 0 -m216 -n216 -x1
+Případně nemusíte vyjít z tavení krystalu, ale z náhodného startu typu:
+------------------ kryst+.def ----------------
+n=108                 ! pomocná proměnná
+N[0]=n N[1]=n         ! počet Na+ a Cl-
+
+rho=100               ! => velikost počátečního mraku, pokud init="random" nebo "crystal"
+
+cutoff=1000           ! elst cutoff [Å]
+LJcutoff=cutoff       ! LJ cutoff   [Å] - nesmí být větší než cutoff, alespoň
+                      ! 10 Å je OK (a o trochu rychlejší než LJcutoff=cutoff)
+noint=30 h=0.1/noint  ! pocet kroků/cyklus a délka kroku [ps]
+no=100                ! počet cyklů (budete měnit dále)
+dt.plb=1              ! jak často se bude zapisovat "playback" [ps]
+dt.prt=1              ! jak často se bude zapisovat řádek protokolu [ps]
+
+thermostat="Berendsen"! termostat
+;
+------------------------------------------------
+
+------------------ kryst+.get ----------------
+T=1300
+init="random"         ! nahodný start (Gaussovský mrak)
+center.K[0]=100       ! [K] síla do středu ve směru x
+center.K[1]=100       ! [K] síla do středu ve směru y
+center.K[2]=100       ! [K] síla do středu ve směru z
+tau.T=1
+thermostat="Andersen" ! lepší termostat pro start
+no=100
+;
+init="start"          ! restart (nebo init="append", abychom viděli postup)
+center.K[0]=1         ! [K] síla do středu ve směru x
+center.K[1]=1         ! [K] síla do středu ve směru y
+center.K[2]=1         ! [K] síla do středu ve směru z
+;
+center.K[0]=0         ! [K] síla do středu ve směru x
+center.K[1]=0         ! [K] síla do středu ve směru y
+center.K[2]=0         ! [K] síla do středu ve směru z
+thermostat="Berendsen"
+T=500                 ! konečná teplota
+no=100000 tau.T=1000  ! ještě pomaleji
+;

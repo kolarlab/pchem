@@ -1,0 +1,16 @@
+title: Struktura povrchového filmu
+difficulty: 4
+supervisor: Jiří Kolafa
+keywords:
+    - molekulová dynamika
+    - MACSIMUS
+    - povrchy
+story:
+    - Amfifilní látky obsahují polární a nepolární část.
+    - Na povrchu vody vytváří oktanol monomolekulární vrstvu a tím ovlivňuje rozhraní voda-vzduch a snižuje povrchové napětí.
+instruction:
+    - Simulujte povrchově aktivní látku (oktanol) na povrchu vody ve slab geometrii.
+    - Měňte pokrytí resp. velikost plochy a všímejte si struktury povrchového filmu (2D plyn, kapalina, krystal).
+    - Stanovte povrchové napětí čisté vody a směsi s oktanolem.
+literature:
+    - https://old.vscht.cz/fch/cz/pomucky/kolafa/pchemlm.pdf

@@ -1,0 +1,17 @@
+title: Montrealský protokol
+difficulty: 4
+supervisor: Petr Slavíček
+keywords:
+    - UV/VIS spektroskopie
+    - energetika reakce
+story:
+    - Látka HFC-227ea zkoumaná v jiné úloze byla zavedena jako zhášecí plyn nahrazující Halon 1301, který byl opuštěn v důsledku Montrealského protokolu a návazných ujednání v Kodani a Londýně.
+instructions:
+    - Zkuste se v protokolu zamyslet, proč HFC-227ea neničí ozón, zatímco Halon 1301 ano.
+    - Následující výpočty počítejte na B3LYP/6-31+G* úrovni.
+    - Zoptimalizujte zmíněné struktury.
+    - Ověřte, že se struktury nachází v minimu na hyperploše potenciální energie.
+    - Vypočítejte disociační energie vazeb v obou molekulách.
+    - Vypočítejte excitační energii těchto molekul metodou TDDFT.
+    - Charakterizujte elektronové přechody v molekulách.
+    - V úvodu protokolu pojednejte o boji s úbytkem ozónu.

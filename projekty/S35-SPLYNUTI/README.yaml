@@ -1,0 +1,17 @@
+title: Koalescence kapek
+difficulty: 4
+supervisor: Jiří Kolafa
+keywords:
+    - molekulová dynamika
+    - MACSIMUS
+    - koloidní chemie
+story:
+    - Koalescence kapek je proces jejich samovolného spojování do větších kapek, poháněný snahou systému minimalizovat povrchovou energii.
+    - Je rozdíl mezi povrchovým napětím (Gibbsova energie) a povrchovou entalpií.
+instruction:
+    - Vypočtěte změnu teploty po splynutí dvou kapek vody o 250 molekulách. 
+    - Simulujte tento jev s modelem SPC/E.
+    - Svá pozorování diskutujte.
+literature:
+    - https://old.vscht.cz/fch/cz/pomucky/kolafa/pchemlm.pdf
+    - Podobná úloha ve 2D je S11-KOALES

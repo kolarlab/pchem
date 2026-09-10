@@ -1,0 +1,12 @@
+title: Monte Carlo tuhých koulí
+difficulty: 3
+supervisor: Jiří Kolafa
+keywords:
+    - Monte Carlo
+story:
+    - Tuhé koule jsou hojně využívaný model pro popis mikroskopického chování kapalin i koloidních systémů.
+instruction:
+    - Simulujte metodou MC tekutinu tuhých koulí v periodických okrajových podmínkách.
+    - Zlomek přijatých konfigurací by měl být dost malý, χ=0.1–0.2.
+    - Vypočtěte a zobbrazte radiální distribuční funkci pro aspoň dvě hustoty vyjádřené zlomkem stěsnání η=0.3 a η=0.4.
+    - Zlomek stěsnání je poměr objemu koulí k objemu prostoru, η=Vk*N/V (Vk je objem jedné koule, N počet koulí, V objem simulační buňky).

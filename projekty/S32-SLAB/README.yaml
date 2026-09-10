@@ -1,0 +1,15 @@
+title: Rovnováha kapalina-pára
+difficulty: 4
+supervisor: Jiří Kolafa
+keywords:
+    - molekulová dynamika
+    - fázové rovnováhy
+    - MACSIMUS
+story:
+    - V klasických simulacích lze snadno simulovat děje jako tání a var.
+    - Toho lze využít při studiu fázových rovnováh směsí.
+instruction:
+    - Stanovte rovnovážný diagram kapalina-pára (modelů) ethanolu (TraPPE-UA) a vody (SPC) za teploty 450 K.
+    - Simulujte vrstvu kapaliny a páry nad kapalinou.
+literature:
+    - https://old.vscht.cz/fch/cz/pomucky/kolafa/pchemlm.pdf

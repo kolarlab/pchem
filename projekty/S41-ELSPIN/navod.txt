@@ -1,0 +1,122 @@
+﻿Následující návod je pro MACSIMUS. Můžete použít i jiný software.
+
+K simulaci použijte cookewslcP1 (paralelní verzi).
+
+=============== Silové pole ===============
+
+----- Připravte soubor SPCE.che s tímto obsahem: ------
+water SPC/E water model
+parameter_set = sea
+Hp0.4238 Hp0.4238
+    \    /
+     On.8476
+-----------------------------------------------------
+a vygenerujte silové pole takto:
+   blend -o voda -h SPCE
+
+=============== Box  ===============
+
+Počet molekul by měl být spíš větší – několik tisíc.
+Můžete začít, řekněme, s 1000.
+
+Nejprve připravíme krychlový periodický box a pak ho zvětšíme ve směru z 3x tak, že se stane vrstvou.
+
+ÚKOL: Vypočtěte velikost krychlového boxu pro daný počet molekul a vyjádřete ho v Ångstromech (zde značený AA).
+
+Vhodný definiční soubor:
+------------------ voda.def -----------------
+n=POCET MOLEKUL
+N[0]=n                ! pocet molekul vody SPC/E
+rho=0                 ! referencni hustota [kg/m3] (1/10 boxu bude kapka)
+cutoff=0              ! elst cutoff pro Ewalda bude automaticky nastaven
+LJcutoff=12           ! LJ cutoff   [A]
+x=DOPLNTE             ! vypoctena hrana boxu [AA]; lze pouzit i vzorec obsahujici n
+L[0]=x                ! x-velikost boxu
+L[1]=x                ! y-velikost boxu
+L[2]=x                ! z-velikost boxu
+noint=5 h=0.01/noint  ! pocet kroku/cyklus a delka kroku [ps]
+dt.plb=0.1            ! jak casto se bude zapisovat "playback" [ps]
+dt.prt=0.1            ! jak casto se bude zapisovat radek protokolu
+thermostat="Berendsen"! frikcni termostat
+T=298                 ! teplota [K]
+tau.T=2               ! defaultni casova konstanta termostatu [ps]
+;
+-------------------------------------------------
+
+------------------ box.get -----------------
+init="crystal"   ! pravidelna mriz
+tau.T=0.1        ! rychle chladit
+no=30;           ! 3 ps simulace
+--------------------------------------------
+
+Simulaci spustíme na několika jádrech procesoru. Vhodný počet jader závisí na vašem stroji a je 2–4, více není vhodné pro menší systémy. Vyznačí se proměnnou NSLOTS, na klastru v případě použití utility jsub je to parametr -p:
+
+Simulace (trvá minuty, pro 2 jádra):
+  NSLOTS=2 cookewslcP1 voda box
+Na klastru:  
+  jsub -p 2 -n JOBNAME cookewslcP1 voda box
+
+Prohlédnout relaxaci (hlavne koncovou teplotu):
+  showcp -p box.cp
+
+=============== Vrstva  ===============
+
+Soubor voda.def upravit tak, že bude obsahovat:
+  L[2]=3*x         ! z-velikost boxu (vyměnit řádek)
+  load.L[2]=1      ! povolí změnu velikosti boxu (přidat před koncový ;)
+  shift[2]=-x/2    ! konfiguraci periodicky posune tak, aby se vrstva lépe zobrazila
+
+Soubor box.get upravit tak, že bude obsahovat:
+------------------ box.get -----------------
+init="start"     ! předchozí konfigurace
+tau.T=1          ! celkem pomalu chladit/relaxovat
+no=50;           ! 5 ps simulace
+--------------------------------------------
+
+Simulace:
+  NSLOTS=2 cookewslcP1 voda box
+
+Prohlédnout relaxaci (hlavne koncovou teplotu):
+  showcp -p box.cp
+
+Prohlédnout konfiguraci:
+  show box.plb
+
+============== Simulace s polem =============
+
+Vhodné pole je 1.5 V/nm (tj. 15e8 V/m) až 2 V/nm. Můžete zkusit i jiná pole.
+
+Ze souboru voda.def vyhodit příkazy zařizující změnu a posun boxu:
+  L[2]=3*x         ! z-velikost boxu - nechat
+  ! load.L[2]=1    ! zakomentovat nebo smazat
+  ! shift[2]=-x/2  ! zakomentovat nebo smazat
+
+Zkopírovat konfiguraci, např.:
+  cp box.cfg E15e8.cfg
+
+Vhodné parametry simulace:
+---------- E15e8.get ---------------
+init="start"
+tau.T=2            ! linejsi termostat
+el.E[2]=15e8       ! pole ve smeru z [V/m]
+no=10000;          ! no=100 odpovídá 1 ps, chce to minimálně 100 ps
+;                  ! automaticky se nastartuje další simulace s init="cont"
+-------------------------------------
+
+Simulace (hodiny pro 5000 molekul):
+  NSLOTS=4 cookewslcP1 voda E15e8
+
+Pro prohlížení je vhodná varianta:
+  show -I$'\t'i E15e8
+(za -I je počáteční vstup z klávesnice, tabulátor=$'\t'=otočení o 90°, i=start)
+
+Pokud zjistíte, že by bylo vhodné pokračovat, změňte v souboru *.get příkaz init="start" na init="cont" a zadejte job znovu.
+
+Pokud chcete definovaně (s možností restartu) běžící job ukončit, napište
+   touch E15e8.stp
+po cca minutě se job ukončí.
+
+Otázky:
+- Při jaké intenzitě pole dojde k vytažení Taylorova kužele?
+- Záleží na směru pole? Všimněte si též natočení molekul na špičce kužele.
+- Jak dlouho po zapnutí pole dojde ke vzniku kužele? Jak rychle se kužel pohybuje?

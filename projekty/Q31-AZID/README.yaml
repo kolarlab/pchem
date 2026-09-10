@@ -1,0 +1,17 @@
+title: Výpočetní chemie zachraňuje životy
+difficulty: 4
+supervisor: Petr Slavíček
+keywords:
+    - energetika reakce
+    - IR spektroskopie
+story:
+    - Azid CH3N3 je explozivní látkou.
+    - Naproti tomu CF3N3 je zcela stabilní
+instructions:
+    - Zvolte kvantově-chemickou metodu, kterou budete používat při následujících výpočtech.
+    - Zoptimalizujte obě zmíněné struktury.
+    - Ověřte, že se struktury nachází v minimu na hyperploše potenciální energie.
+    - Vypočítejte IR spektra těchto molekul.
+    - Vypočítejte reakční energie a Gibbsovu energie pro reakce, kdy se z těchto dvou azidů odštěpuje molekula dusíku N2 (pozn. produkty musí být také zoptimalizovány).
+    - Vypočítejte aktivační energie pro tyto rozpady.
+    - V úvodu protokolu rozeberte rozdíl mezi primárními a sekundárními výbušninami a otázky bezpečnosti práce.

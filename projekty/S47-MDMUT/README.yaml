@@ -1,0 +1,18 @@
+title: Vliv bodové mutace na terciární strukturu (MD simulace)
+difficulty: 5
+supervisor: Michal Kolář
+keywords:
+    - protein
+    - terciární struktura
+    - molekulová dynamika
+    - GROMACS
+story:
+    - Molekulově dynamické simulace poskytují konformační soubor biomolekul.
+    - Umožňují studovat strukturu a dynamiku biomolekul na časových škálách mikrosekund s atomárním rozlišením.
+instructions:
+    - Zvolte si malý protein o 100 nebo méně reziduích a vyhledejte jeho exprimentálně zjištěnou terciární strukturu takovou, aby měla rozlišení 2,5 \AA nebo lepší.
+    - Proveďte molekulově dynamickou simulaci proteinu při teplotě 300 K a tlaku 1 bar na časové škále alespoň 100 ns.
+    - Zvolte bodovou mutaci tak, aby byl její předpokládaný efekt na terciární strukturu proteinu co největší.
+    - Proveďte molekulově dynamickou simulaci jeho mutantu za stejných simulačních podmínek jako referenčního proteinu.
+    - Vhodnými metrikami popište vliv bodové mutace na strukturu a dynamiku proteinu.
+    - Výsledky diskutujte.

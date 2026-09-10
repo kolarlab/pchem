@@ -1,0 +1,17 @@
+﻿Isingův model viz https://old.vscht.cz/fch/cz/pomucky/kolafa/simul02.pdf#page=15. Budeme uvažovat model na periodické čtvercové mřížce N×N.
+Parametr uspořádání tohoto modelu je magnetizace
+  M = 1/N² ∑_i σ(i)
+kde součet je přes všechny buňky (je jich 1/N²) a σ(i) je hodnota spinu {−1,+1}.
+
+Pod kritickou teplotou za nulového vnějšího pole existují dva Gibbsovy stavy, převážně + (modrý) a převážně − (žlutý). To odpovídá v reálné tekutině kapalině a páře. Systém je však symetrický, M druhého stavu má opačné znaménko.
+
+V simulaci zvolte aspoň dvě různé velikosti systému. Připravte jeden stav (třeba tak, že zvýšíte magnetické pole h a po překlopení systému ho vypnete). Simulujte pro řadu těsně podkritických teplot; čím blíže kritickému bodu, tím déle míchejte a potom déle simulujte. Stanovte M vč. odhadu nejistoty.
+
+Nakreslete graf závislosti M(T) na T resp. na (Tc-T)/Tc, kde Tc je kritická teplota (ve 2D je známa analyticky):
+- Jak závisí magnetizace na počtu částic?
+- V oblasti dost nízkých teplot nafitujte data na vztah
+  M(T) = a*[1-T/Tc]^β
+  kde a je konstanta a β kritický exponent.
+
+Odpovídá takto zjištěná hodnota literatuře (Onsagerovo řešení)?
+

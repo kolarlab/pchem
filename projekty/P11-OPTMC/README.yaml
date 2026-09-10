@@ -1,0 +1,11 @@
+title: Optimalizace MC
+difficulty: 3
+supervisor: Jiří Kolafa
+keywords:
+    - Monte Carlo
+story:
+    - Pro efektivní použití metody Monte Carlo je potřeba nastavit délku zkušebního posunutí.
+instruction:
+    - Simulujte Metropolisovou metodou jednu molekulu dusíku v tíhovém poli g = 10 m/s² za teploty T = 300 K a podmínky výška h > 0.
+    - Vypočtěte průměrnou výšku molekuly, ⟨h⟩, a odhad nejistoty této hodnoty, σ(h). K výpočtu σ(h) můžete použít např. blokovou metodu.
+    - Opakujte pro různé délky zkušebního posunutí d. Nakreslete graf σ(h) na χ (zlomek přijatých konfigurací). Stanovte optimální χ.

@@ -1,0 +1,18 @@
+title: Analýza sekundární struktury ribozymu
+difficulty: 2
+supervisor: Michal Kolář
+keywords:
+    - RNA
+    - ribozym
+    - sekundární struktura
+    - PDB
+    - RNAfold
+    - ViennaRNA
+story:
+    - Ribozym je molekula RNA s katalytickou funkcí.
+    - Nejznámějším ribozymem je ribozom, který v buňkách katalyzuje tvorbu peptidových vazeb.
+    - Existují ale mnohem menší ribozymy.
+instructions:
+    - Zvolte si malý ribozym, jehož terciární struktura je určena experimentálně s rozlišením lepším než 3,5 \AA.
+    - Predikujte sekundární strukturu ribozymu pomocí několika predikčních nástrojů.
+    - Výsledky predikčních metod provnejte mezi sebou a srovnejte je s výsledky odvozenými ze známe 3D struktury.

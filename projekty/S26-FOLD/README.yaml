@@ -1,0 +1,18 @@
+title: Sbalování proteinů
+difficulty: 5
+supervisor: Michal Kolář
+keywords:
+    - peptid
+    - sbalování proteinů
+    - molekulová dynamika
+    - GROMACS
+story:
+    - Molekulově dynamické simulace poskytují konformační soubor biomolekul.
+    - Umožňují studovat strukturu a dynamiku biomolekul na časových škálách mikrosekund s atomárním rozlišením.
+instructions:
+    - Vyhledejte, která aminokyselina nejsnáze tvoří alfa-helix. 
+    - Ve vhodném softwaru (např. PyMOL) vytvořte dekapeptid složený z reziduí této aminokyseliny.
+    - Vytvořte dvě počáteční konformace, a to alfa-helix a plně natažený peptid.
+    - Proveďte molekulově dynamickou simulace tohoto peptidu při teplotě 310 K a tlaku 1 bar. Budou potřeba časové škály ve stovkách nanosekund.
+    - Vhodnými metrikami popište časový vývoj sekundární strutury.
+    - Výsledky a pozorování diskutujte.

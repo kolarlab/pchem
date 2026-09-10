@@ -1,0 +1,15 @@
+title: Dielsova-Alderova reakce
+difficulty: 3
+supervisor: Petr Slavíček
+keywords:
+    - sturkturní analýza
+    - energetika reakce
+story:
+    - Butadien může reagovat s ethylenem za uzavření cyklu (Dielsova-Alderova reakce). 
+    - Reakce probíhá synchronním mechanismem a tudíž musí být butadien orientován v poloze cis.
+instructions:
+    - Zvolte kvantově-chemickou metodu, kterou budete používat při výpočtech.
+    - Najděte substituent R, pro který bude cis forma butadienu stabilnější než trans forma.
+    - Hledejte mezi alkylovými a alkoxy substituenty a holgeny.
+    - Strukturu zoptimalizujte a ověřte, že se nachází v minimu na hyperploše potenciální energie.
+    - V úvodu protokolu pojednejte o syntetických aplikacích Dielsovy-Alderovy reakce.

@@ -1,0 +1,20 @@
+title: Docking methylxantinů
+difficulty: 5
+supervisor: Michal Kolář
+keywords: 
+    - dokování
+    - docking
+    - SwissDock
+    - protein-ligand interakce
+story:
+    - Methylxantiny jsou alkaloidy se stimulačními účinky na lidskou centrální nervovou soustavu. 
+    - Mezi methylxantiny patří např. kofein nebo theobromin.
+    - Mechanismus účinku zahrnuje vazbu methylxantinů do adenosinového receptoru.
+instructions:
+    - Vytvořte si sadu alespoň 5 methylxantinů včetně kofeinu a theobrominu.
+    - Pomocí nástroje SwissDock analyzujte, jak se váží do receptoru A2A.
+    - Jako výchozí použijte experimentálně zjištěnou strukturu protein-ligandového komplexu (PDB 3RFM).
+    - Pomocí vhodné metriky porovnejte predikovanou polohu ligandu s experimentálně určenou polohou kofeinu.
+    - Porovnejte predikovanou afinitu ligandů k receptoru.
+literature:
+    - https://www.sciencedirect.com/science/article/pii/S0969212611002383

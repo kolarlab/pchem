@@ -1,0 +1,15 @@
+title: Izomerace glyoxalu
+difficulty: 4
+supervisor: Petr Slavíček
+keywords:
+    - chemické rovnováhy
+    - chemická kinetika
+    - izomerizace
+instructions:
+    - Zvolte si, kterou kvantově-chemickou metodu použijete při následujících výpočtech.
+    - Zoptimalizujte strukturu cis a trans glyoxalu.
+    - Ověřte, že se struktury nachází v minimu na hyperploše potenciální energie.
+    - Vypočítejte aktivační energii pro izomeraci, případně také reakční profil.
+    - Jaká je rovnovážná konstanta izomerace?
+    - Odhadněte rychlostní konstantu reakce na základě teorie tranzitního stavu.
+    - V úvodu protokolu stručně popište teoretické metody výpočtu rychlostních konstant.

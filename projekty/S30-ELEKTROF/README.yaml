@@ -1,0 +1,15 @@
+title: Elektroforéza
+difficulty: 4
+supervisor: Jiří Kolafa
+keywords:
+    - molekulová dynamika
+    - MACSIMUS
+story:
+    - Elektroforéza je fyzikálně-chemická separační a analytická metoda, která využívá pohyb nabitých částic v elektrickém poli.
+    - Může se rozpuštěnec pohybovat, i když není nabitý?
+instruction:
+    - Simulujte atom Xe ve vodním roztoku LiI, ve kterém teče elektrický proud.
+    - Sledujte, jestli může být atom Xe unášen.
+    - Svá pozorování vysvětlete.
+literature:
+    - https://old.vscht.cz/fch/cz/pomucky/kolafa/pchemlm.pdf

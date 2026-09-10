@@ -1,0 +1,17 @@
+title: Vizualizace zvoleného biomolekulového komplexu
+difficulty: 4
+supervisor: Michal Kolář
+keywords:
+    - protein
+    - PDB
+    - VMD
+    - Mol*
+    - Chimera
+    - Pymol
+story:
+    - Biomolekuly běžně asociují za tvorby funkčních komplexů. 
+instructions:
+    - V PDB vyhledejte strukturní model vámi vybraného biomolekulového komplexu, který se skládá alespoň z 5 podjednotek (RNA a/nebo protein) a má rozlišení alespoň 3,5 \AA.
+    - Vytvořte vizualizace celého biomolekulového komplexu a každé eho částí zvlášť.
+    - Části komplexu seřeďte podle různých kritérií, např. počtu reziduí, gyračního poloměru, počtu bazických reziduí, atp.
+    - Vytvořte vizualizace funkčně kritických částí biomolekulového komplexu.

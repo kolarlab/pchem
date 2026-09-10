@@ -1,0 +1,131 @@
+Následující podrobný návod je pro MACSIMUS. Můžete použít i jiný software, pokud ho ovládáte.
+
+Objekt ʻOumuamua proletěl sluneční soustavou a opět ji opustil. Přímo nebyl jeho tvar pozorovatelný, ale podařilo se stanovit světelnou křivku (průběh jasnosti rotujícího objektu v čase), z níž vyplývá, že ʻOumuamua je protáhlého tvaru. Stanovte světelné křivky (jako plochu průřezu v závislosti na čase) rotující podlouhlé molekuly a srovnejte s křivkou ʻOumuamuy. Pozn.: Podle nejnovějších „kvalifikovaných spekulací“ pochází ʻOumuamua z extrasolárního objektu typu Pluto a je tvořena z větší části tuhým dusíkem.
+
+K simulaci použijte cookfree+x, verzi V3.3m nebo novější.
+Není-li k dispozici, dejte mi vědět.
+Též můžete instalovat MACSIMUS (old.vscht.cz/fch/software/macsimus) a po instalaci ze složky .../macsimus/cook provést:
+  ./configure.sh xsection
+a zvolit následující:
+  f = Free (vacuum), true electrostatic 1/r (no cutoff)
+> c = Coulomb interaction (DEFAULT)
+> n = No polarizability (DEFAULT)
+> p = Plain version (DEFAULT)
+> lj     = Lennard-Jones (DEFAULT), various combining rules available
+> 3 = LEAPFROG, Ekin = m/4 * [(r(t+h)-r(t)]/h)^2 + (r(t)-r(t-h)]/h)^2] (DEFAULT)
+  x = geometric cross-section (XSECTION)
+
+a 2x potvrdit překlad. 
+
+
+=============== molekula ===============
+
+----- Připravte soubor OUMUAMUA.che s tímto obsahem: ------
+molecule oumuamua
+
+parameter_set=diamond
+
+CT--CTv--CTv
+|   |     |
+|   CTvv  |
+|   |     |
+CT^-+-CT^-CT
+|   |     |
+CT-CTv---CTv
+|   |     |
+|   CTvv  |
+|   |     |
+CT^-+-CT^-CT
+|   |     |
+CT-CTv---CTv
+|   |     |
+|   CTvv  |
+|   |     |
+CT^-+-CT^-CT
+|   |     |
+CT-CTv---CTv
+|   |     |
+|   CTvv  |
+|   |     |
+CT^-+-CT^-CT
+|   |     |
+CT-CTv---CTv
+|   |     |
+|   CTvv  |
+|   |     |
+CT^-+-CT^-CT
+|   |     |
+CT-CTv---CTv
+
+-----------------------------------------------------
+
+Optimalizujte geometrii molekuly (stiskněte několikrát [CG] a pak [finish]):
+  blend -g OUMUAMUA
+Stanovte momenty setrvačnosti vzhledem k hlavním osám:
+  blend -H -r4 OUMUAMUA
+Případně stanovte gyrační momenty vzhledem k hlavním osám:
+  blend -G -r4 OUMUAMUA
+Vygenerujte silové pole pro simulaci:
+  blend -o oumuamua OUMUAMUA
+
+=============== Simulace ==================
+
+Simulace je adiabatická (bez termostatu), tj. zachovává se celková energie, což odpovídá volné rotaci tělesa. Molekula bude při simulaci ve vakuových okrajových podmínkách centrovaná, ale nebudou nulovány momenty hybnosti, takže bude rotovat. Počáteční rychlosti budou náhodné (odpovídající zvolené teplotě), což zajistí i náhodnou rotaci. Program počítá průřez jako „plochu stínu“, kdy má každý atom poloměr rovný součtu svého kolizního poloměru (Lennard-Jones σ) + poloměru sondy (He), zde je to 3.59 Å.
+
+Vhodný definiční soubor:
+------------------ 1.def -----------------
+N[0]=1              ! 1 molekula
+rho=1000            ! "hustota" (zde nemá význam)
+noint=50 h=0.2/noint! časový krok a cyklus (0.2 ps)
+dt.plb=1            ! zápis trajektorie
+dt.prt=1            ! zápis protokolu
+T=100               ! počáteční teplota - kromě rychlých vibrací
+                    ! ovlivní celkovou rotaci
+epsc=1e-9           ! presne delky vazeb                    
+;
+-------------------------------------------------
+
+Řídicí soubor simulace:
+------------------ 1.get -----------------
+init="random"       ! náhodná orientace
+drift=7             ! bude centrovat, ale nebude nulovat rotace
+xs.grid=10          ! grid pro výpočet průřezu
+xs.mode="xyz"       ! v osách x,y,z (tři nezávislé hodnoty)
+xs.freq=1           ! každý cyklus
+no=2000;            ! počet cyklů po 1 ps
+--------------------------------------------
+
+Soubor definující, že se budou sledovat 3 složky průřezu:
+------------------ 1.cpi -----------------
+XSx
+XSy
+XSz
+-----------------------------------------
+
+Simulace:
+- výpočet na vlastním linuxu:
+  cookfree+x oumuamua 1
+- v případě delší simulace na klastru dávkový výpočet:
+  jsub -n JOBNAME cookfree+x oumuamua 1
+
+======================= Analýza ====================
+
+Prohlídka trajektorie:
+  show 1
+
+Průřezy v závislosti na čase:
+  showcp -b1 -p -9 -o9,10,11 1
+* na ose x je čas v ps
+* -9 = zobrazí sloupec 9
+* -o9,10,11 = spojení grafů sloupce 9 s 10,11 do jednoho grafu
+* -b1 neblokuje data
+
+Pro kreslení v jiném softwaru použijte -p2 nebo:
+  showcp -b1 -a2 1
+Pak 1. sloupec je čas (v ps) a 3 složky průřezu jsou sloupce 10 11 12
+
+======================== Další úkoly ==================
+
+* Opakujte stejný výpočet několikrát
+* Změňte molekulu (délku, přidání postranních řetězců aj.) a opakujte
+* Srovnejte získané křivky s experimentální světelnou křivkou (hledejte "Oumuamua light curve")

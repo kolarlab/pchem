@@ -1,0 +1,102 @@
+Následující podrobný návod je pro MACSIMUS. Můžete použít i jiný software, pokud ho ovládáte.
+
+Simulujte kapku SPC/E vody v silném elektrickém poli. Jak se změní tvar kapky? (Viz též DOI:10.1021/ie404268f a úloha 122.
+
+K simulaci použijte cookewslc. Paralelní verze zde není příliš výhodná.
+
+=============== Silové pole ===============
+
+----- Připravte soubor SPCE.che s tímto obsahem: ------
+water SPC/E water model
+parameter_set = sea
+Hp0.4238 Hp0.4238
+    \    /
+     On.8476
+-----------------------------------------------------
+a vygenerujte silové pole takto:
+   blend -o voda -h SPCE
+
+=============== Základní kapka  ===============
+
+Počet molekul by měl být spíš větší, řekněme aspoň 1000. 
+Můžete začít, řekněme, s 300, ale výsleky nebudou průkazné.
+Protože se kapka bude protahovat, je dobré hned začít s protaženým boxem.
+
+ÚKOL: Vypočtěte nejprve průměr kapky vody s daným počtem molekul a vyjádřete ho v Ångstromech (AA); simulační box by měl být ve směrech y,z alespoň 1.6x tak velký, ve směru x aspoň 2.2x.  Ale nezvětšujte box příliš, simulace by se zpomalila.
+
+Vhodný definiční soubor:
+------------------ voda.def -----------------
+n=POCET MOLEKUL
+N[0]=n                ! pocet molekul vody SPC/E
+rho=0                 ! referencni hustota [kg/m3] (1/10 boxu bude kapka)
+cutoff=0              ! elst cutoff pro Ewalda bude automaticky nastaven
+LJcutoff=12           ! LJ cutoff [AA]
+x=DOPLNTE             ! vypocteny prumer [AA]; lze pouzit i vzorec obsahujici n
+L[0]=x*2.2            ! x-velikost boxu
+L[1]=x*1.6            ! y-velikost boxu
+L[2]=x*1.6            ! z-velikost boxu
+noint=5 h=0.01/noint  ! pocet kroku/cyklus a delka kroku [ps]
+dt.plb=1              ! jak casto se bude zapisovat "playback" [ps]
+dt.prt=1              ! jak casto se bude zapisovat radek protokolu
+thermostat="Berendsen"! frikcni termostat
+T=298                 ! teplota [K]
+tau.T=0.5             ! casova konstanta termostatu [ps]
+;
+-------------------------------------------------
+
+------------------ drop.get -----------------
+init="crystal"   ! pravidelna mriz
+center.K[0]=1    ! pritazliva sila ke stredu boxu v ose x
+center.K[1]=1    ! pritazliva sila ke stredu boxu v ose y
+center.K[2]=1    ! pritazliva sila ke stredu boxu v ose z
+no=500;
+center.K[0]=0    ! vynulovat silu
+center.K[1]=0
+center.K[2]=0
+no=1000;
+--------------------------------------------
+
+Simulace (cca 2 minuty pro 300 molekul)
+   jsub -n JOBNAME cookewslc voda drop
+
+Prohlednout kapku, soubor drop.plb:
+  show drop.plb (nebo "start drop.plb" nebo z Midnight Commanderu)
+Prohlednout relaxaci (hlavne koncovou teplotu), soubor drop.cp:
+  showcp -p drop.cp
+
+============== Zapnout pole =============
+
+Proveďte několik simulací s různým polem.
+Vhodná pole jsou řádově 5e8 V/m - zkuste menší i větší
+
+Zkopírovat konfiguraci, např.:
+  cp drop.cfg drop5e8.cfg
+
+Data pro simulaci:
+---------- drop5e8.get ---------------
+init="start"
+el.E[0]=5e8         ! pole ve smeru x [V/m]
+no=3000;            ! 100 = 1 ps, tak, aby se ustalil tvar
+-------------------------------------
+
+Nechte počítat (cca 4 minuty pro 300 molekul):
+   jsub -n JOBNAME cookewslc voda drop5e8
+
+A pak analyzujte tvar vzniklých kapek.
+
+Otázky:
+
+- Kapka se protáhne ve směru pole.  Je protažení úměrné intenzitě pole nebo nějaké vyšší mocnině intenzity pole?
+- Při jakém poli dojde k propojení v periodických podmínkách a vzniku vlákna?
+- Jak toto vše závisí na počtu částic?
+
+Pozn.: pro analýzu tvaru kapky buď převeďte .plb na .pla utilitou plb2asc a napište si program, nebo můžete využít následující jednoduchý příkaz, který vypíše velikost kapky (max-min) ve všech směrech. Nejprve si zjistěte počet obrázků v .plb příkazem
+   plbinfo drop5e8.plb
+Pak napište smyčku (v jazyce shellu "bash"):
+   for (( i=1; i<=POCET; i++ )) ; do plbframe drop5e8.plb - $i | plbinfo - | fgrep range ; done > range.dat
+V souboru range.dat po odstranění prvního sloupce najdete "range" v x,y,z.
+Dejte pozor na to, že se občas může molekula vypařit - výsledek je pak nesmyslný
+
+Ještě více automaticky:
+  N=drop5e8
+  for (( i=1; i<=`plbinfo +f $N.plb`; i++ )) ; do plbframe $N.plb - $i | plbinfo - | fgrep range ; done | field 3-5 > $N.dat

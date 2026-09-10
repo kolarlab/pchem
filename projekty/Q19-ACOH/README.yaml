@@ -1,0 +1,20 @@
+title: Vlastnosti kyseliny octové
+difficulty: 4
+supervisor: Petr Slavíček
+keywords:
+    - chemické rovnováhy
+    - vibrační analýza
+    - strukturní analýza
+    - dimerizace
+    - vodíková vazba
+instructions:
+    - Zvolte kvantově-chemickou metodu, kterou budete používat při následujících výpočtech.
+    - Zoptimalizujte strukturu kyseliny octové a jejího dimeru.
+    - Ověřte, že se struktury nachází v minimu na hyperploše potenciální energie.
+    - Stanovte vibrační frekvenci OH vazby v izolované kyselině octové a v jejím dimeru.
+    - Vypočítejte Gibbsovu energii dimerizační reakce kyseliny octové.
+    - Vypočítejte rovnovážnou konstantu reakce.
+    - Výsledky konfrontujte s experimentem, víte-li, že závislost dimerizační rovnovážné konstanty na teplotě lze vyjádřit vztahem ln K = 7425,84/T - 29,2438
+    - Jaká část molekul kyseliny octové se bude nacházet ve formě dimeru při pokojové teplotě a atmosférickém tlaku?
+    - Dokázali byste sestrojit stavovou rovnici pro asociující plyn jako kyselina octová?
+    - Ze struktury dimeru odhadněte, zdali se budou ve významné míře vytvářet také trimery.

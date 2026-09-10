@@ -1,0 +1,166 @@
+Následující podrobný návod je pro MACSIMUS. Můžete použít i jiný software, pokud ho ovládáte.
+
+Stanovte bod tání nebo hexagonálního (Ih) nebo kubického (Ic) ledu přímou metodou. Použijte model vody TIP4P/2005 (případně OPC nebo Nada–Eerden – více informací na požádání). K dispozici budete mít i krystal ledu s náhodnou orientací protonů. Přidejte stručné pojednání o polymorfismu ledu.
+
+Instalujte MACSIMUS: https://old.vscht.cz/fch/cz/pomucky/kolafa/pchem00.pdf
+Budete používat cookewslc, případně cookewslcP1
+
+========== 1 ===========
+----- Připravte soubor TIP4P05.che s tímto obsahem: ------
+TIP4P/2005
+parameter_set = water
+
+      H405p.55640
+     /
+   O405-M405n1.1128
+     \
+      H405p.55640
+
+-----------------------------------------------------
+a vygenerujte silové pole takto:
+   blend -o voda -h TIP4P05
+
+Připravte si krystal ledu o velikosti stěny x,y aspoň 14x14 Å, ale (z důvodu rychlosti) ne více než 25x25 Å.  Použijte utilitu 'ice'.
+Příklady:
+  ice Ih 4 2 3 -sHOMH -T0      # menší, rychlejší
+  ice Ih 5 3 3 -sHOMH -T0      # lepší, pomalejší
+nebo
+  ice Ic 3 3 3 -sHOMH -T0
+Pro návod spusťte 'ice' bez parametru.
+
+Pomocí utility 'plbinfo' zkontrolujte velikost:
+  plbinfo Ih423HOMH.plb
+Led obsahuje neuspořádanost generovanou z náhodného rozmístění protonů metodou simulovaného žíhání.
+
+Pro zobrazení použijte příkaz
+  show Ih423HOMH
+nebo Enter nebo doubleclick z MidnightCommanderu (jsou-li nainstalovány typy souborů)
+
+Postup pro vybranou teplotu (250 K jako příklad)
+
+========== 2 ===========
+Simulace krystalu ledu
+Použijte soubor např. Ih423HOMH.def a zkopírujte ho do
+třeba cryst250.def, přidejte následující data:
+
+equalize.cfg=0.8      ! změna hmotnosti - umožní použít delší krok
+noint=40 h=0.1/noint  ! pocet kroku/cyklus a delka kroku [ps]
+                      ! cyklus = 0.1 ps
+dt.plb=1              ! jak casto se bude zapisovat "playback" [ps]
+dt.prt=1              ! jak casto se bude zapisovat radek informace do .prt
+
+thermostat="Berendsen"! druh termostatu
+T=250                 ! teplota [K]
+tau.T=1               ! casova konstanta termostatu [ps]
+
+P=101325              ! tlak [Pa]
+bulkmodulus=8e9       ! odhad modulu pruznosti (pro barostat)
+rescale="XYZCM"       ! nastavuje vsechny strany boxu nezavisle
+                      ! skaluje teziste molekul
+tau.P=3               ! konstanta barostatu [ps]
+;
+----------------------------------------------------
+
+Vhodné je sledovat všechny hrany boxu:
+------- soubor cryst250.cpi ------------------
+Lx
+Ly
+Lz
+-----------------------------------------------
+
+------- soubor cryst250.get ------------------
+init="plb" ! nacte Ih423HOMH.plb (treti parametr pro cook)
+no=20      ! cyklus = 0.1 ps
+tau.T=0.3 tau.P=1;
+no=500 tau.T=1 tau.P=3;
+----------------------------------------------------
+Simulujte:
+  jsub -n JOBNAME cookewslc voda cryst250 Ih423HOMH.plb
+případně paralelně
+  jsub -n JOBNAME -p 2 cookewslcP1 voda cryst250 Ih423HOMH.plb
+
+Prohlédněte cryst250.cp - především hustotu hrany boxu Lx,Ly.Lz;
+je-li třeba, míchejte déle asi takto:
+------- soubor cryst250.get ------------------
+init="append"
+no=500 tau.T=1 tau.P=3;
+----------------------------------------------------
+
+Spusťte produktivní běh asi tak 200 ps dlouhý (to je no=2000).
+Vhodná data (init="plb" nutno zrušit):
+------- soubor cryst250.get ------------------
+init="start"
+no=2000 tau.T=1 tau.P=3;
+----------------------------------------------------
+Z příkazu spuštění lze odstranit Ih423HOMH.plb (či jiný)
+
+Najděte střední velikosti hrany simulačního boxu Lx,Ly,Lz v souboru cryst250.prt
+
+========= 3 =========
+Vytvoření vrstev
+
+Box pomnožíme několikrát (REPL krát) ve směru osy z.
+Kolikrát, to závisí na zvoleném boxu - výsledná velikost ve směru osy z by měla být cca 2.2 až 3 krát delší než (průměrná) velikost ve směrech x,y.
+Typicky bude REPL=2 nebo 3.
+
+Zkopírujte např. do slab250:
+cp cryst250.cfg slab250.cfg
+cp cryst250.def slab250.def
+
+---------------- slab250.def upravte takto (stači přidat na konec):
+
+N[0]=PŮVODNÍ_HODNOTA*REPL
+L[0]=Lx             ! jak bylo vypočteno výše
+L[1]=Ly             ! jak bylo vypočteno výše
+L[2]=Lz*(REPL-0.07) ! Lz jak bylo vypočteno výše
+                    ! voda ma mensi objem nez led, proto -0.07
+
+P=101325            ! tlak [Pa]
+rescale="ZCM"       ! bude menit box jen ve smeru osy z
+
+! TOHLE SMAZAT PO PRVNIM KROKU:
+load.n[2]=REPL      ! pomnozit ve smeru z
+;
+
+---------------- slab250.get ----------
+init="start"
+
+no=500
+rescale="XYZCM"
+tau.P=0 tau.rho=1
+! zatim NVT: nastaveni boxu podle Lx,Ly,Lz
+
+! roztaveni poloviny boxu
+tau.T=0.2             ! "tvrdsi" termostat pro castecne taveni
+slab.T=T+30           ! teplota v prostredni polovine boxu o 30 vetsi nez T
+slab.Tz0=0.25         ! definuje rozsah z pro jinou teplotu (v L[2])
+slab.Tz1=0.75         ! definuje rozsah z pro jinou teplotu (v L[2])
+T=T-30                ! teplota ledu
+;
+
+Spusťte výpočet. Počkejte, až se objeví soubor slab250.plb, otevřte (zobrazte příkazem show slab250), otočte pomocí [StdRot] nebo tabulátoru, také pomůže [Projections] (klávesnice: =) a sledujte.
+
+Až se půlka boxu roztaví, můžete zastavit simulaci příkazem
+  touch slab250.stp
+Před dalším krokem nutno počkat, až zmizí soubor slab250.loc (=chrání simulaci před dvojím spuštěním)
+Pokud se půlka boxu neroztaví, smažte označený řádek v slab250.def a opakujte.
+
+=========== 4 ===========
+Vlastní simulace vrstvy
+
+Nyní smažte z slab250.def řádek za "! TOHLE SMAZAT PO PRVNIM KROKU:"
+a změňte slab250.get na:
+---------------- slab250.get ----------
+init="start"
+no=5000       ! podle rychlosti
+rescale="ZCM" ! bude měnit jen z
+tau.P=3 tau.T=1
+;;;;;;;;;;;;;;; ! několik stejných kroků po sobě (zapíšou se .cp)
+
+Nechte počítat několik hodin, případně přes noc. Zkontrolujte tání/růst pomocí slab250.plb a slab250.cp
+Až bude jasné, jakým směrem simulace běží, zastavte ji pomocí
+   touch slab250.stp
+
+============ 5 ===========
+
+A opakujte celý postup alespoň pro teploty 245, 250, 255 K (to platí pro TIP4P05, jiné modely mají teplty posunuty).

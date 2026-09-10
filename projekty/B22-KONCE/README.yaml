@@ -1,0 +1,17 @@
+title: Homorepeats v proteomu
+difficulty: 4
+supervisor: Michal Kolář
+keywords:
+    - protein
+    - PDB
+    - FASTA
+    - python
+    - programování
+story:
+    - Existuje cca 20 kanonických aminokyselinových zbytků.
+    - Každý zbytek se v proteinech vyskytuje s různou četností, přičemž tato četnost může záviset na poloze rezidua v rámci sekvence.
+instructions:
+    - V databázi uniprot vyhledejte kompletní proteom bakterie E. coli.
+    - Analyzujte 10 N-koncových a 10 C-koncových residuí.
+    - Určete, jestli jsou konce obohacené o některé aminokyselinové zbytky. Budete potřebovat referenční frekvence výskytu v rámci celého proteomu.
+    - Výsledky a pozorování diskutujte.

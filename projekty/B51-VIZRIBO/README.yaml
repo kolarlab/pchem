@@ -1,0 +1,18 @@
+title: Vizualizace ribozomu
+difficulty: 3
+supervisor: Michal Kolář
+keywords:
+    - ribozom
+    - protein
+    - RNA
+    - VMD
+    - Chimera
+    - Pymol
+    - Mol*
+story:
+    - Ribozome je velký biomolekulový komplex zodpovědný za syntézu proteinů. 
+    - Přestože mechanismus translace je v obecných rysech stejný pro všechny organismy, ribozomy se napříč organismy značně liší.
+instructions:
+    - V PDB vyhledejte kompletní strukturní model bakteriálního, kvasinkového a lidského ribozomu.
+    - Vytvořte jejich vizualizace v několika reprezentacích. Např. rozlište proteinové a neproteinové části, nebo každou molekulu v chemickém slova smyslu vykreslete jinou barvou.
+    - Diskutujte rozdíly mezi ribozomy plynoucí z jejich vzhledu.

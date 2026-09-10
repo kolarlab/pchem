@@ -1,0 +1,16 @@
+title: Dopravní zácpa
+difficulty: 4
+supervisor: Jiří Kolafa
+keywords:
+    - pohybové rovnice
+story:
+    - Fantomová dopravní zácpa je pojem z dopravního inženýrství.
+    - Vzniká tzv. bez viditelného důvodu, pouze v závislosti na faktorech souvisejících s plynulostí provozu (např. reakční doba brzdění). 
+instruction:
+    - Simulujte chování aut na silnici za hustého provozu.
+    - Předpokládejte, že volné auto se pohybuje rovnoměrně zrychleně (např. 2 m/s²), dokud nedosáhne maximální rychlosti (např. 36 m/s).
+    - Pokud řidič uvidí před sebou jiné auto, začne zpomalovat. Bezpečná vzdálenost přitom závisí na rychlosti (např. dráha, kterou auto ujede za 1 s).
+    - Zpomalení by mělo záviset i na vzdálenosti (při velmi malé vzdálenosti řidič musí dupnout na brzdu).
+    - Celý model by měl obsahovat i prvek náhody (mírně různá zpomalení či zrychlení, různá bezpečná vzdálenost různých řidičů atp.).
+    - Celou simulaci proveďte v periodických podmínkách (okruh) s tím, že na začátku auta stojí. 
+    - Při vhodném nastavení parametrů dojde ke vzniku kolon. Místo zácpy se pohybuje opačným směrem než auta.

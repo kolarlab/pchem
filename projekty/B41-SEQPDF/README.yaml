@@ -1,0 +1,18 @@
+title: Sekvenční porovnání peptidových deformyláz
+difficulty: 3
+supervisor: Michal Kolář
+keywords:
+    - protein
+    - primární struktura
+    - sekvence
+    - sekundární struktura
+    - BLAST
+    - DSSP
+    - Stride
+story:
+    - Peptidová deformyláza je první enzym, se kterým přijde většina bakteriálních proteinů do kontaktu. 
+    - Na ordícím se polypeptidu odstraňuje formylovou skupiny z N-terminálního N-formylmethioninu.
+instructions:
+    - Porovnejte primární strukturu peptidových deformyláz z pěti různých organismů.
+    - Použijte např. službu Clustal Omega.
+    - Predikujte sekundární strukturu proteinů a diskutujte mezidruhové rozdíly.

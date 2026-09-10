@@ -1,0 +1,26 @@
+﻿Střední kvadratické posunutí (Mean Square Displacement) částice je definováno vztahem
+  MSD(t)=⟨[r(0)−r(t)]²⟩.
+V simulaci se průměruje přes všechny částice. V simulaci v periodických okrajových podmínkách je nutno počítat MSD tak, že algoritmus sleduje, ve kterém periodickém boxu se částice nachází. Pokud se neumí algoritmus rozhodnout, ohlásí chybu "Cannot follow the periodic boundary conditions". Je nutno zvětšit systém, zkrátit velikost bloku apod.
+
+1) Plyn a kapalina:
+  - menu → [Boundary conditions] → [Periodic]
+  - menu → [Method] → [Molecular dynamics NPT Berendsen]
+  - simulation speed na maximum
+  - measurement block 10–30 (maximum 100 může vést k chybě "Cannot follow the periodic boundary conditions")
+  - Teplota T=3 a tlak P=1 (toto jsou defaulty)
+  - nastavte include: → [Convergence prof.] (pod přepínačem CSV)
+  - stiskněte [▫ record]
+  - spočtěte aspon 100 bloků
+  - stiskněte [▫ record] znovu a uložte
+  - otevřete simolant-CP1.csv a zobrazte sloupce MSDx a MSDy (případně jejich součet) jako funkci t, jedná se o průměr MSD přes všechny atomy.
+
+2) Zopakujte bod 1 pro teploty T=1 a T=0.7 (kapalina), soubory se budou
+jmenovat simolant-CP2.csv atd.
+
+3) Ochlaďte na T=0.5 – vznikne krystal (může mít defekty) a zopakujte výpočet.
+
+4) Zopakujte výpočet kapaliny a plynu pro jiné okrajové podmínky:
+  menu → [Boundary conditions] → [Slit (x-periodic,y-walls)]
+  menu → [Boundary conditions] → [Box]
+
+Inerpretujte získaná data. Z které geometrie dostaneme nejpřesněji difuzivitu, D=½d MSD(t)/dt (pro jednu dimenzi)?  (Difuzivitu nepočítejte, to je úkol pro jiný projekt.)

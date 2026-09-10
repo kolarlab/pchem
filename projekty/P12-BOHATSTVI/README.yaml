@@ -1,0 +1,20 @@
+title: Původ nerovnosti mezi lidmi
+difficulty: 2
+supervisor: Jiří Kolafa
+keywords:
+    - statistická mechanika
+    - kinetické Monte Carlo
+story:
+    - Interakce ekonomických subjektů obsahuje prvek náhody.
+    - Tuto interakci lze studovat metodou Monte Carlo.
+    - Spravedlivé ekonomické zákony nemusí vést k férovému rozdělení bohatství.
+instruction:
+    - Uvažujte N lidí (např. N=1000), z nichž má každý na začátku stejně peněz (např. 1000 USD).
+    - Nechť jeden krok simulace sestává z následujícího. 1) Vyber náhodně pár lidí a zjisti, kdo je chudší a kdo bohatší. 2) Hoď mincí. Padne-li hlava, chudší zaplatí bohatšímu LOSS=20 % svého majetku (jeho majetek bude 80 % původní hodnoty); padne-li orel, dostane chudší od bohatšího WIN=25 % svého majetku (jeho majetek bude 125 % původní hodnoty).
+    - To vypadá spravedlivě, protože chudší z dvojice s pravděpodobností 50 % svůj majetek zvětší (o 25 %), s pravděpodobností 50 % zmenší, ale jen o 20 %. 
+    - Proveďte M kroků simulace a seřaďte jmění podle velikosti, nakreslete graf a spočtěte Giniho koeficient.
+    - Studujte, jaký počet kroků M je potřeba ke konvergenci grafů a Giniho koeficientu (mělo by to být několik×N²).
+    - Zkuste měnit parametry modelu WIN a LOSS. Jako nezávisle proměnnou pro grafy je vhodné použít X=(1−LOSS)*(1+WIN) – proč je X=1 jistou kritickou hodnotou rozdělení majetku? Jak změnit parametry, aby se Giniho koeficient snížil?
+    - Můžete zkusit i přerozdělení – třeba tak, že se po nějakém počtu kroků všichni s majetkem M > 10 USD zaplatí daň (M−10 USD)*0.1 do státní pokladny, která tyto peníze rozdělí. 
+literature:
+    - https://www.scientificamerican.com/article/is-inequality-inevitable

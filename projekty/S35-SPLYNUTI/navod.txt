@@ -1,0 +1,103 @@
+Následující podrobný návod je pro MACSIMUS. Můžete použít i jiný software, pokud ho ovládáte.
+
+Pokud splynou dvě makroskopické kapky vody, teplota se prakticky nezmění. U velmi malých kapek to však neplatí. Vypočtěte změnu teploty po splynutí dvou kapek vody po 250 molekulách. Simulujte ten samý jev s modelem SPC/E.
+
+K simulaci použijte cookcelc.
+Paralelní verze (cookcelcP1) zde není příliš výhodná.
+
+=============== Příprava ===============
+
+----- Připravte soubor SPCE.che s tímto obsahem: ------
+water SPC/E water model
+parameter_set = sea
+Hp0.4238 Hp0.4238
+    \    /
+     On.8476
+-----------------------------------------------------
+a vygenerujte silové pole takto:
+   blend -o voda -h SPCE
+
+=============== Výroba jedné kapky  ===============
+
+Vhodný definiční soubor (AA = Å)
+------------------ drop.def -----------------
+n=250
+N[0]=n                ! pocet molekul vody SPC/E
+rho=100               ! referencni hustota [kg/m3] (1/10 boxu bude kapka)
+cutoff=14             ! elst cutoff [AA]
+LJcutoff=cutoff       ! LJ cutoff   [AA]
+noint=6 h=0.01/noint  ! pocet kroku/cyklus a delka kroku [ps]
+dt.plb=1              ! jak casto se bude zapisovat "playback" [ps]
+dt.prt=1              ! jak casto se bude zapisovat radek protokolu
+thermostat="Berendsen"! frikcni termostat
+T=273                 ! teplota [K]
+tau.T=0.5             ! casova konstanta termostatu [ps]
+;
+-------------------------------------------------
+
+------------------ drop.get -----------------
+init="crystal"   ! pravidelna mriz
+center.K[0]=1    ! pritazliva sila ke stredu boxu v ose x
+center.K[1]=1
+center.K[2]=1
+no=500;
+center.K[0]=0    ! vynulovat silu
+center.K[1]=0
+center.K[2]=0
+no=1000;
+--------------------------------------------
+
+Simulace:
+- výpočet na vlastním linuxu:
+  cookcelc voda drop
+- výpočet na klastru
+  jsub -n JOBNAME cookcelc voda drop
+
+Prohlédnout kapku:
+- pomocí Midnight Commanderu poklepáním na soubor drop.plb
+- z příkazového řádku:
+  show drop.plb
+
+Prohlédnout relaxaci (hlavne koncovou teplotu):
+- pomocí Midnight Commanderu poklepáním na soubor drop.cp
+- z příkazového řádku (-b100 znamená blokování dat po 100 cyklech, což je zde 1 ps):
+  showcp -p -i -b100 drop.cp
+
+============== Dvě kapky =============
+
+Vypočtěte vzájemnou rychlost kapek tak, aby:
+- kinetická energie byla malá ve srovnání s povrchovou
+- obě kapky urazily vzájemnou vzdálenost (cca 10 Å) za snesitelnou dobu simulace
+Rychlost v Å/ps (Å=AA=Ångström) dosadíte do drop2.get
+
+Zkopírovat
+  cp drop.cfg drop2.cfg
+  cp drop.def drop2.def
+
+------ opravit drop2.def -------
+zvětšit N[0] dvakrát (n nechat - bude potřeba) takto:
+  N[0]=n*2
+
+---------- drop2.get ---------------
+init="start"
+load.n[0]=2         ! pomnozi dvakrat ve smeru x (v pripade restartu zrusit)
+nshift=-n           ! polovina molekul vpravo, polovina vlevo
+vshift[0]=DOPLNIT   ! zmena rychlosti (obe kapky se budou priblizovat), [AA/ps]
+shift[0]=5          ! o neco priblizit obe kapky [AA]
+thermostat=0        ! NVE simulace - zachovava se celkova energie (viz .cp sloupec 1)
+no=10000;           ! 100 = 1 ps, nastavit podle rychlosti kapek .. a pocitace
+-------------------------------------
+
+=============== Vizualizace ==============
+
+Pro obarvení obou kapek jinak lze provést příkaz:
+   molcfg -250:a%03d SPCE -250:b%03d SPCE drop2
+a pak zobrazit takto (Y=Yellow, C=Cyan)
+   show drop2 -Ya -Cb
+
+=============== Teoretická hodnota ==============
+
+K termodynamickému výpočtu ΔT potřebujete hustotu vody, tepelnou kapacitu vody a povrchovou entalpii ("total surface energy"), pro kterou platí:
+   η = γ + T σ = γ − T ∂γ/∂T
+kde γ je povrchové napětí a σ = -∂γ/∂T je povrchová entropie (vzpomeňte si na dG = −S dT + V dp a G = H − TS).
+V tabulkách nejspíš najdete jen γ pro různé teploty. Spočtěte derivaci graficky či numericky. Vypočtěte z počtu molekul velikost kapek (předpokládejte dokonalou kouli) před a po spojení a změnu povrchu. Z entalpické bilance spočtete ΔT.

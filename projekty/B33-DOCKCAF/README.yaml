@@ -1,0 +1,17 @@
+title: Docking kofeinu
+difficulty: 4
+supervisor: Michal Kolář
+keywords: 
+    - dokování
+    - docking
+    - SwissDock
+    - protein-ligand interakce
+story:
+    - Kofein je alkaloid celosvětově užívaný ke stimulaci centrální nervové soustavy.
+instructions:
+    - Pomocí nástroje SwissDock analyzujte, jak se váže kofein do receptoru A2A.
+    - Jako výchozí použijte experimentálně zjištěnou strukturu protein-ligandového komplexu (PDB 3RFM).
+    - Pomocí vhodné metriky porovnejte predikovanou polohu ligandu s experimentálně určenou polohou.
+    - Popište roli dílčích nekovalentních interakcí mezi ligandem a A2A.
+literature:
+    - https://www.sciencedirect.com/science/article/pii/S0969212611002383

@@ -1,0 +1,16 @@
+title: Vizualizace alfa-helixů
+difficulty: 3
+supervisor: Michal Kolář
+keywords: 
+    - PDB
+    - protein
+    - vizualizace
+    - sekundární struktura
+    - terciární struktura
+story:
+    - Alfa-helix patří k základním motivům sekundární struktury proteinů.
+instructions:
+    - V databázi PDB vyhledejte proteiny, které obsahují alfa-helixy o 5, 7, 9, 11, 13, 15 a 17 reziduích.
+    - Vizualizujte terciární strukturu alfa-helixů.
+    - Změřte euklidovskou délku helixů a vyneste ji do grafu oproti počtu reziduí.
+    - Svá pozorování diskutujte.

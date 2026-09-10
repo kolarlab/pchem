@@ -1,0 +1,14 @@
+title: Lagrangeovy body
+difficulty: 5
+supervisor: Jiří Kolafa
+keywords:
+    - pohybové rovnice
+    - astronomie
+story:
+    - Lagrangeovy librační body v soustavě Slunce–planeta jsou body, v nichž se malé těleso pohybuje synchronně s obíháním planety.
+    - Stabilní body L4 a L5 leží ve vrcholech rovnostranného trojúhelníka se základnou Slunce–planeta.
+instruction:
+    - Napište program pro integraci Newtonových pohybových rovnic tří těles. Doporučuji metodu leap-frog.
+    - Počáteční podmínky zvolte tak, aby planeta obíhala okolo Slunce po kruhové dráze.
+    - Těleso o nepatrné hmotnosti umístěte do těsné blízkosti L4 nebo L5 tak, aby obíhalo (téměř) synchronně.
+    - Kontrolujte, zda jsou integrály pohybu konstantní. Zkuste vyjít z bodů L1, L2, L3 nebo z náhodného bodu.

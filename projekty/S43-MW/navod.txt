@@ -1,0 +1,94 @@
+Následující podrobný návod je pro MACSIMUS. Můžete použít i jiný software, pokud ho ovládáte.
+
+Voda a solanka v mikrovlnce.
+
+============== 0 instalace ===============
+
+Budete potřebovat cookewlc nebo cookewlcP1 (paralelizovaný), případně cookewslc / cookewslcP1, dále silové pole Joung–Cheatham, viz blend/data/JC+SPCE.par (po instalaci je k dispozici).
+
+1) Instalujte MACSIMUS, viz https://github.com/kolafaj/MACSIMUS nebo http://old.vscht.cz/fch/software/macsimus/index.html
+
+2) V průběhu instalace požadujte kompilaci cookewslc a/nebo cookewslcP1.
+Alternativně po instalaci přejděte do macsimus/cook a spusťte ./configure.sh a nechte defaultní parametry kromě možné paralelizace (verze budou bez 's').
+
+=============== 1 příprava silového pole ==============
+
+Potřebujete soubory Na+.che, Cl-.che, SPCE.che, viz data.zip
+
+Příprava silového pole ff.ble:
+  blend -o ff Na+ Cl- -h SPCE
+Pozn.: parametr -h zařizuje, že model vody je rigidní. Zároveň se vytvoří soubory pro zobrazení.
+
+================== 2 příprava simulace ==================
+
+Projděte si a upravte následující soubory.
+  Vstupní soubor simulace: example.def
+  Řídicí soubor simulace: example.get
+Použijte vhodné jméno místo "example", např. "water" nebo "brine1m" apod.
+Pro simulaci se solí použijte molalitu od 1 mol/kg do max. 3.7 mol/kg (rozpustnost tohoto modelu). Musíte tedy spočítat počet párů a doplnit do souboru *.def.
+
+Spuštění (minuty na středně moderním kancelářském počítači)
+  NSLOTS=4 cookewslcP1 ff brine1m
+NSLOTS je počet paralelních vláken; pro ~500 molekul nemá smysl víc. Musíte mít ovšem procesor, který tolik vláken má. Optimální NSLOTS je v případě hyperthreadingu tak asi polovina počtu vláken.
+
+Zobrazte trajektorii
+  show -I@i brine1m  # nebo doubleclick brine1m.plb v MidnightCommanderu
+                     # nebo start brine1m..plb (je-li instalován start)
+Pozn.: -I@i nastavuje jiné zobrazení vody a iontů a start videa
+
+Zobrazte konvergenční profily – je aspoň trochu ustálená hustota?
+  showcp -p brine1m  # nebo doubleclick brine1m.cp v MidnightCommanderu
+                     # nebo start brine1m.cp (je-li instalován start)
+Pozn: všechny grafy se zavřou pomocí [Kill all]
+
+Pokud vypadají konvergenční profily dobře, můžete simulovat s polem.
+
+================== 3 běh s proměnným polem ==================
+
+Nastavení parametrů:
+- Čas simulace t by měl být alespoň 3 periody záření, tedy 3/f, kde f=2.45 GHz.
+- Potřebnou velikost pole pro detekci ohřevu zhruba odhadněte z elektrické vodivosti, kterou získáte z limitní molární vodivosti iontů a koncentrace. Platí
+  Q/Vt = j.E,
+kde E je intenzita pole, j=κE je proudová hustota, κ je konduktivita roztoku, Q teplo a V objem. Počítejte s ohřevem zhruba o 10 K během doby simulace.
+- Stejné pole nechte pro čistou vodu (zvýšení teploty bude nižší).
+Rady: Rychlost ohřívání je v malých polích úměrná dvojmoci intenzity pole, ale konduktivita roste s teplotou. Střední kvadratické napětí střídavého proudu je polovinou maximálního.
+
+Zkopírujte si konfiguraci, např.:
+  cp brine1m.cfg brine1m-a.cfg
+Zlinkujte nebo zkopírujte def-soubor (nebude se měnit):  
+  cp brine1m.def brine1m-a.def  nebo  ln -s brine1m.def brine1m-a.def
+Vytvořte ----------- brine1m-a.get ----------------
+! NSLOTS=4 cookewslcP1 ff brine1m-a 
+init="start"          ! pokracovani, nove mereni a konvergencni profily
+no=VYPOCTETE          ! pocet cyklu (1 cyklus = 0.1 ps, pokud jste nemenili noint*h)
+thermostat=0          ! adiabaticka simulace
+tau.rho=0             ! vypnout rizeni na hustotu
+tau.P=0               ! vypnout rizeni na tlak => NVE simulace
+el.f=2.45e9           ! frekvence [Hz]
+el.E[2]=DOPLNTE       ! [V/m] max. amplituda intenzity pole
+;
+-------- konec brine1m-a.get ------------
+a spusťte simulaci. Počítejte s "wall time" řádu jednotek hodin.
+Nejste-li si jisti výpočtem el.E[2], nastavte menší no (třeba jen no=100 ⇒ t=10 ps) a zkoušejte. Pro t=10 ps je ale pole prakticky konstantní, takže ohřev je 2× větší.
+
+Zkontrolujte konvergenční profily a trajektorii:
+  showcp brine1m-a.cp # Konvergenční profily mají na vodorovné ose ps.
+  show -I@i brine1m-a.plb
+Druhý příkaz funguje i během výpočtu, první ne, ale můžete snížit no a opakovat ; několikrát (po každém ; se zapisuje *.cp).
+
+Proveďte analogickou simulaci s čistou vodou (n=0 v def-souboru).
+
+Po provedení simulace případně upravte intenzitu pole a simulujte znova. Pokud bude zvýšení teploty malé, bude zjištěno nepřesně. Pokud bude zvýšení teploty značné (> desítky K), bude výsledek ovlivněn změnou vodivosti s teplotou, případně simulace zhavaruje.
+
+================== 4 pokus ==================
+
+Pro pokus v mikrovlnce potřebujete tři stejné nádoby, nejlépe kelímky z pěnového polystyrenu (malá tepelná kapacita). Připravte si:
+- Čistou (ideálně destilovanou nebo deionizovanou) vodu, ale pražská kohoutková je relativně měkká a projde;
+- Teploměr, vhodný je kuchyňský se sondou na maso nebo těsto. Jde o rychlost, takže čím menší sonda, tím lepší. Jistě vám teploměr půjčí i v laboratoři. V nouzi lze změřit i s běžným lihovým teploměrem, ale doba ustálení je delší;
+- Běžnou kuchyňskou sůl.
+Příprava:
+- V 1 kelímku by měla být čistá voda, v druhém zředěný roztok soli (~fyziologický roztok), ve třetím koncentrovaný roztok (blízko nasycení). Hmotnost (nikoliv objem) v každém kelímku by měl být stejný (běžná digitální kuchyňská váha je OK).
+- Zkontrolujte, zda je v každém kelímku stejná teplota, případně nechte teploty vyrovnat.
+- Dejte do mikrovlnky všechny tři kelímky symetricky do trojúhelníka na otočný talíř: vzdálenost od středu otáčení by měla být přesně stejná.
+- Zapněte mikrovlnku a zahřívejte. Mikrovlnku vypněte, až bude sestava kelímků v přesně stejné pozici na otočném talíři jako při zapnutí a vzrůst teploty je měřitelný (chce to nějaké zkoušení).
+- Porovnejte teploty v kelímcích. Pokud se vám výsledek pro kelímek s koncentrovaným roztokem nezdá, podívejte se na internet na heslo Faradayova klec a/nebo posuďte, zda je celý objem roztoku zahřát rovnoměrně.

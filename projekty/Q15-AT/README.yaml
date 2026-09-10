@@ -1,0 +1,12 @@
+title: Adenin a thymin
+difficulty: 3
+supervisor: Petr Slavíček
+keywords:
+    - strukturní analýza
+instructions:
+    - Zvolte kvantově-chemickou metodu, kterou budete používat při následujících výpočtech.
+    - Zoptimalizujte strukturu adeninu a thyminu v kanonické formě.
+    - Zoptimalizujte strukturu vodíkově vázaného komplexu mezi těmito bázemi (dle Watsona a Cricka).
+    - Ověřte, že se struktury nachází v minimu na hyperploše potenciální energie.
+    - Vypočítejte energii vodíkové vazby páru A-T.
+    - V úvodu protokolu diskutujte význam vodíkové vazby v biologii.

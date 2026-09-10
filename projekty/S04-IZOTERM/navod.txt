@@ -1,0 +1,54 @@
+﻿Izotermy se pro 2D systém chovají kvalitativně stejně jako ve 3D. Jedním z rozdílů je hodnota kritického exponentu β=1/8 – viz https://en.wikipedia.org/wiki/Critical_exponent. Dvoufázová oblast je tak v blízkosti kritického bodu ještě placatější než ve 3D (β=0.326).
+
+Při práci doporučuji měnit jméno protokolu simolant.txt (např.) podle teploty, viz položka v menu File → protocol name.
+
+1. Nadkritické izotermy
+^^^^^^^^^^^^^^^^^^^^^^^
+Nastavte:
+  * Boundary conditions → Periodic
+  * [simulation speed] na maximum
+  * [measurement block] na maximum
+  * Doporučená metoda je "MD/Bussi CSVR" (default), pro řidší systémy může být efektivnější "MC/NVT/Metropolis" (volí se v Menu → Method)
+Výpočet izotermy:
+  * Nastavte vhodnou teplotu. Můžete začít z T=2. Je vhodné zadávat do pole cmd:
+  * Zadejte rho=vhodná hustota, třeba rho=1. Pokud systém zkrystalizuje, snižte.
+    - Po ustálení stiskněte [▫ record]
+    - Napočtěte aspoň 10 bloků
+    - Stiskněte znovu [▫ record] a uložte (save / append)
+    - Opakujte pro další hustotu.
+Celý výpočet opakujte pro o něco nižší teplotu.
+Extrahujte data ze souboru výsledků (default=simolant.txt).
+Zobrazte graf P vs. ρ nebo P vs. V=1/ρ
+
+2. Podkritické izotermy
+^^^^^^^^^^^^^^^^^^^^^^^
+A) VÝPOČET ROVNOVÁHY:
+Nastavte:
+  * Prepare system → Vapor-liquid equilibrium
+    (to je to samé co Boundary conditions → Slit + horní zeď odpudivá, spodní přitažlivá)
+  * Show → Vertical density profile
+  * Nastavte vhodnou teplotu, např. T=0.7
+  * Zkontrolujte, zda vidíte dvoufázový systém
+  * Nastavte include: [Density profile] (menu pod [▫ record])
+  * Stiskněte [▫ record]
+  * Je potřeba aspoň 100 bloků (pro simulation speed = max, measurement block=max)
+Zobrazte density profile a určete:
+  * Hustotu kapaliny (vlevo): odhadněte v oblasti oscilací
+  * Hustotu páry
+B) VÝPOČET PLYNNÉ IZOTERMY
+  * Nastavte stejně jako výše "Nadkritické izotermy"
+  * Vypněte "Show → Vertical density profile" a "include: [Density profile]"
+  * Zadejte hustotu nižší, než je rovnovážná hustota pro plyn
+  * Počítejte pro zvyšující se hustoty a sledujte fázi (nezkapalňuje?)
+  * Zkuste metastabilní přesycenou páru (hustota o něco větší než rovnovážná)
+C) VÝPOČET KAPALNÉ IZOTERMY
+  * Nastavení viz B)
+  * Zadejte hustotu o něco vyšší než je rovnovážná pro kapalinu
+  * Počítejte pro snižující se hustoty a sledujte fázi (nevypařilo se?)
+  * Zkuste metastabilní přechlazenou kapaliny (hustota o trošku nižší než rovnovážná)
+  
+3. Pokuste se určit kritický bod
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Podle posouzení systému okem odstraňte ty výsledky, kdy byl systém zjevně dvoufázový (např. vznikla vrstva či jedna velká kapka nebo kavita).
+Dostali jste někde p(V) odpovídající stavovým rovnicím (van der Waals loop)?
+Je v konečném systému kritická teplota podhodnocená nebo nadhodnocená?

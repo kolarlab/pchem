@@ -1,0 +1,19 @@
+title: Frekvence výskytu aminokyselin
+difficulty: 4
+supervisor: Michal Kolář
+keywords:
+    - protein
+    - UniProt
+    - FASTA
+    - python
+    - programování
+story:
+    - Existuje cca 20 kanonických aminokyselinových zbytků.
+    - Každý zbytek se v proteinech vyskytuje s různou četností, přičemž tato četnost může záviset na organismu.
+    - Mycoplasma pneumoniae je jedním s nejmenších prokaryotních organismů.
+    - Saccharomyces cerevisiae je jednoduchý modelový eukaryotní organismus.
+    - Porovnejte čestnosti výskytu jednotlivých aminokyselinových zbytků v proteomech těchto dvou organismů.
+instructions:
+    - Proteomy vyhledejte v databázi UniProt.
+    - Věnujte pozornost statistickému vyhodnocení pozorovnaých rozdílů. Velikosti genomů se totiž řádově liší.
+    - Výsledky a pozorování diskutujte.

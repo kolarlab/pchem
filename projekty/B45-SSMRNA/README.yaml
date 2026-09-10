@@ -1,0 +1,15 @@
+title: Analýza sekundární struktury mRNA
+difficulty: 4
+supervisor: Michal Kolář
+keywords:
+    - mRNA
+    - sekundární struktura
+    - RNAfold
+    - ViennaRNA
+story:
+    - Messengerová RNA slouží jako dočasné uložiště genetické informace. 
+    - Na rozdíl od relativně jednoduché DNA dvoušroubovice tvoří RNA velké množství strukturních motivů.
+instructions:
+    - Vyhledejte sekvenci mRNA, která je ribozomem zpracovávána pomalu. Jako odrazový můstek mohou sloužit sekvence kódující segmenty bohaté na Arg a Lys.
+    - Predikujte sekundární strukturu mRNA o délce 20-70 nukleotidů různými predikčními servery.
+    - Výsledky predikcí provnejte mezi sebou a diskutujte konsenzuálně shodné vlastnosti mRNA.

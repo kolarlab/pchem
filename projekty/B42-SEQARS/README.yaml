@@ -1,0 +1,16 @@
+title: Sekvenční porovnání tRNA syntetáz
+difficulty: 3
+supervisor: Michal Kolář
+keywords:
+    - protein
+    - primární struktura
+    - sekvence
+    - sekundární struktura
+    - BLAST
+story:
+    - tRNA syntetázy jsou enzymy, které propojují aminokyseliny s příslušnými transferovými RNA, a nepřímo se tak účastní translace. 
+    - V každé buňce existuje 20 tRNA syntetáz, které se dělí do dvou hlavních tříd.
+instructions:
+    - Vyberte si jednu tRNA syntetázu.
+    - Porovnejte primární strukturu této tRNA syntetázy ze tří různých organismů (např. pomocí služby Clustal Omega).
+    - Predikujte sekundární strukturu proteinů a diskutujte mezidruhové rozdíly.

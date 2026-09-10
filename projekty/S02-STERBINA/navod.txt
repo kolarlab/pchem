@@ -1,0 +1,46 @@
+﻿Analogií povrchového napětí ve 2D je lineární napětí (line tension), rozměr je J/m = N. SIMOLANT ovšem používá bezrozměrné jednotky.
+
+Ve 3D pro "slab-geometrii" (1 vrstva kapaliny se dvěma povrchy kolmá k ose z) platí pro povrchové napětí:
+    γ = (2 Pzz − Pxx − Pyy)*Lz/4
+kde Lz je velikost simulační buňky ve směru osy z a Pzz,Pyy,Pzz jsou diagonální složky tenzoru tlaku.
+
+Ve 2D obdobně pro lineární napětí a vrstvu kolmou k ose y:
+    γ = (Pyy – Pxx)*Ly/2
+
+0)
+Nastartujte SIMOLANT a zvolte:
+  - panel uprostřed: include: → [Density profile]
+  - panel dole: "simulation speed" na maximum
+  - panel dole: "measurement block" na maximum
+
+1) Vrstva
+  - menu: [Prepare system] → [Horizontal slab]
+Doporučená teplota je 0.55, počet částic 300 – nemusíte (zatím) měnit.
+(Chcete-li měnit N, bude asi potřeba zopakovat [Prepare system] → [Horizontal slab].)
+
+Pozor: Vždy zkontrolujte, zda se zobrazuje "vertical density profile; pokud ne, změňte:
+  - menu: [Show and measure] → Vertical density profile.
+  - Nastavení v panelu include: → [Density profile] musí být TAKÉ.
+
+Nechte ustálit, stiskněte [Record] a simulujte aspoň 50 cyklů (modré n=) a uložte. Ignorujte hlášku "Cannot follow periodic b.c.". V souboru simolant.txt najdete termodynamické veličiny, v CSV souboru (je-li nastaveno CSV) pak hustotní profil. Analýza:
+  - Najděte hodnotu povrchového napětí γ vč. odhadu nejistoty.
+  - Nakreslete hustotní profil.
+  - Jaká je hustota kapaliny ve středu vrstvy?
+  - Poznamenejte si i tlaky v obou směrech; Pyy lze interpretovat jako tlak plynu nad kapalinou.
+
+2)
+Opakujte bod 1) pro vyšší a nižší teplotu (zadejte příkaz např. "T=0.6" v políčku cmd:), pokud to půjde – za vyšší teploty se vrstva rozbije či vypaří, za nízké zkrystalizuje. Nakreslete graf závislosti povrchového napětí na teplotě.
+
+3a)
+  - menu: [Boundary conditions] → [Slit (x-periodic,y-walls)] (červené zdi jsou odpudivé)
+  - menu: [Method] → Molecular dynamics NPT (Berendsen)
+  - Nastavte teplotu opět na T=0.55.
+  - Zvolte tlak P=0.1 (to je průměrný tlak obou složek Pxx a Pyy), nechte ustálit a opět spočtěte stejné veličiny.
+  - Opakujte pro P=0.2.
+
+3b)
+Vpravo uprostřed ve vnitřním panelu Walls přepněte zdi na přitažlivé a vše přepočtěte pro P=0 a P=0.1
+
+3c)
+  - Porovnejte hustotní profily a hustoty uprostřed vrstvy a okomentujte z hlediska struktury.
+-   Porovnejte tlaky a povrchová napětí. Diskutujte smysl γ pro simulace se zdmi.

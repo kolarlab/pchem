@@ -1,0 +1,17 @@
+title: Terciární struktury homopeptidů
+difficulty: 2
+supervisor: Michal Kolář
+keywords:
+    - protein
+    - peptid
+    - primární struktura
+    - terciární struktura
+    - AlphaFold
+story:
+    - Homopeptidy jsou peptidy složené s jednoho typu aminokyselinového zbytku.
+instructions:
+    - Vyberte si 5 aminokyselin a vytvořte z každé z nich homopeptid o délce 15 reziduí.
+    - Predikujte jejich terciární strukturu pomocí algoritmu AlphaFold nebo podobného.
+    - Klasifikujte sekundární strukturu.
+    - Výsledky a pozorování diskutujte.
+    - Určete preference jednotlivých aminokyselin účastnit se různých sekundárně-strukturních motivů.

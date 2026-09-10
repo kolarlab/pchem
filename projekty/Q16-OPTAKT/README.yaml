@@ -1,0 +1,12 @@
+title: Optická aktivita
+difficulty: 3
+supervisor: Petr Slavíček
+keywords:
+    - optická otáčivost
+    - helicen
+instructions:
+    - Zoptimalizujte strukturu pentahelicenu s pomocí semiempirické metody PM3.
+    - Ověřte, že se struktura nachází v minimu na hyperploše potenciální energie.
+    - Vypočítejte optickou otáčivost na B3LYP/6-31G* úrovni.
+    - Hodnotu optické otáčivosti porovnejte s hodnotou pro kyselinu mléčnou.
+    - V úvodu protokolu pojednejte o významu chirality v chemii a o chemii helicénů.

@@ -1,0 +1,16 @@
+title: Balení náhodných sekvencí
+difficulty: 3
+supervisor: Michal Kolář
+keywords:
+    - AlphaFold
+    - protein
+    - primární struktura
+    - terciární sturktura
+story:
+    - Balení proteinů je klíčovým biofyzikálním dějem ve všech živých organizmech, neboť terciární struktura definuje funkci proteinu.
+    - V přírodě existuje omezené množství tříd terciárních struktur (několik set), přestože možných proteinových sekvencí je astronomické množství.
+instructions:
+    - Vygenerujte alespoň 10 náhodných proteinových sekvencí, každou o 150 reziduích.
+    - Pomocí modelu AlphaFold predikujte terciární strukturu náhodných proteinů.
+    - Modely vhodnými nástroji analyzujte a výsledky diskutujte.
+    - Hledejte trendy. Srovnejte s proteiny, které se v přírodě nachází.

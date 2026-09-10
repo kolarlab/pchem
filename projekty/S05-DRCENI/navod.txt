@@ -1,0 +1,18 @@
+﻿1) Příprava konfigurace
+- 300–600 částic (N)
+- Slider "simulation speed" na maximum
+- Menu [Prepare system] → Hexagonal crystal
+- Teplotu na minimum
+- Přepněte na stochastický termostat (např. Langevin)
+- Pomocí slideru "g" opatrně uložte krystal na spodní okraj boxu tak, aby se  nerozbil ani nezměnil tvar.
+- Uložte si tuto konfiguraci pomocí menu [File] → Save configuration as...
+
+2) Nahrajte [File] → Load configuration as... a proveďte "drcení" za definovaných podmínek:
+- Nastavte zvolenou teplotu
+- Zvyšujte pomalu gravitaci (ale ve všech pseudoexperimentech přibližně stejně rychle), až proběhne první dislokace (posun vrstev) a změní se tvar krystalu. Zapište si hodnotu gravitace, g(max).
+
+3) Opakujte bod 2) několikrát pro jednu teplotu a spočtěte průměr a odhad nejistoty.
+
+4) Opakujte bod 3 pro několik teplot.
+
+5) Vyneste graf logaritmu střední hodnoty g(max) na inverzní teplotě a stanovte pomocí Arrheniova zákona aktivační energii posunu vrstev. Pokud zkusíte pro několik velikostí krystalu, rozhodněte, zda výsledek závisí na počtu vrstev.

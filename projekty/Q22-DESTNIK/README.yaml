@@ -1,0 +1,18 @@
+title: Deštníkový efekt
+difficulty: 3
+supervisor: Petr Slavíček
+keywords:
+    - energetika reakce
+story:
+    - Molekula amoniaku se může překlopit skrze svou planární formu. 
+    - Mluvíme o deštníkovém efektu nebo o planární inverzi.
+instructions:
+    - Zvolte jednu DFT a jednu korelovanou ab-initio kvantově-chemickou metodu, kterou budete používat při následujících výpočtech.
+    - Zoptimalizujte strukturu amoniaku.
+    - Ověřte, že se struktura nachází v minimu na hyperploše potenciální energie.
+    - Proveďte sken hyperplochou potenciální energie podél vhodné reakční koordináty.
+    - Použijte strukturu odpovídající lokálnímu maximu na skenu jako odhad pro optimalizaci tranzitního stavu reakce.
+    - Stanovte výšku aktivační bariéry reakce.
+    - Dochází k této inverzi při pokojové teplotě?
+    - V protokolu diskutujte o experimentální detekci tohoto jevu a stručně pojednejte o kulturní historii deštníku.
+    - V případě dostatku času zkuste jev modelovat i pro amoniak substituovaný např. methylovou skupinou.

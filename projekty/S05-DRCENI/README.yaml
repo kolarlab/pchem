@@ -1,0 +1,13 @@
+title: Drcení 2D krystalu
+difficulty: 3
+supervisor: Jiří Kolafa
+keywords:
+    - krystal
+    - SIMOLANT
+story:
+    - Využitím mechanické síly lze vrstvy krystalu vůči sobě posouvat.
+    - Tento děj je teplotně závislý, přičemž tuto závislost lze modelovat rovnicí Arrheniova typu.
+instruction:
+    - Pro 2D systém implementovaný v SIMOLANTu stanovte aktivační energii posunu krystalových vrstev.
+literature:
+    - https://github.com/kolafaj/SIMOLANT

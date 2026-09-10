@@ -1,0 +1,11 @@
+title: Konjugované polyeny
+difficulty: 3
+supervisor: Petr Slavíček
+keywords:
+    - UV-VIS spektroskopie
+instructions:
+    - Zvolte kvantově-chemickou metodu, kterou budete používat při optimalizaci.
+    - Zoptimalizujte struktury konjugovaných polyenů od ethenu po deka-1,3,5,7,9-pentaen.
+    - Ověřte, že se struktury nachází v minimu na hyperploše potenciální energie.
+    - Metodou ZINDO vypočítejte, jak se mění poloha prvního absorbčního pásu struktur.
+    - V úvodu protokolu pojednejte o významu fotochemie dvojné vazby, o fotochemii spojené se zrakovým vjemem a o úloze mrkve ve výživě obyvatelstva.

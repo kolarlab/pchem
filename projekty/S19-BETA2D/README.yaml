@@ -1,0 +1,17 @@
+title: Kritický exponent β ve 2D
+difficulty: 3
+supervisor: Jiří Kolafa
+keywords:
+    - SIMOLANT
+    - kritický exponent
+    - mřížkový model
+story:
+    - Kritický exponent β je konstanta v limitním vztahu ρ(l)−ρ(g)∝(Tc−T)^β, kde Tc je kritická teplota, T teplota a ρ hustota fází v rovnováze.
+    - Lépe se kritické chování studuje pomocí Isingova modelu, kde ρ je magnetizace a ρ(+)=−ρ(−).
+instruction:
+    - Isingův 2D model bude implementován v SIMOLANTu; pokud to nestihnu, můžete dostat samostatný kód pro linux.
+    - Studujte závislost rovnovážné magnetizace na teplotě v oblasti těsně pod kritickým bodem.
+    - Nakreslete graf a nafitujte na výše uvedený vztah.
+    - Najděte v literatuře známou hodnotu β a porovnejte.
+literature:
+    - https://github.com/kolafaj/SIMOLANT

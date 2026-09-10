@@ -1,0 +1,20 @@
+﻿XY model viz https://old.vscht.cz/fch/cz/pomucky/kolafa/simul02.pdf#page=18. Budeme uvažovat model na periodické čtvercové mřížce N×N bez vnějšího pole.
+
+BKT teplotu lze stanovit přibližně a bez přílišné teorie (jako jsou korelační funkce) následovně:
+- Připravíme konfiguraci za teploty T. Mícháme hodně dlouho. Efektivitu míchání zvýšíme tak, že nejprve promícháme menší systém (třeba 64×64) a pak zvětšíme dvakrát v každém směru resp. po chvíli ještě jednou dvakrát (showxy: hot key R).
+- Nyní prudce ochladíme (tlačítko q) a spočítáme víry. Vhodné je barevné zobrazení (hot key m/M). V zobrazení nábojů (modré a červené čtverečky) po stisku b a znovu b se sečtou samy.
+
+Nad BKT teplotou vzniká mnoho vírů, pod ní (téměř) žádné, v okolí BKT teploty byste měli pozorovat málo blízkých vírů.
+
+Zopakujte pro alespoň dvě velikosti mřížky.
+
+Následující příklad ukazuje interakci nábojů (platí pro showxy):
+
+select boundary conditions:
+  0=walls  1=periodic in x  2=periodic  3=horizontal interface = 2 ==> 
+maximum simulation square edge (affects geometry) = 1024 ==> 
+initial simulation square edge = 64 ==> 128
+initial temperature T = 0.8935 ==> 0.1
+initial cfg (0=|||, <0: waves, >0:charge pairs) = 1 ==> 8
+
+Pak přepněte zobrazení pomocí Mnebo MM na náboje.

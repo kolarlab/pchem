@@ -1,0 +1,17 @@
+title: Kulová hvězdokupa
+difficulty: 5
+supervisor: Jiří Kolafa
+keywords:
+    - pohybové rovnice
+    - věta o viriálu
+story:
+    - Kulová hvězdokupa s dostatečným množstvím hvězd je metastabilní útvar pomalu se vypařující do prostoru. 
+instruction:
+    - Napište kód pro výpočet sil v konfiguraci hmotných bodů interagujících Newtonovým zákonem. Integrujte vhodnou metodou s adaptivní délkou kroku.
+    - Simulujte hvězdokupu složenou z cca 200–400 hvězd o hmotnosti rovné hmotnosti Slunce v oblasti o velikosti řádově jednotky parseků.
+    - Dokážete získat útvar dostatečně stabilní alespoň stovky milionů let?
+    - Přidejte výklad o aplikaci věty o viriálu na rovnováhu klastru.
+    - Pokud nevěříte svým programátorským schopnostem, lze použít software MACSIMUS – podrobný návod dodám na požádání (nevýhodou je nutnost přepočtu astronomických jednotek na mikroskopické).
+literature:
+    - V. Vanýsek, Základy astronomie a astrofyziky, Academia, Praha (1980)
+    - https://old.vscht.cz/fch/cz/pomucky/kolafa/simul03.pdf

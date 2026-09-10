@@ -1,0 +1,19 @@
+title: Vizualizace NMR
+difficulty: 2
+supervisor: Michal Kolář
+keywords:
+    - NMR
+    - PDB
+    - VMD
+    - Mol*
+    - Chimera
+    - Pymol
+story: 
+    - Proteiny jsou dynamické objekty. 
+    - Některé experimentální metody, např. nukleární magnetická rezonance, poskytují místo jednoho strukturního modelu konformační soubor biomolekuly.
+    - Konformační soubor reflektuje nepřesnosti v určení poloh jednotlivých atomů, méně často může reflektovat i konformační dynamiku molekuly.
+instructions:
+    - V PDB vyhledejte strukturní model proteinu nebo nukleové kyseliny určený metodou NMR, který obsahuje alespoň 5 konformací.
+    - Vytvořte vizualizace biomolekuly tak, aby každá konformace byla vykreslena zvlášť.
+    - Konformace seřaďte podle různých kritérií, např. gyračního poloměru, vzdálenosti C- a N- konce, atp.
+    - Vytvořte vizualizaci biomolekuly tak, že aby bylo zřejmé, které části jsou určeny s vysokou a které s nízkou přesností.

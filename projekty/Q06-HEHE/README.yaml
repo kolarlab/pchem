@@ -1,0 +1,13 @@
+title: Dimer helia
+difficulty: 2
+supervisor: Petr Slavíček
+keywords:
+    - metodologie
+    - nekovalentní interakce
+instructions:
+    - Při následujících výpočtech použijte metody HF, MP2 a CCSD(T) a báze cc-pVDZ, aug-cc-pVDZ, aug-cc-pVTZ, aug-cc-pVQZ.
+    - Zoptimalizujte strukturu dimeru helia.
+    - Ověřte, že se struktura nachází v minimu na hyperploše potenciální energie.
+    - Studujte vliv velikosti báze a stupeň zahrnutí korelačních efektů na vazebnou energii dimeru helia.
+    - Porovnejte interakční energii s typickou hodnotou termální energie.
+    - V úvodu protokolu diskutujte význam Londonovy disperzní energie v chemii a biologii.

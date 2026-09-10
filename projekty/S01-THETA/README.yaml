@@ -1,0 +1,13 @@
+title: 2D kontaktní úhel
+difficulty: 2
+supervisor: Jiří Kolafa
+keywords:
+    - povrchové jevy
+    - SIMOLANT
+story:
+    - Kapalina na pevném povrchu zaujme takový tvar, aby optimalizovala mezimolekulové síly na rozhraních l-s-g.
+instruction:
+    - Stanovte pro 2D kapalinu implementovanou v SIMOLANTu kontaktní úhel na přitažlivé stěně v závislosti na (rovnoměrné) hustotě materiálu stěny (parametr "wall").
+    - Stanovte hustotu, kdy dojde k rozestírání, a porovnejte s rovnovážnou hustotou kapaliny.
+literature:
+    - https://github.com/kolafaj/SIMOLANT

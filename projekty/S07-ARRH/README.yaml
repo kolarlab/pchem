@@ -1,0 +1,14 @@
+title: Aktivační energie difuze
+difficulty: 2
+supervisor: Jiří Kolafa
+keywords:
+    - SIMOLANT
+    - Brownův pohyb
+story:
+    - Difuze je samovolný proces rozptylování částic, při němž se částice pohybují z míst s vyšší koncentrací do míst s nižší koncentrací.
+    - Difuzi popisuje difuzní koeficient, který je závislý na teplotě.
+instruction:
+    - Pro 2D systém implementovaný v SIMOLANTu stanovte střední kvadratické posunutí (MSD z angl. Mean Square Displacement) a difuzivitu pro několik teplot.
+    - Z Arrheniova vztahu vypočtěte aktivační energii difuze.
+literature:
+    - https://github.com/kolafaj/SIMOLANT

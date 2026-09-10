@@ -1,0 +1,104 @@
+Následující podrobný návod je pro MACSIMUS. Můžete použít i jiný software, pokud ho ovládáte.
+
+Simulujte atom Xe v roztoku LiI, ve kterém teče elektrický proud. Může být atom Xe unášen?
+
+Pokud se má nenabitá částice pohybovat v iontovém roztoku, ve kterém teče proud, musí mít kationty a anionty co nejrůznější afinity k částici – jev je slabý. Zkusíme proto větší atom (Xe) v roztoku LiI.
+
+================= 0 ================
+
+Instalujte MACSIMUS: https://old.vscht.cz/fch/cz/pomucky/kolafa/pchemlm.pdf
+
+=============== 1 start a stanovení hustoty ===============
+
+V zip-archivu najdete parametry silového pole (JC+SPCE.par) a definice molekul.
+Silové pole ff.ble s dalšími vlastnostmi molekul vyrobíte takto:
+  blend -o ff JC+SPCE.par  Xe Li+ I- -h SPCE
+Látky jsou číslované takto: Xe=0 Li+=1 I-=2 voda=3
+
+Budete potřebovat cookewlc cookewlcP1, případně cookewslc cookewslcP1
+
+Protože Xe i Cl jsou zelené, změňte v souboru Xe.mol barvu, aby byl xenon k poznání, např. takto:
+  0 Y154/0-XE       XE    0.000000  0    0
+
+Příklad definičního souboru simulace:
+
+---------- Vstupní soubor pro simulaci, např. sim.def ---------
+N[0]=1                 ! 1 atom rozpuštěnce Xe
+n=20
+N[1]=n                 ! Li+
+N[2]=n                 ! I-
+N[3]=300               ! voda
+noint=60 h=0.1/noint   ! cyklus a krok (sim.cp se zapisuje po 1 cyklu)
+thermostat="Berendsen" ! preskalovani rychlosti
+tau.T=0.5              ! [ps] konstanta termostatu, minimum = 0.2
+LJcutoff=10            ! [Å] případně upravit podle velikosti boxu/rozpuštěnce
+cutoff=10.5            ! [Å] nejvýše polovina boxu
+rdf.cutoff=cutoff      ! [Å] dosah měření radiální distribuční funkce
+rdf.grid=25            ! [1/Å] jemnost histogramu
+rho=1200               ! [kg/m3] hustota (bude změněno barostatem)
+tau.rho=1              ! jak rychle systém dosáhne cílovou hustotu [ps]
+T=300                  ! [K] teplota
+dt.plb=1               ! [ps] jak často zapisovat trajektorii
+dt.prt=1               ! [ps] zápis do .prt
+;
+--------------------------------------------------------
+
+----------- Řídicí soubor simulace - příklad, např. sim.get ----------
+init="crystal"        ! začátek
+initrho=800           ! [kg/m3] počáteční hustota
+! init="start"           ! pokračování, nové měření a konvergenční profily
+! init="cont"            ! pokračování (všeho)
+! init="append"          ! pokračování, jen statistika se resetuje
+! el.E[0]=1e9           ! el. pole ve směru x [V/m]
+no=100                ! počet cyklů: 20000 cyc/h, 5 ns/day
+tau.T=.2              ! start: rychle ochladit a smrštit
+;
+bulkmodulus=2e9       ! pro barostat: v [Pa]
+tau.rho=0             ! vypnout
+tau.P=2               ! [ps] konstanta barostatu
+no=2000               ! NPT simulace
+;
+---------------------------------------------------------------
+
+Start simulace (příklad):
+  NSLOTS=2 cookewlcP1 ff sim
+Na klastru:  
+  jsub -n sim1 -p 2  cookewlc ff sim
+
+Zobrazte průběh simulace – je aspoň trochu ustálená hustota?
+  showcp -p sim  # nebo doubleclick sim.cp v MidnightCommanderu
+
+Zobrazte radiální distribuční funkce (RDF)
+  rdfg sim -g -p # nebo doubleclick sim.rdf v MidnightCommanderu
+
+
+=============== 2 simulace s polem ===============
+
+Udělejte si kopie souborů, např. sim9.cfg, sim9.def, sim9.get a opravte tam:
+  tau.P=0 ! bez barostatu
+  tau.T=.5
+  init="start"
+  ! initrho=800 zrušit
+  rho=ODHADEM Z GRAFU (nemusí být moc přesně)
+  tau.rho=1
+  no=XXX ! odhadněte tak, aby výsledky byly přes noc, můžete naplánovat ve 2 kusech a použít ;;
+  el.E[0]=1e9 ! [V/m] můžete zkusit i jiné
+  ;;
+
+Simulujte.  Sledujte teplotu – vzroste (Jouleovo teplo), ale neměla by vzrůst
+příliš.  V případě problémů snižte T nebo tau.T (ale ne pod 0.1) a opakujte.
+
+Pro sledování polohy první částice použijte
+  plbsites sim9.plb -l 0 > VYSTUPNI-SOUBOR
+  plbsites sim9.plb -l 0 | plot -:0:1 :2 :3
+– zobrazí se posun první částice ve směru x,y,z (první = číslo 0)
+Pozn.: -l způsobí sledování periodických okrajových podmínek
+
+=============== 3 další ===============
+
+Můžete zkusit s jinými ionty, s jinou velikostí pole, s jinou koncentrací aj.
+
+================ DISKUSE ===============
+
+Je částice unášena kationty nebo anionty?
+Jaká je souvislost RDF částice–kation, částice–anion s unášením?

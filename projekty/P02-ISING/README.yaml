@@ -1,0 +1,17 @@
+title: Isingův model ve 3D
+difficulty: 5
+supervisor: Jiří Kolafa
+keywords:
+    - Monte Carlo
+    - mřížka
+story:
+    - Isingův model je prototyp modelu pro studium složitých systémů.
+    - Používá se nejen ve fyzice (magnetismus, supravodivost, kritické chování), ale i v biologii, sociologii, ekonomii nebo strojovém učení.
+instruction:
+    - Napište program pro MC simulaci Isingova feromagnetu na kubické mřížce v periodických okrajových podmínkách s nulovým magnetickým polem.
+    - Monitorujte energii a celkovou magnetizaci (součet všech spinů). 
+    - Proveďte termální cyklus, tj. pomalý ohřev z nízké teploty na vysokou a zpátky. Všimněte si hystereze.
+    - Opakujte pro různé velikosti mřížky.
+    - Podaří se vám odhadnout teplotu a druh fázového přechodu?
+literature:
+    - https://old.vscht.cz/fch/cz/pomucky/kolafa/simul02.pdf#page=15

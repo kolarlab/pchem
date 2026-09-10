@@ -1,0 +1,172 @@
+Následující podrobný návod je pro MACSIMUS. Můžete použít i jiný software, pokud ho ovládáte.
+
+Připravte krystalek ledu v modelu TIP4P/2005 za nízké teploty. Odhadněte rychlost, při které je kinetická energie rovna energii potřebné k roztavení ledíků. Dva ledíky nechte danou rychlostí srazit. Vyzkoušejte nižší i vyšší rychlosti. Při jaké rychlosti začnou odletovat fragmenty resp. jednotlivé molekuly? Jako bonus se můžete zmínit o vaší oblíbené filmové ničičce.
+
+K simulaci použijte cookceslc.
+Paralelní verze zde není příliš výhodná (jen malé zrychlení)
+
+=============== 1 ===============
+
+----- Připravte soubor TIP4P05.che s tímto obsahem: ------
+TIP4P/2005
+parameter_set = water
+
+      H405p.55640
+     /
+   O405-M405n1.1128
+     \
+      H405p.55640
+
+-----------------------------------------------------
+a vygenerujte silové pole takto:
+   blend -o voda -h TIP4P05
+
+=============== 2 ===============
+
+Připravte si krystal ledu, pro jednoduchost v kvádru, cca 100-1000 molekul.
+Příklady:
+  ice Ih 3 2 2 -sHOMH -T0 # malý pro test
+  ice Ih 4 2 3 -sHOMH -T0
+  ice Ih 5 3 3 -sHOMH -T0
+nebo led Ic
+  ice Ic 3 3 3 -sHOMH -T0
+Pro návod spusťte 'ice' bez parametru.
+
+Pomocí utility 'plbinfo' zkontrolujte velikost (TIP4P05 = 4 sites)
+  plbinfo Ih322HOMH.plb
+Led obsahuje neuspořádanost generovanou z náhodného rozmístění protonů metodou simulovaného žíhání.
+
+Pro zobrazení vodíkových vazeb použijte příkaz
+  show -H Ih322HOMH
+
+Pozn.: pokud chcete ledík upravit, např. odstranit molekuly, které (po zrušení periodických okrajových podmínek) lezou po ledíku, postupujte takto:
+  show LED.plb
+- přejděte na zobrazení čarami ([7], hotkey = &)
+- nastavte rovnoběžné promítání ([proj], hotkey =)
+- nastavte Click range na 2 nebo 3 ([rg], hot key K)
+- označte prostřední myší molekuly, které chcete odstranit
+- stiskněte [inv] (hotkey M)
+- stiskněte [save] (hotkey Ctrl-s)
+
+Kontrola: show LED LED-0000.plb
+Do def-souborů musíte dát ovšem změněný počet molekul. Nejlépe ho zjistíte stejně, jako se počítá počet ovcí z počtu nohou: pomocí plbinfo zjistíte počet atomů a vydělíte 4 (molekula vody TIP4P05 má navíc site M).
+
+=============== 3 ===============
+
+Krystal ledu. Zkopirujte LED.def (např. Ih322HOMH.def) a přidejte:
+---------------- led1.def ----------------
+! z Ih322HOMH.def:
+n=96 N[0]=n           ! případně změnit podle ledíku
+L[0]=13.5554771
+L[1]=15.6525154
+L[2]=14.7573338
+!cutoff=6.7777386 LJcutoff=cutoff
+
+!pridat:
+cutoff=14             ! useknuti elst potencialu (vc. vyhlazeni) [A]
+LJcutoff=cutoff       ! useknuti LJ potencialu [A]
+                      ! (v prvnim kroku bude pro male ledy nadavat)
+noint=6 h=0.01/noint  ! pocet kroku/cyklus a delka kroku [ps]
+                      ! zde: cyklus=0.01 ps
+dt.plb=0.1            ! jak casto se bude zapisovat "playback" [ps]
+T=10                  ! (pocatecni) teplota [K]
+;
+----------------------------------------------------
+
+------------ led1.get ---------------
+init="plb"  ! nacte soubor .plb
+no=1        ! je 1 krok (z tech.duv. nelze najednou s nasledujicim)
+thermostat="AndersenCM"
+tau.T=1
+T=100       ! teplota
+;           ! konec prvniho kroku
+
+init="start"! nacte predchozi konfiguraci (s parametry viz nize)
+
+x=SPOCITAT  ! nastavit na cca dvojnasobek velikosti lediku
+L[0]=x      ! cilova velikost boxu
+L[1]=x
+L[2]=x
+load.L[0]=1 ! nactena konfigurace se nebude skalovat, tj. bude ledik v prostoru
+load.L[1]=1
+load.L[2]=1
+
+x=7         ! posun doprostred (jen esteticke duvody, i pri zobrazovani)
+shift[0]=x
+shift[1]=x
+shift[2]=x
+
+no=100      ! pocet kroku
+;
+-------------------------------------------
+
+Simulujte (kratke - lze na serveru, za Ih322HOMH.plb dosaďte svůj led):
+  cookceslc voda led1 Ih322HOMH.plb
+
+Prohlédněte si led1.cp, led1.plb
+
+========= 4 =========
+
+Vypočtěte rychlost vedoucí k roztavení a převeďte do jednotek Å/ps.
+
+Zkopirujte
+  cp led1.def led2.def
+  cp led1.cfg led2.cfg
+
+-------- upravte led2.def ------------
+- zvětšete počet molekul 2x takto:
+n=96 N[0]=n*2 ! n se nemění a je nyní polovina počtu molekul - viz nshift dole
+
+-------- led2.get ------------
+init="start"
+x=SPOCITAT  ! nastavit na cca dvojnasobek velikosti lediku
+L[0]=x*2     ! cilova velikost boxu: cca dvojnasobek velikosti lediku
+L[1]=x
+L[2]=x       ! dvakrat tolik
+load.n[0]=2  ! pomnozi 2x ve smeru osy x - v pripade pokracovani simulace zrusit
+
+thermostat=0 ! NVE simulace
+nshift=-n    ! polovina molekul jednim smerem, druha polovina opacnym
+vshift[0]=RYCHLOST   ! [A/ps] rychlost poloviny molekul (=1 lediku)
+no=10000     ! nastavit, kolik bude potreba (v cyklech)
+;
+--------------------------------
+
+Simulujte:
+  jsub -n JOBNAME cookceslc voda led2
+
+Spusťte výpočet. Až se objeví soubor led2.plb, otevřte (zobrazte příkazem show):
+Zobrazit včetně vodíkových vazeb:
+  show -H -DH405 -AO405 led2
+
+Až se nebude dít nic zajímavého,  můžete zastavit simulaci příkazem
+  touch led2.stp
+
+Simulace skončí, až zmizí soubor led2.loc (= „lock file“)
+
+Sledujte také led2.cp.  Na graf označený Tkin Tin Ttr obsahuje:
+bílá = celková teplota
+bleděmodrá = translační teplota – pro letící ledy bude velká
+žluté = jen z rotačních stupňů volnosti
+
+Opakujte pro různé velikosti ledíků a různé rychlosti.
+Jaký vliv má na tavení povrchová energie?
+
+Pozn.: pro restart této simulace od začátku (např. s jinou rychlostí), proveďte
+  cp led1.cfg led2.cfg
+a opakujte.
+
+Pokud zapomenete odstranit load.N, dostanete:
+*** ERROR in /home/jiri/macsimus/sim/simils.c:1079
+*** cannot replicate cell: not a multiple: total 864 molecules expected
+*** (or mixture composition changed)
+
+Příliš velká rychlost povede k chybě
+*** ERROR in /home/jiri/macsimus/sim/norm.c:446
+*** t=0.333333, molecule[60]: x=inf out of box or too long (check #define WORM)
+nebo simulace zhavaruje jinak, pak zůstane lock-file led2.loc, musíte ho smazat!
+Chcete-li přece simulovat, musíte zkrátit integrační krok h.
+
+Chcete-li studovat necentrální srážku, přidejte do led2.get:
+  shift[1]=(y-posun proti stredu)
+Ale dejte pozor na velikost boxu!

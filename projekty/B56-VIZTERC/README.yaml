@@ -1,0 +1,15 @@
+title: Reprezentace terciární struktury proteinu
+difficulty: 1
+supervisor: Michal Kolář
+keywords:
+    - PDB
+    - VMD
+    - Mol*
+    - Chimera
+    - Pymol
+story:
+    - Terciární struktura má několik úrovní komplexity.
+instructions:
+    - V PDB vyhledejte strukturní model proteinu nebo nukleové kyseliny určený metodou rentgenové krystalografie, který má rozlišení 3,0 \AA nebo lepší.
+    - Vytvořte vizualizace biomolekuly v několika reprezentacích zdůrazňujících různé aspekty terciární struktury.
+    - Využijte barevné škály pro vyjádření různých vlastností proteinu.

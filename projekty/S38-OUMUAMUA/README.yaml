@@ -1,0 +1,17 @@
+title: Je 1I/ʻOumuamua mimozemský kosmický koráb?
+difficulty: 3
+supervisor: Jiří Kolafa
+keywords:
+    - molekulová mechanika
+    - MACSIMUS
+story:
+    - 1I/ʻOumuamua proletěla sluneční soustavou v roce 2017 a opět ji opustila.
+    - Jméno je havajského původu, neboť objekt byl zaznamenán dalekohlem na Havajských ostrovech.
+    - Tvar nebyl přímo pozorovatelný, ale podařilo se stanovit světelnou křivku (průběh jasnosti rotujícího objektu v čase), z níž vyplývá, že ʻOumuamua je podezřele protáhlého tvaru.
+instruction:
+    - Simulujte rotaci podlouhlého tuhého tělesa (kousek diamantu) ve vakuu.
+    - Stanovte závislost plochy pozorované z jednoho směru na čase.
+    - Vyzkoušejte různé počáteční podmínky. 
+    - Dostanete křivky podobné naměřeným křivkám jasu ʻOumuamuy na čase?
+literature:
+    - https://old.vscht.cz/fch/cz/pomucky/kolafa/pchemlm.pdf

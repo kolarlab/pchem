@@ -1,0 +1,16 @@
+title: Homorepeats v proteomu
+difficulty: 4
+supervisor: Michal Kolář
+keywords:
+    - protein
+    - PDB
+    - FASTA
+    - python
+    - programování
+story:
+    - Homorepeats (trochu víc česky nejspíš homorepetice) proteinové fragmenty složené s jednoho typu aminokyselinového zbytku.
+instructions:
+    - V databázi uniprot vyhledejte kompletní proteom bakteri E. coli.
+    - Pro každý typ aminokyselinového zbytku vyhledejte nejdelší homorepetici v proteomu.
+    - Diskutujte délku repetice a její polohu v rámci daného proteinu.
+    - Diskutujte ochotu daného rezidua účastnit se homorepetic.

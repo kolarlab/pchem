@@ -1,0 +1,139 @@
+Následující podrobný návod je pro MACSIMUS. Můžete použít i jiný software, pokud ho ovládáte.
+
+Můžete použít libovolný software schopný výpočtu fundamentálních vibrací. Použití kvantových výpočtů je kanón na vrabce, ale v principu je možné – v tomto případě použijte co nejlevnější metodu. O několik řádů je rychlejší výpočet založený na molekulové mechanice (silovém poli). Následující návod předpokládá použití balíku MACSIMUS.
+
+1) Instalujte MACSIMUS: https://old.vscht.cz/fch/cz/pomucky/kolafa/pchem00.pdf
+Základy linuxu: https://old.vscht.cz/fch/cz/pomucky/kolafa/pchem0x.pdf
+
+2) K výpočtu lze použít příkaz 'blend' a následující vstupní soubor:
+
+---------------------------------- graphene.che ----------------------------------
+graphene (one layer of graphite), C294
+
+parameter_set=charmm21
+
+
+                                            CR66-CR66
+                                             |    |
+                                    CR66--CR66    CR66--CR66
+                                    |        |    |        |
+                              CR66-CR66     CR66-CR66     CR66-CR66
+                               |    |        |    |        |    |
+                      CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66
+                      |        |    |        |    |        |    |        |
+                CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66
+                 |    |        |    |        |    |        |    |        |    |
+        CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66
+        |        |    |        |    |        |    |        |    |        |    |        |
+  CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66
+   |    |        |    |        |    |        |    |        |    |        |    |        |    |
+CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66   CR66
+   |    |        |    |        |    |        |    |        |    |        |    |        |    |
+  CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66
+   |    |        |    |        |    |        |    |        |    |        |    |        |    |
+CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66   CR66
+   |    |        |    |        |    |        |    |        |    |        |    |        |    |
+  CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66
+   |    |        |    |        |    |        |    |        |    |        |    |        |    |
+CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66   CR66
+   |    |        |    |        |    |        |    |        |    |        |    |        |    |
+  CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66
+   |    |        |    |        |    |        |    |        |    |        |    |        |    |
+CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66   CR66
+   |    |        |    |        |    |        |    |        |    |        |    |        |    |
+  CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66
+   |    |        |    |        |    |        |    |        |    |        |    |        |    |
+CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66   CR66
+   |    |        |    |        |    |        |    |        |    |        |    |        |    |
+  CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66
+   |    |        |    |        |    |        |    |        |    |        |    |        |    |
+CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66   CR66
+   |    |        |    |        |    |        |    |        |    |        |    |        |    |
+  CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66
+   |    |        |    |        |    |        |    |        |    |        |    |        |    |
+CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66   CR66
+   |    |        |    |        |    |        |    |        |    |        |    |        |    |
+  CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66
+        |        |    |        |    |        |    |        |    |        |    |        |
+        CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66
+                 |    |        |    |        |    |        |    |        |    |
+                CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66     CR66-CR66
+                      |        |    |        |    |        |    |        |
+                      CR66--CR66    CR66--CR66    CR66--CR66    CR66--CR66
+                               |    |        |    |        |    |
+                              CR66-CR66     CR66-CR66     CR66-CR66
+                                    |        |    |        |
+                                    CR66--CR66    CR66--CR66
+                                             |    |
+                                            CR66-CR66
+
+---------------------------------- konec souboru ---------------------------------
+
+Je použito silové pole CHARMM 21, typ atomu CR66 = "Aromatic carbon - merged six membered rings"
+
+Tento soubor lze případně (po přejmenování) editovat editorem, který umí pravoúhlé bloky (např. joe).
+Můžete případně zkusit obdélník (stačí smazat několik řádek), nesmí ale nikde zbýt volné vazby (CR66--)
+
+Nejprve DŮKLADNĚ zoptimalizujte molekulu takto:
+  blend -g -m-1000 graphene
+lze také použít doubleclick z Midnight Commanderu (je-li jeho podpora instalovaná).
+Energie se již nesmí měnit! Pokud se bude, stisknete tlačítko [CG] (= Conjugate Gradients) nebo hotkey ','.
+Minimalizace trvá sekundy.
+Ukončíte tlačítkem [finish], z klávesnice hot key .
+Vytvoří se soubory graphene.mol a graphene.plb.
+
+WARNING: Při dalším volání 'blend graphene' se již nepoužívá graphene.che, ale graphene.mol. Pokud chcete vynutit použití graphene.che, nutno takto:
+  blend -rě -g -m-1000 graphene
+
+Výpočet vibrací
+  blend -N -M1 -P999 -m99 -p -g graphene
+Význam parametrů:
+  -N = budou se počítat vibrace (Normal Mode Frequencies)
+  -M = amplituda pohybu v Å pro vizualizaci
+  -P999 = počet módů pohybu (999 je "moc" = všechny)
+  -m99 = max. počet kroků minimalizace metodou konjugovaných gradientů (napodruhé již jen několik)
+  -m-1000 = na začátku několik kroků metodou nejvyššího spádu
+  -p = bude se zapisovat "playback" (trajektorie, koncovka .plb)
+  -g = grafický interface (bez něj jen počítá, nezobrazuje)
+  -FCISLO = počet obrázků pro zobrazení pohybu (default=7)
+Po skončení minimalizace nutno pokračovat pomocí [finish] nebo hotkey ','.
+Výpočet pak trvá do minuty.
+
+Po úspěšném ukončení se vytvoří následující soubory:
+  graphene.nmf = seznam frekvencí, prvních 6 jsou ~nuly (rotace,translace)
+  nm0000.plb = playback pro nejnižší vibraci (totiž do 6 translace/rotace)
+  nm0001.plb = playback pro další vibraci, atd.
+
+3) Zobrazení vibrací:
+  SHOWNMF=graphene.nmf show -\\ -h6 -d30 graphene graphene.nm%04d.plb -I\$wwi
+Význam parametrů:
+  SHOWNMF=graphene.nmf bude zobrazovat frekvence ze souboru graphene.nmf
+  graphene = molekula
+  nm%04d.plb = budou se zobrazovat soubory nm%04d.plb = nm0000.plb atd.
+  -\\ nezobrazí souřadnicový kříž
+  -h6 vynechá prvních 6 (rotace,translace)
+  -d30 rychlost (vloží 30 ms)
+  -I\$wwir = počáteční řetězec:
+    \$ = balls+sticks
+    ww = swing mode (opakuje tam-zpět...)
+    i = začne zobrazení playbacku
+    r = zmenší koule
+Tlačítka se šipkami [<] [>] vpravo dole resp. hotkeys PgUp PgDn přecházejí mezi jednotlivými vibračními módy (ne obrázky).
+
+K vytvoření animovaného GIFu (musíte mít instalovaný Image Magic)
+- pomoci w/bg si zvolte pozadí (jako parametr též -bgRRGGBB, kde RRGGBB je hex barva)
+- stiskem 'w' nebo tlačítka se dvěma trojúhelníky zrušte swing mode
+- slider doleva nebo ','
+- [PIC] nebo 'P'
+- [animated GIF] nebo 'a'
+- [|>] a [<|] nebo 'ib', případně po jednom framu '[' ']' 
+- End series nebo 'E'
+
+4)
+Vše toto lze vyvolat pomocí skriptu nmf.sh, což je asociováno s F3 v Midnight Commanderu, ale už nelze měnit parametry (a v případě závady se výpočet zbytečně opakuje).
+
+Vytvoření histogramu hustoty stavů (v jednotkách počet/[cm^-1]):
+  field  3 < graphene.nmf | histogram 100 .5 > hist.dat
+  plot hist.dat
+
+K dispozici je dále experimentální zařízení s deskou, reproduktorem a zesilovačem. Zařízení se připojí ke zvukovému výstupu počítače, kam se nainstaluje generátor sinusových kmitů. Desku lze posypat cukrem. Vylepšení tohoto zařízení se meze nekladou (např. deska ze silnějšího plechu).

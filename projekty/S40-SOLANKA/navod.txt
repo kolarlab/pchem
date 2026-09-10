@@ -1,0 +1,133 @@
+Následující podrobný návod je pro MACSIMUS. Můžete použít i jiný software, pokud ho ovládáte.
+
+Simulujte metodou MD zředěný roztok NaCl ve vodě. Zobrazte radiální distribuční funkce Na-Na, Na-Cl a Cl-Cl a diskutujte výsledky. Z koordinačních čísel (vč. H a O i bez) vypočtěte průměrný náboj v kouli o poloměru r okolo iontu a srovnejte s predikcí podle Debyeovy-Hückeovy teorie.
+
+============== 0 instalace ===============
+
+Budete potřebovat cookewlc nebo cookewlcP1 (paralelizovaný), případně cookewslc / cookewslcP1, dále silové pole Joung–Cheatham, viz blend/data/JC+SPCE.par.
+
+1) Instalujte MACSIMUS, viz https://github.com/kolafaj/MACSIMUS nebo http://old.vscht.cz/fch/software/macsimus/index.html
+
+2) V průběhu instalace požadujte kompilaci cookewslc a/nebo cookewslcP1.
+Alternativně po instalaci přejděte do MACSIMUS/cook a spusťte ./configure.sh a nechte defaultní parametry kromě možné paralelizace.
+
+=============== 1 příprava silového pole ==============
+
+Potřebujete tyto tři textové soubory:
+--------------- Na+.che ----------
+ion Na+
+parameter_set = JC+SPCE
+NAp1
+--------------- Cl-.che ----------
+ion Cl-
+parameter_set = JC+SPCE
+CLn1
+--------------- SPCE.che ----------
+water SPC/E
+parameter_set = JC+SPCE
+Hp0.4238 Hp0.4238
+    \    /
+    On.8476
+-----------------------------------
+
+Příprava silového pole brine.ble:
+  blend -o brine Na+ Cl- -h SPCE
+Pozn.: parametr -h zařizuje, že model vody je rigidní. Zároveň se vytvoří soubory pro zobrazení.
+
+================== 2 příprava simulace ==================
+
+---------- Vstupní soubor pro simulaci (příklad) sim.def ---------
+n=10                   ! pocet paru iontu (0.555 mol/kg)
+N[0]=n                 ! Na+
+N[1]=n                 ! Cl-
+N[2]=1000              ! voda SPCE
+noint=50 h=0.1/noint   ! cyklus a krok (sim.cp se zapisuje po 1 cyklu)
+equalize.cfg=0.8       ! zmena hmotnosti (pro prodlouzeni kroku)
+thermostat="Berendsen" ! termostat
+tau.T=0.5              ! [ps] konstanta termostatu, minimum = 0.2
+bulkmodulus=2e9        ! pro barostat [Pa]
+LJcutoff=11            ! [AA] pripadne upravit podle velikosti boxu
+cutoff=13              ! [AA] nejvyse polovina boxu
+rdf.cutoff=cutoff      ! [AA] dosah mereni radialni distribucni funkce
+rdf.grid=50            ! [1/AA] jemnost histogramu
+rho=1020               ! [kg/m3] hustota (bude zmeneno barostatem)
+tau.rho=1              ! jak rychle system dosahne cilovou hustotu [ps]
+T=300                  ! [K] teplota
+dt.plb=1               ! [ps] jak casto zapisovat trajektorii
+dt.prt=1               ! [ps] jak casto zapisovat do .prt
+;                      ! konec bloku dat
+--------------------------------------------------------
+
+----------- Řídicí soubor simulace pro start (příklad) sim.get ----------
+init="crystal"        ! zacatek; lze tez init="random"
+! init="start"           ! pokracovani, nove mereni a konvergencni profily
+! init="cont"            ! pokracovani (vseho)
+! init="append"          ! pokracovani, jen statistika se resetuje
+no=100                ! pocet cyklu (po noint*h)
+tau.T=.2              ! start: rychle ochladit a smrstit
+;                     ! konec bloku dat
+tau.rho=0             ! vypnout rizeni na hustotu
+tau.T=0.5             ! [ps] konstanta termostatu
+tau.P=2               ! [ps] konstanta barostatu
+no=500                ! cyklu NPT simulace
+;                     ! konec bloku dat
+---------------------------------------------------------------
+
+Spuštění (na 4 vláknech ~5–10 minut)
+  NSLOTS=4 cookewslcP1 brine.ble sim
+NSLOTS je počet paralelních vláken; pro 1000 molekul nemá smysl NSLOTS>8
+Běh lze přerušit (se zápisem) pomocí Ctrl-C nebo
+  touch sim.stp
+
+Zobrazte trajektorii
+  show -I@i sim  # nebo doubleclick sim..plb v MidnightCommanderu
+                 # nebo start sim..plb (je-li instalován start)
+Pozn.: -I@i nastavuje jiné zobrazení vody a iontů a start videa
+
+Zobrazte konvergenční profily – je aspoň trochu ustálená hustota?
+  showcp -p sim  # nebo doubleclick sim.cp v MidnightCommanderu
+                 # nebo start sim.cp (je-li instalován start)
+Pozn: všechny grafy se zavřou pomocí [Kill all]
+
+Pokud vypadají konvergenční profily dobře, můžete simulovat.  Počítejte s delším během, např. přes noc.
+
+================== 3 ostrý běh ==================
+
+----------- Řídicí soubor pro produktivní běh (příklad) sim.get ----------
+init="start"   ! pokracovani ze sim.cfg, nove mereni a konvergencni profily
+tau.rho=0      ! vypnout rizeni na hustotu
+tau.T=0.5      ! [ps] konstanta termostatu
+tau.P=2        ! [ps] konstanta barostatu
+no=10000       ! NPT simulace (nastavit dle zmereneho casu)
+;              ! konec bloku dat
+;;             ! po zápisu zopakuje 2x s init="cont" (ala checkpoint)
+---------------------------------------------------------------
+
+Zkontrolujte konvergenční profily a trajektorii a dále:
+
+Zobrazte radiální distribuční funkce (RDF)
+  rdfg sim -g -p # nebo doubleclick sim.rdf v MidnightCommanderu
+                 # nebo start sim.rdf
+
+Zobrazte running coordination numbers:
+  rdfg sim -c -p
+
+================== 4 analýza ==================
+
+Na základě souborů .cn spočtěte:
+- množství náboje od protiiontu do vzdálenosti r od Na+, tj. (pro sloupce 2):
+  sim.NA.NA.cn − sim.NA.CL.cn
+  (a ovšem sim.NA.CL.cn ≡ sim.CL.NA.cn, protože obou iontů je stejně)
+- množství náboje od protiiontu do vzdálenosti r od Cl-, tj. (pro sloupce 2):
+  sim.CL.NA.cn − sim.CL.CL.cn
+- množství náboje (celkem, tj. i od H a O) do vzdálenosti r od Na+
+- množství náboje (celkem, tj. i od H a O) do vzdálenosti r od Cl-
+Parciální náboje H a O zjistíte v souboru SPCE.mol.
+
+Analyzujte křivky a pokuste se odhadnout Debyeovu stínící délku. Které křivky jsou k tomuto účelu vhodné? Debyeovo stínění po odstranění granularity způsobené jednotlivými molekulami je dáno vzorcem (např. pro náboj okolo Na+):
+  q(Na+) = −1 + A exp(-r/λ)
+Srovnejte s predikcí pomocí Debyeovy–Hückelovy teorie.
+
+================== 5 více ==================
+
+Případně zkuste se zředěnějším roztokem – uvádí se, že pro uni-univalentní sůl je Debyeova–Hückelova teorie přesná pro koncentrace nejvýše 0.1 M, tak se alespoň přibližte. Mírně také zvětšete množství vody a také cutoff (pozn.: z technických důvodů musí být rdf.cutoff ≤ cutoff ≤ L/2, kde L je minimální velikost boxu, který ovšem fluktuuje). Výpočty mohou trvat dost dlouho. Místo souboru NPT můžete použít i NVT se střední hustotou spočtenou v předchozí simulaci. V tomto případě nastavte rho a tau.rho=1 a tau.P=0.

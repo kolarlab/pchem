@@ -1,0 +1,15 @@
+title: Srovnání rengenové krystalografie a strojového učení
+difficulty: 2
+supervisor: Michal Kolář
+keywords:
+    - protein
+    - terciární struktura
+    - AlphaFold
+    - RMSD
+story:
+    - Modely strojového učení pro určení terciární struktury proteinů prošly v posledních letech průdkým rozvojem.
+instructions:
+    - Vyhledejte pět různých proteinů v PDB, jejichž experimentální strukturní modely mají rozlišení lepší než 2,5 \AA.
+    - Predikujte jejich terciární strukturu pomocí algoritmu AlphaFold nebo podobného.
+    - Pomocí vhodné metriky (např. RMSD) srovnejte struktury poskytnuté krystalograií a strojovým učením.
+    - Výsledky diskutujte.

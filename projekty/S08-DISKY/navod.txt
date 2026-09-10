@@ -1,0 +1,20 @@
+﻿Potenciál „propustných disků“ (penetrable disks, ve 3D ovšem penetrable spheres) implementovaný v SIMOLANTu je definován zde: http://old.vscht.cz/fch/software/simolant/simolant.html#Potentials. Potenciál je nezáporný, v systému tedy není fázová rovnováha kapalina–pára. Existuje ale rovnováha krystal–tekutina. To je křivka v P–T diagramu.
+
+1) V SIMOLANTU nastavte:
+  - menu Force field → Penetrable disks (a=1,c=2)
+  - menu Boundary conditions → periodic
+  - menu Method → Molecular dynamics NPT Berendsen
+  - v panelu: include: → Density profile (zajistí výstup do CSV)
+  - simulation speed na maximum
+  - můžete trochu zvětšit measurement block
+  - vpravo dole color mode: → Neighbors
+
+2)
+  - Nastavte tlak (zkuste i větší tlaky až P=10, což je mimo slider, tedy použijte příkaz P= v okénku cmd:)
+  - Měňte pomalu teplotu (slider T) a stanovte bod mrznutí i zpětně bod tání (pozor na hysterezi)
+  - Opakujte pro několik tlaků
+  - Pozorujte strukturu (RDF) pro tekutinu i krystal
+  - Exporujte RDF pomocí [▫ record], nechte několik bloků pro větší přesnost, a nakreslete vzniklý CSV-soubor (otevře se excelem apod.), sloupce A,B=RDF, sloupce A,C=kumulativní distribuční funkce
+
+3)
+V protokolu a prezentaci by měl být fázový diagram i několik vybraných distribučních funkcí s diskusí.

@@ -1,0 +1,38 @@
+﻿V SIMOLANTu je přitažlivá stěna zelená a odpudivá červená. Přitažlivou stěnu si můžete představit jako poloprostor vyplněný rozmazanými atomy stejných vlastností s tím, že číselná hustota je daná parametrem wall, který se vypisuje a lze ho měnit zadáním do okénka cmd: (nelze měnit pomocí slideru), např.:
+  cmd: wall=0.5 [Enter]
+Parametr musí být kladný, přitažlivost/odpudivost stěny se přepíná v panelu wall kliknutím na příslušné tlačítko (svítí zeleně = přitažlivá).
+
+0)
+Nastartujte SIMOLANT a zvolte:
+  - panel dole: "simulation speed" na maximum
+  - panel dole: "measurement block" na maximum
+  - Doporučený počet částic je 300 až 500 (pro vyšší teploty nutno víc)
+  - menu: [Prepare system] → [Vapor-liquid equilibrium]
+  - hustotu ρ pomalu na minimum tak, aby dole zbyla kapka či vrstva
+
+1)
+Zvolte teplotu T=0.5 a nechte defaultní hodnotu wall=0.75. Je dole kapka nebo vrstva? Zkuste zvyšovat hodnotu wall (např. wall=0.8) a pokuste se okometricky odhadnout, kdy dojde k rozestírání (kontaktní úhel θ=0). Nemáte-li kapku na správném místě, můžete si pomoci gravitací, ale nezpomeňte pak vypnout!
+
+2a) Snižujte hodnotu wall a pokuste se odhadnout, kdy je kontaktní úhel θ=90°. Tvar kapky je kruhová úseč (ve 3D kulová úseč). Představte si nejlepší doplnění kapky na kruh zasahující pod spodní zeď, ale pozor na vrstvu přiléhající těsně ke zdi.
+
+2b) Alternativně si udělejte přitažlivý roh:
+- menu: [Boundary conditions] → [Box (soft walls)]
+- levou a spodní zeď přitažlivou
+- pravou a horní zeď odpudivou.
+Tvar kapky by měl být čtvrtkruh.
+
+3) Opakujte pro vyšší i nižší teploty. (Čím vyšší teplota, tím je to těžší. Pokud se vám přisedlá kapka vypaří, může být problém s nukleací; můžete si pomoci dočasně gravitací nebo snížením teploty – nezapomeňte pak vypnout).
+
+4) Stanovte pomocí NPT simulace rovnovážnou hustotu pro vybrané teploty za nulového tlaku. Zvolte:
+  - menu: [Boundary Conditions] → Periodic
+  - menu: [Method] → Molecular Dynamics NPT Berendsen
+  - tlak (slider P) nejprve zvýšit (aby zmizel plyn), pak snížit pomalu na 0
+  - stanovit hustotu (stačí krátký běh): [Record], několik bloků, [Record]
+  - opakovat pro všechny teploty
+
+5) Do stejného grafu nakreslete:
+  - závislost wall(θ=0) na teplotě
+  - závislost wall(θ=90°) na teplotě
+  - závislost ρ na teplotě
+
+6) Uveďte příklady materiálů, na kterých se voda rozestírá, a naopak příklady superhydrofobních povrchů.

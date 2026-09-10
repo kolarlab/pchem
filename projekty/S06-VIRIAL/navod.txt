@@ -1,0 +1,16 @@
+﻿1) Nastartujte SIMOLANT a nastavte:
+  - "simulation speed" na maximum
+  - cca 100 částic (N)
+  - Boundary conditions → Periodic
+  - NVT simulaci, rychlejší je Monte Carlo (Metropolis), ale lze použít i MD
+  - Před měřením nechte nastavit posunuti (set MC moves), ale na měření vypněte. Také lze po vypnutí "set MC moves" nastavit d=0.5, což je pro řídké systémy vhodná hodnota.
+
+2) Začněte např. s T=2 (defaultní T=3 je nevhodné, protože je blízko Boyleovy teploty) a po stisku [▫ record] stanovte hodnotu kompresibilitního faktoru pro několik poměrně malých hustot, např. ρ=0.2, 0.1, 0.05, ρ=0.0025.
+  - Čím řidší systém, tím déle simulujte!
+  - Ignorujte hlášku "Cannot follow periodic b.c.! MSD turned off for now...".
+
+3) Nakreslete graf Z(rho) a stanovte směrnici tečny v bodě ρ → 0; neumíte-li to jinak, stačí graficky.
+  - Také můžete extrapolovat funkci (Z−1)/ρ k nule a získat přímo B.
+  - Nejlepší postup je fitovat Z na vhodnou funkci, např. Z=1+B*ρ+C*ρ². Je vhodné použít metodu, která použije udané standardní chyby; pokud takovou metodu nemáte, použijte jako váhy 1/σ², kde σ je udaná standardní chyba hodnoty Z.
+
+4) Opakujte pro několik teplot a srovnejte s hodnotou uvedenou v souboru simolant.txt (B=...).  Pro které hodnoty je simulovaná hodnota přesnější a pro které méně přesná?

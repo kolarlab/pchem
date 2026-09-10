@@ -1,0 +1,13 @@
+title: Asociace methanu na grafen
+difficulty: 5
+supervisor: Michal Kolář
+keywords:
+    - molekulová dynamika
+    - GROMACS
+story:
+    - Simulace molekulární dynamiky umožňují studovat strukturu a dynamiku molekulových komplexů na časových škálách mikrosekund s atomárním rozlišením.
+    - Methan jako hydrofobní částice může ve vodném prostředí asociovat s grafenem.
+instructions:
+    - Proveďte molekulově dynamickou simulaci systému obsahující grafen, tři molekuly methanu a vodu.
+    - Charakterizujte polohu methanů a vypočítejte Gibbsovu energie adsorpce.
+    - Výsledky diskutujte.

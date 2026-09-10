@@ -1,0 +1,122 @@
+Následující podrobný návod je pro MACSIMUS. Můžete použít i jiný software, pokud ho ovládáte.
+
+Silové pole: Suk Joung and Thomas E. Cheatham, III: J. Phys. Chem. B 112, 9020–9041 (2008). Model je vhodný pro ionty ve vodě, jinak není příliš přesný, je však jednoduchý.
+
+Technická poznámka: "Slab" geometrie popisuje systém periodický ve všech směrech, takže ve směru z máme "sendvič" z nekonečně vrstev.  Tyto vrstvy mají jistý fluktuující dipólový moment, a proto se přitahují (je to analogie vzniku Londonových sil).  Tlak ve směru osy z, který se počítá z viriálu sil, je proto nutné korigovat – přitažlivost odečíst.  Viz  manuál, odd. "Slab geometry and vapor-liquid equilibrium", blíže viz C. Yeh, M.L. Berkowitz, J. Chem. Phys. 111, 3155 (1999).
+
+Pozn.: Stanovení normálního bodu varu za tlaku 100 kPa je obtížné a vyžaduje nastavení vysoké přesnosti Ewaldovy sumace i dlouhé běhy, proto se spokojíme s tlakem cca 1 MPa.
+
+Budete používat cookewslc (cook), případně cookewslcP1
+
+================= 0 ================
+
+Instalujte MACSIMUS: https://old.vscht.cz/fch/cz/pomucky/kolafa/pchemlm.pdf
+
+2) Rozbalte přiložené soubory z data.zip a připravíte silové pole (soubor nacl.ble) příkazem
+  blend -o nacl Na+ Cl-
+
+Použijte ALESPOŇ Na200Cl200, spočtěte velikost boxu taveniny (hustota bude za vyšší teploty cca 1000 kg/m3) a dosaďte níže v Å, vyzkoušejte a případně změňte!
+
+Pozn.: AA = Å
+
+---------- Vstupní soubor pro simulaci, vhodné jméno = nacl.def ---------------
+n=POCET_IONTU         ! pomocna promenna - dobre zkusit pro ruzne velikosti
+N[0]=n N[1]=n         ! pocet Na+ a Cl-
+
+x=SPOCITAT            ! pomocna promenna = velikost boxu [AA]
+                      ! NUTNO SPOCITAT, aby pulka boxu byla kapalina a druha plyn
+                      ! pokud se nepovede napoprve, doladit
+z=3*x                 ! box ve smeru z bude 3x vetsi
+
+L[0]=x L[1]=x L[2]=3*x ! velikost boxu [AA]
+cutoff=x/2            ! elst cutoff [AA]
+                      ! nastavit na polovinu boxu
+                      ! u vetsich systemu i o neco mene (ovlivnuje rychlost vypoctu)
+LJcutoff=cutoff       ! LJ cutoff   [AA]
+                      ! nesmi byt vetsi nez cutoff, obv. alespon 10 A je OK
+corr=0                ! zrusi korekce pocitane za predpokladu,
+                      ! ze system je homogenni (zde neni)
+el.corr="zCM"         ! tlak Pzz bude korigovan na dip. moment vrstvy
+el.epsk=.1 el.epsr=.1 ! vyssi presnost vypoctu elst. sil (chyba tlaku 50 kPa) [K/A]
+el.diff=0.3           ! omezi urcita varovani
+noint=30 h=0.1/noint  ! pocet kroku/cyklus a delka kroku [ps]
+no=100                ! pocet cyklu (budete menit dale)
+dt.plb=1              ! jak casto se bude zapisovat "playback" [ps]
+dt.prt=1              ! 1 radek protokolu kazdou ps
+
+thermostat="Berendsen" ! skalovani rychlosti
+tau.T=1               ! casova konstanta termostatu [ps] - default
+
+slab.max=z            ! rozsah pro mereni z-profilu
+;
+
+----------- Řídicí soubor simulace (příklad, vhodné jméno = nacl2000.get) -----------
+init="slab"           ! vytvori vrstvu (kterou nutno dale zrovnovaznit)
+el.epsk=2 el.epsr=1   ! mene presny Ewald (rychlejsi)
+initrho=200           ! mensi hustota na zacatku, protoze pri vetsi
+                      ! hustote se spatne vkladaji molekuly
+tau.rho=1             ! zajisti zmenseni boxu na uvedenou velikost
+T=2000                ! teplota (ZKUSIT NEKOLIK TEPLOT)
+no=20 tau.T=.1;       ! pocatecni michani a rychle chlazeni
+no=20 tau.T=.2;       ! restart Ewalda po zmene boxu
+no=200 tau.T=1;       ! dalsi michani
+---------------------------------------------------------------
+
+Start simulace (paralelně, klastr):
+  jsub -p 2 -n JMENOJOBU cookewslcP1 nacl nacl2000
+Start simulace (sériově, klastr):
+  jsub -n JMENOJOBU cookewslc nacl nacl2000
+Start simulace (lokální počítač):
+  NSLOTS=2 cookewslcP1 nacl nacl2000
+  cookewslc nacl nacl2000
+
+Analýza míchání (equilibrace):
+1) podívat se na nacl2000.cp
+2) na konfiguraci nacl2000.plb
+3) v souboru nacl2000.prt najít "speed =" (nejlépe v cycles/hour) a podle toho plánovat práci (např. nechat počítat přes noc)
+
+==================== produktivní běh ===============
+----- SOUBOR nacl.def:
+JE-LI POTŘEBA: opravit výpočet "x" a "cutoff"
+------ SOUBOR nacl2000.get:
+init="start"           ! start z predchozi konfigurace; nove mereni a zaznam
+T=TEPLOTA              ! doplnit
+no=500                 ! jeste zamichat
+!no=2000                ! toto pouzit, pokud se menilo x
+;                      ! konec michani
+! produktivni beh
+init="append"          ! .cp,.plb pokracuji, nove mereni
+no=POCET_CYKLU         ! aby to bylo za rozumnou dobu
+! kód pro měření hustotního profilu (vyzaduje init="append","start")
+slab.grid=1 ! 1 chlivek histogramu na Angstrom
+slab.mode=1 ! stanovi i povrchove napeti
+slab.sp=-1  ! centrovani vrstvy - jen pro mereni z-profilu
+;
+--------------------------------------
+
+Je třeba sledovat i tlak ve směru z, to se zajistí vytvořenim souboru nacl2000.cpi s následujicím řádkem
+Soubor nacl2000.cpi:
+Ptzz
+--------------------------------------
+
+Analýza vysledků:
+1) nacl2000.cp - je vše v pořádku?
+   showcp -p nacl2000.cp
+2) grafy hustoty v kg/m3: Na+, Cl- a největší=součet
+   plot nacl2000.cm.kgm-3.z:1:2 :3 :4
+3) tlak: najít řádek =Ptens.zz [Pa]=
+   # HODNOTA STDERR ...  =Ptens.zz [Pa]=
+STDERR (standardní chyba) by měla být několikrát menší než hodnota (chyby jsou typicky několik set kPa)
+
+DÁLE (nikoliv nutně všechny body):
+- není-li dost přesné, provést podle možností delší simulaci
+- zkusit jinou teplotu (podle toho, jak to vyjde - čím nižší teplota, tím menší tlak a tím relativně méně přesný výsledek)
+- cílový tlak P=1e5 Pa je špatně dosažitelný, vyžadoval by dlouhé běhy a zpřesnění Ewaldovy simace (parametry el.epsk,el.epsr)
+  => pokusit se extrapolovat (vyneste si závislost 1/T na ln(Ptzz))
+  pro usnadnění extrapolace možno stanovit enthalpii z NPT simulace za dané teploty (viz cvičení pchem06)
+- stanovit hustotu z grafu nacl2000.cm.kgm-3.z
+- odpovídá hustota stavové rovnici id. plynu?
+- podívat se, jak velké jsou klastry v plynné fázi (tip: používat [Trace])
+- zkusit pro víc molekul a porovnat
+- najít povrchové napětí (hledat "surface tension" v .prt)
+- srovnat s experimentem, podaří-li se najít

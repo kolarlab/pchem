@@ -1,0 +1,18 @@
+title: Difuzně řízená agregace
+difficulty: 3
+supervisor: Jiří Kolafa
+keywords:
+    - Brownův pohyb
+story:
+    - Dendrimer je vysoce rozvětvená makromolekula se stromovitou (dendritickou) strukturou.
+instruction:
+    - Uvažujte následující model vzniku dendrimerů při elektrolýze.
+    - Použít můžete buď 2D nebo 3D prostor a jak pohyb po mřížce (čtvercové nebo hexagonální) tak spojitý popis polohy iontů.
+    - Na začátku máte určitý počet N iontů, např. rozmístěných náhodně v kruhu, kouli, čtverci aj. 
+    - Uprostřed máte jeden atom (elektrodu). 
+    - V jednom kroku simulace každý ion provede Brownův pohyb (difuzi) v náhodném směru a s určitou (poměrně malou) pravděpodobností pohyb směrem k elektrodě. 
+    - V případě dotyku s elektrodou se elektricky zneutralizuje (vybije) a usadí. Stane se tak součástí elektrody. 
+    - Stanovte gyrační poloměr Rg takového dendrimeru, opakujte pro větší množství iontů a z grafu log(N) vs log(Rg) stanovte fraktální dimenzi.
+literature:
+    - Základní info o fraktálech: https://old.vscht.cz/fch/cz/pomucky/kolafa/mikro12.pdf#page=7
+    - Gyrační poloměr: https://old.vscht.cz/fch/cz/pomucky/kolafa/mikro12.pdf#page=19

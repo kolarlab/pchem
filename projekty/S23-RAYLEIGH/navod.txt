@@ -1,0 +1,76 @@
+Následující podrobný návod je pro MACSIMUS. Můžete použít i jiný software, pokud ho ovládáte.
+
+=========== 0 ===========
+Instalujte MACSIMUS: https://old.vscht.cz/fch/cz/pomucky/kolafa/pchemlm.pdf
+
+========== 1 ===========
+----- Připravte soubor AR.che s tímto obsahem: ------
+Ar
+AR
+-----------------------------------------------------
+a vygenerujte silové pole takto:
+   blend -o ar AR
+
+========== 2 ===========
+Nejprve uděláme malý váleček pomocí působení vnějších sil do středu boxu ve směru y,z.
+(To je z důvodů efektivity, metoda "linked-cell list" v implementaci v MACSIMUSu začíná rozklad simulační buňky ve směru x a takto bude výpočet rychlejší)
+--------  soubor ar200.def: ---------
+N[0]=200             ! pocet molekul typu 0 (vic typu nemame)
+LJcutoff=8 cutoff=8  ! dosah potencialu
+noint=25 h=0.1/noint ! casovy krok bude 0.004 ps
+dt.plb=1             ! jak casto zapisovat trajektorii (playback), v ps
+dt.prt=1             ! jak casto zapisovat informace do protokolu
+z=30
+L[0]=z L[1]=z*2 L[2]=z*2    ! velikost boxu [AA = Angstrom]
+T=60 thermostat="Berendsen" tau.T=1
+rho=0                       ! hustota bude stanovena z boxu
+;
+--------  soubor ar200.get: ---------
+init="crystal"  ! ridka pravidelna pocatecni konfigurace
+center.K[1]=1 center.K[2]=1 ! centralni sily ve smerech y,z v [K/AA^2]
+no=1000
+;
+-------------------------------------
+
+Spustit přímo:
+  cook ar ar200
+Na klastru:  
+  jsub cook ar ar200
+Zkontrolujte okometricky ar200.plb:
+  show ar200.plb
+
+========== 3 ===========
+Nyní pomnožíme ve směru osy x asi 20 krát.
+Nejprve kopie:
+  cp ar200.cfg ar4000.cfg
+  cp ar200.def ar4000.def
+--------  soubor ar4000.def změny: ----------
+n=20  ! replikacni faktor
+N[0]=200*n ! pocet molekul
+L[0]=z*n   
+thermostat="Andersen"
+! a přidat:
+load.n[0]=n ! replikacni faktor
+----------------------------
+--------  soubor ar4000.get: ---------
+init="start"
+no=1;
+--------------------------------
+a spustit (lze na serveru – je to krátké):
+  cook ar ar4000
+Zkontrolovat konfiguraci:
+  show ar4000.plb
+
+========== 4 ===========
+Upravíme data pro delší běh:
+--------  soubor ar4000.def ---------
+- zrušit "load.n[0]=n"
+--------  soubor ar4000.get: ---------
+init="start" ! případně "append" pro další simulace
+no=NEKOLIK_TISIC; ! delsi beh
+--------------------------------
+
+DALŠÍ:
+- simulujte ještě jednou pro větší počet molekul
+a/nebo
+- seznamte nás nás s různými typy Rayleighových nestabilit

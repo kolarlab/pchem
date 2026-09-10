@@ -1,0 +1,18 @@
+title: Klastry vody
+difficulty: 3
+supervisor: Petr Slavíček
+keywords:
+    - chemické rovnováhy
+    - slabé interakce
+instructions:
+    - Zvolte si, kterou kvantově-chemickou metodu použijete při následujících výpočtech.
+    - K zvolené metodě provádějte vaše výpočty vždy s bází 6-31G* a bází 6-31+G*, která obsahuje difúzní funkce.
+    - Zoptimalizujte strukturu dimeru, trimeru a tetrameru vody.
+    - Ověřte, že se struktury nachází v minimu na hyperploše potenciální energie.
+    - Vypočítejte interakční energii jednotlivých struktur.
+    - Vypočítejte rovnovážnou konstantu dimerizace vody.
+    - Výsledky spočítané s bází 6-31G* a 6-31+G* srovnejte.
+    - Do protokolu přidejte kratší pojednání o významu nekovalentních interakcí v přírodních vědách.
+literature:
+    - Proc. Nat. Acad. Sci. 98 (2001) 10533
+    - https://www-wales.ch.cam.ac.uk/CCD.html

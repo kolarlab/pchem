@@ -1,0 +1,16 @@
+title: Solvatace a tautomerní rovnováha
+difficulty: 4
+supervisor: Petr Slavíček
+keywords:
+    - chemie v roztoku
+    - chemické rovnováhy
+instructions:
+    - Zvolte kvantově-chemickou metodu, kterou budete používat při následujících výpočtech.
+    - Zoptimalizujte strukturu 2-hydroxypyridinu a 2-pyridonu.
+    - Ověřte, že se struktury nachází v minimu na hyperploše potenciální energie.
+    - Vypočítejte rovnovážnou konstantu reakce v plynné fázi a ve vodě s pomocí tzv. termodynamického cyklu (viz přiložená literatura).
+    - Porovnejte vliv vody na rovnováhu mezi strukturami. Pro zahrnutí vlivu solvatace použijte metodu spojitého dielektrika.
+    - V protokolu stručně diskutujte význam tautomerních rovnováhy v biomolekulárních vědách.
+literature:
+    - Skripta z předmětu Praktikum z kvantové chemie (str. 54-56)
+    - https://ufch.vscht.cz/files/uzel/0024844/0006~~CyhKzC7JzC7Nja-Kzy5LzCvJL0uNT85Izc1MBQA.pdf?redirected

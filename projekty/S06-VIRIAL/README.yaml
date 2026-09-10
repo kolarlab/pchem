@@ -1,0 +1,14 @@
+title: Druhý viriálový koeficient
+difficulty: 2
+supervisor: Jiří Kolafa
+keywords:
+    - termodynamika
+    - SIMOLANT
+story:
+    - Druhý viriálový koeficient vyjadřuje efektivní interakci páru částic při dané teplotě.
+    - Viriálové koeficienty se používají při popisu neideálních plynů a jejich odchylek od ideálního chování.
+instruction:
+    - Pro 2D systém implementovaný v SIMOLANTu stanovte druhý viriálový koeficient pro několik teplot pseudoexperimentálně z tlaku (resp. z kompresibilitního faktoru Z).
+    - Srovnejte s přímým výpočtem z mezimolekulového potenciálu podle vzorce.
+literature:
+    - https://github.com/kolafaj/SIMOLANT

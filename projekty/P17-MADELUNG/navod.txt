@@ -1,0 +1,21 @@
+﻿Existuje několik variant definice Madelungovy konstanty. Pro účely této úlohy ji definujeme tak, že elektrostatická energie iontového krystalu je
+  Eelst = lim_N→∞ (N M e²)/(4π ε0 r0),
+kde
+  N  je počet iontů v krystalu
+  r0 je nejbližší vzdálenost iontů
+  e  je elementární náboj
+  M  je Madelungova konstanta
+  ε0 je permitivita vakua
+  
+Jiné definice počítají potenciál na iontu (pak máme jinou M_i pro každý druh iontu) a/nebo místo r0 používají mřížkovou konstantu nebo (objem buňky)^1/3.
+
+1) Uvažujte mikrokrystalky NaCl krychlového tvaru vzniklé opakováním motivu Na₄Cl₄ ve 3 směrech n× (n=1,2,3...). Pro jednoduchost uvažujte r0=1, e=1, 4πε0=1.
+
+2) Spočtěte energii a z ní M(n). Nakreslete graf.
+
+3) Pro závislost M(n) na n platí asymptotický vztah:
+   M(n) = M + a/n + b/n² + ...
+   (Pro vyšší členy je již nutno rozlišovat sudé a liché n)
+   Pokuste se, po vynechání malých n, pomocí tohoto vztahu extrapolovat. Můžete zkusit též Richardsonovu extrapolaci (viz např. https://old.vscht.cz/fch/cz/pomucky/kolafa/mmfch4.pdf#page=9).
+
+Pozn.: Pro výpočet Madelungovy vyvinuli Ewald a Kornfeld mnohem efektivnější metodu. Zajímavé je, že dnes je tato metoda široce používaná v simulacích nejen pro krystaly pro výpočet elektrostatických sil v periodických okrajových podmínkách.

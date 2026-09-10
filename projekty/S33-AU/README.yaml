@@ -1,0 +1,20 @@
+title: Klastry zlata
+difficulty: 3
+supervisor: Jiří Kolafa
+keywords:
+    - molekulová dynamika
+    - zlato
+    - fázové rovnováhy
+    - MACSIMUS
+story:
+    - V klasických simulacích lze snadno simulovat děje jako tání a var.
+    - Silové pole pro kovy typu tight binding mechanisticky modeluje hustotu volných elektronů.
+instruction:
+    - Vytvořte krystalky zlata ve tvaru dvacetistěnu.
+    - Simulujte s potenciálem typu tight-binding.
+    - Studujte hustotu ve středu krystalku za nulové teploty v závislosti na počtu atomů.
+    - Opakujte podobný pseudoexperiment s argonem; rozdíly vysvětlete.
+    - Zkuste krystalek roztavit a pomalu zchladit – zkrystalizuje opět?
+literature:
+    - https://old.vscht.cz/fch/cz/pomucky/kolafa/pchemlm.pdf
+    - https://pubs.aip.org/aip/jcp/article/122/21/214722/896065/Melting-of-icosahedral-gold-nanoclusters-from

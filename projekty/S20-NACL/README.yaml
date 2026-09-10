@@ -1,0 +1,15 @@
+title: Bod varu NaCl
+difficulty: 4
+supervisor: Jiří Kolafa
+keywords:
+    - molekulová dynamika
+    - fázové rovnováhy
+    - MACSIMUS
+story:
+    - Fázové rovnováhy modelů lze sledovat simulacemi molekulové dynamiky a Monte Carlo.
+instruction:
+    - Stanovte bod varu NaCl za zvýšeného tlaku přímou metodou – kapalina a pára v rovnováze.
+    - Systém musí být větší (aspoň Na256Cl256). Zjistěte alespoň kvalitativně, zda v parách NaCl jsou volné ionty, molekuly NaCl nebo větší klastry.
+    - Diskutujte strukturu par.
+literature:
+    - https://old.vscht.cz/fch/cz/pomucky/kolafa/pchemlm.pdf

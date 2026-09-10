@@ -1,0 +1,42 @@
+Následující podrobný návod je pro MACSIMUS. Můžete použít i jiný software, pokud ho ovládáte.
+
+============== 0 instalace ===============
+
+Instalujte MACSIMUS. Budete potřebovat cookceslc nebo cookceslcP1, které je možno zvolit v průběhu instalace. (Přesnější by byly verze s Ewaldovou sumací, cookceslc nebo cookceslcP1, ale výpočet by byl pomalejší). 
+
+=============== 1 příprava ============
+
+Příprava silového pole:
+  blend -o ff OCTANOL -h SPC
+
+Prohlédněte si definiční soubor simulace O20W500.def a řídicí soubor O20W500.get a spusťte:
+  NSLOTS=4 cookceslcP1 ff O20W500
+kde je počet procesorů (max. 4).
+
+Zkontrolujte
+  show O20W500 -I$'\t$i
+a
+  showcp -p O20W500
+
+============ 3 měření =============
+
+Je-li vše ustálené, proveďte měření. Vhodný řídicí soubor je
+! cookceslcP1 ff O20W500
+init="start"     ! startuje z predchozi konfigurace
+no=1000;         ! pocet cyklu po 0.1 ps
+                 ! nastavte podle dosazene presnosti a rychlosti vypoctu
+                 ! pro povrchove napeti je treba delsi beh
+
+Prohlížení z-profilu (těžiště molekul) v číselných hustotách:
+  plot O20W500.cm.AA-3.z:1:2 :1:3 :1:4
+2=oktanol je bílý
+3=voda je žlutá
+4=součet
+Můžete ovšem použít libovolný jiný software čtoucí white-separated sloupce
+
+Nábojový profil
+  plot O20W500.q.eAA-3.z:1:2 :1:3 :1:4
+
+Povrchové napětí: najděte tabulku a údaj označený "from full Pt (incl.kin.part)" a (d), poslední 2 sloupce označené stderr=odhad nejistoty a FF-corrected.
+
+Opakujte pro čistou vodu a/nebo pro více molekul oktanolu a/nebo pro butanol.

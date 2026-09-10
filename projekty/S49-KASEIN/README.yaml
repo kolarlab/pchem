@@ -1,0 +1,19 @@
+title: Rozdíl mezi kaseinem A1 a A2
+difficulty: 5
+supervisor: Michal Kolář
+keywords:
+    - molekulová dynamika
+    - protein
+    - mutace
+    - GROMACS
+story:
+    - V kravském mléce se vyskytuje beta-kasein.
+    - V mléce nešlechtěných plemen skotu se vyskytuje tzv. A2 forma, v mléce moderních plemen převažuje A1 forma, které se liší jediným reziduem.
+    - Díky rozdílu v jednom reziduu (His vs Pro), se hydrolýza obou forem značně liší.
+instructions:
+    - Proveďte molekulárně dynamické simulace A1 a A2 beta-kaseinů (zde je dobré vyjít z jedné společné terciární struktury a následně dané reziduum mutovat).
+    - Simulace proveďte při teplotě 310 K a tlaku 1 bar. Simulujte alespoň 200 ns.
+    - Popište rozdíly mezi A1 a A2 beta-kaseinem. Sledujte zejména strukturu a dynamiku v okolí bodové mutace.
+    - Diskutujte význam pozorovnání na konzumaci tzv. A2 mléka.
+literature:
+    - podcast Institut moderní výživy, díl 39

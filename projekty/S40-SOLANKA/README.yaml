@@ -1,0 +1,15 @@
+title: Solanka (Debyeova–Hückeova teorie)
+difficulty: 3
+supervisor: Jiří Kolafa
+keywords:
+    - molekulová dynamika
+    - MACSIMUS
+story:
+    - Soli ve vodném prostředí disociují a náboj jednotlivých iontů je elektrostaticky kompenzován polárním rozpoštědlem.
+instruction:
+    - Simulujte metodou MD zředěný roztok NaCl ve vodě.
+    - Zobrazte radiální distribuční funkce Na-Na, Na-Cl a Cl-Cl a popište je.
+    - Jednodušší verze (obtížnost 2): opakujte pro jinou koncentraci a vysvětlete změny.
+    - Složitější vaerze (obtížnost 4): Z koordinačních čísel (vč. H a O i bez) vypočtěte průměrný náboj v kouli o poloměru r okolo iontu a srovnejte s predikcí podle Debyeovy–Hückeovy teorie.
+literature:
+    - https://old.vscht.cz/fch/cz/pomucky/kolafa/pchemlm.pdf

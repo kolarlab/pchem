@@ -1,0 +1,25 @@
+title: Deaminace nukleových bází
+difficulty: 5
+supervisor: Petr Slavíček
+keywords:
+    - chemie v roztoku
+    - chemické rovnováhy
+story:
+    - Deaminace cytosinu probíhá za fyziologických podmínek mnohem rychleji než deaminace adeninu.
+    - Uracil vzniklý touto deaminací je účinně rozpoznáván opravnými enzymy.
+    - I přesto však touto reakcí může vzniknout bodová mutace.
+    - Předpokládá se, že právě proto se v DNA přirozeně vyskytuje thymin namísto uracilu, aby byly _správné uracily_ rozpoznány od produktů deaminace cytosinu.
+instructions:
+    - Zvolte kvantově-chemickou metodu, kterou budete používat při následujících výpočtech.
+    - Zoptimalizujte struktury na schématu (viz příloha).
+    - Ověřte, že se struktury nachází v minimu na hyperploše potenciální energie.
+    - Vypočítejte rovnovážné konstanty deaminace adeninu a uracilu v plynné fázi při 300 K.
+    - Vypočítejte rovnovážné konstanty deaminace adeninu a uracilu ve vodě při 300 K.
+    - Rozpouštědlo modelujte jako dielektrické kontinuum.
+    - K výpočtům ve vodní fázi se doporučuje počítat přes tzv. termodynamický cyklus (viz přiložená literatura).
+    - V literatuře vyhledejte údaje o rychlostech těchto reakcí.
+    - V úvodu protokolu pojednejte o těchto i dalších reakcích vedoucích k poškození DNA.
+literature:
+    - Acc. Chem. Res. 42, 97–106 (2009), https://pubs.acs.org/doi/10.1021/ar800114w
+    - Skripta z předmětu Praktikum z kvantové chemie (str. 54-56)
+    - https://ufch.vscht.cz/files/uzel/0024844/0006~~CyhKzC7JzC7Nja-Kzy5LzCvJL0uNT85Izc1MBQA.pdf?redirected

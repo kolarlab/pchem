@@ -1,0 +1,15 @@
+title: Sekvenční porovnání vybraného proteinu
+difficulty: 4
+supervisor: Michal Kolář
+keywords:
+    - protein
+    - primární struktura
+    - sekvence
+    - sekundární struktura
+    - BLAST
+story:
+    - Primární struktura je hlavní charakteristikou každého biopolymeru. 
+    - Přestože se primární struktura homologních proteinů může lišit, jejich 3D tvar může být přitom podobný.
+instructions:
+    - Porovnejte primární strukturu vámi vybraného proteinu v několika organismech. Jako vhodné se nabízí proteiny zapojené do základního metabolismu buněk.
+    - Predikujte sekundární strukturu proteinů a diskutujte mezidruhové rozdíly.

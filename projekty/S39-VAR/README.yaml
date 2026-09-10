@@ -1,0 +1,17 @@
+title: Var modelu vody
+difficulty: 3
+supervisor: Jiří Kolafa
+keywords:
+    - molekulová dynamika
+    - voda
+    - fázové rovnováhy
+    - MACSIMUS
+story:
+    - Rovnováhu kapalina–pára lze simulovat klasickou molekulovou dynamikou.
+    - Zde si to vyzkoušíme jen pro čistou látku a nejjednodušší přímou metodou.
+instruction:
+    - Simulujte metodou MD ve slab geometrii kapalnou vodu s vodní párou za teploty 200 °C. Použijte model TIP4P/2005.
+    - Stanovte rovnovážné hustoty kapaliny a páry rovnovážný tlak a srovnejte s experimentem.
+literature:
+    - https://old.vscht.cz/fch/cz/pomucky/kolafa/pchemlm.pdf
+    - https://iapws.org/documents/release/IF97-Rev

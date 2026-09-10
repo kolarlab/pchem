@@ -1,0 +1,13 @@
+title: Simulace epidemie
+difficulty: 4
+supervisor: Jiří Kolafa
+keywords:
+    - Monte Carlo
+story:
+    - Šíření epidemie (např. chřipky nebo covid-19) lze popsat modely, které lze simulovat metodou kinetického MC.
+instruction:
+    - Mějme G měst, pro jednoduchost nechť má každé N obyvatel.
+    - Obyvatel může být v jednom ze tří stavů {Vnímavý (zdravý ale bez imunity), Nemocný, Imunní}.
+    - Na začátku je v populaci několik Nemocných.
+    - Každý den dojde k následujícím změnám: 1) Dojde k P párovým interakcím v rámci každého města. Setká-li se Nemocný s Vnímavým, Vnímavý onemocní. 2) Dojde k X párovým interakcím mezi různými městy podle stejného pravidla. 3) Nemocný se s pravděpodobností U uzdraví a stane imunním. Alternativně můžete uvažovat délku nemoci D dní. 4) Imunní s pravděpodobností Z ztratí imunitu (stane se Vnímavým), Z < U; můžete též zkusit Z = 0 (trvalá imunita).
+    - Při vhodném nastavení parametrů lze dostat opakující se epidemie. Podaří se vám to?

@@ -1,0 +1,13 @@
+title: Madelungova konstanta NaCl
+difficulty: 3
+supervisor: Jiří Kolafa
+keywords:
+    - iontový krystal
+story:
+    - Elektrostatická energie iontového krystalu (na 1 ion) je dána vztahem Eelst=Me²/4πε0r0, kde r0 je vzdálenost nejbližších sousedů.
+    - M je Madelungova konstanta.
+    - Nekonečná řada pro výpočet M není absolutně konvergentní.
+instruction:
+    - Napište kód pro výpočet elektrostatické energie krychlového klastru NaxClx (x=4,8,12..) vyříznutého z ideálního krystalu.
+    - Vypočtěte a extrapolujte pro n→∞.
+    - Srovnejte se známou hodnotou.

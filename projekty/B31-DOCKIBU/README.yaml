@@ -1,0 +1,19 @@
+title: Docking ibuprofenu
+difficulty: 4
+supervisor: Michal Kolář
+keywords:
+    - dokování
+    - docking
+    - swissdock
+    - protein-ligand interakce
+    - ibuprofen
+story:
+    - Ibuprofen patří mezi nejpoužívanější léky proti bolesti.
+    - Inhibuje syntézu prostaglandinů, hormonů vyskytujících se prakticky ve všech orgánech těla.
+instructions:
+    - Pomocí nástroje SwissDock analyzujte, jak se váže ibuprofen do proteinu COX-2.
+    - Jako výchozí použijte experimentálně zjištěnou strukturu protein-ligandového komplexu (PDB 4PH9)
+    - Pomocí vhodné metriky porovnejte predikovanou polohu ligandu s experimentálně určenou polohou.
+    - Popište roli dílčích nekovalentních interakcí mezi ligandem a COX-2.
+literature:
+    - https://doi.org/10.1016/j.jsb.2014.11.005

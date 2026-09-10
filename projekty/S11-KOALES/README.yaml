@@ -1,0 +1,15 @@
+title: Koalescence kapek 2D
+difficulty: 3
+supervisor: Jiří Kolafa
+keywords:
+    - molekulová dynamika
+    - SIMOLANT
+    - koloidní chemie
+story:
+    - Koalescence kapek je proces jejich samovolného spojování do větších kapek, poháněný snahou systému minimalizovat povrchovou energii.
+    - Je rozdíl mezi povrchovým napětím (Gibbsova energie) a povrchovou entalpií.
+instruction:
+    - Studujte změnu teploty po koalescenci dvou kapek a srovnejte s teoretickým výpočtem z povrchového napětí, povrchové entalpie a tepelné kapacity.
+literature:
+    - https://github.com/kolafaj/SIMOLANT
+    - Podobná úloha ve 3D je S35-SPLYNUTI

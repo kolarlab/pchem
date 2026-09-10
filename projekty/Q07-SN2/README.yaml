@@ -1,0 +1,16 @@
+title: Ab initio studium SN2 reakce
+difficulty: 3
+supervisor: Petr Slavíček
+keywords:
+    - chemie v roztoku
+    - energetika reakce
+instructions:
+    - Zvolte kvantově-chemickou metodu, kterou budete používat při následujících výpočtech.
+    - Zoptimalizujte strukturu reaktantů, produktů a tranzitního stavu pro modelovou reakci fluoridového aniontu s methylfluoridem mechanismem SN2.
+    - Ověřte, že se struktury reaktantů a produktů nachází v minimu na hyperploše potenciální energie.
+    - Ověřte, že se struktura tranzitního stavu nachází v sedlovém bodě na hyperploše potenciální energie.
+    - Namodelujte energetický diagram reakce.
+    - Jaká je výška reačkní bariéry ve vodě a jaká v chloroformu? Rozpouštědlo modelujte jako spojité dielektrikum.
+    - V úvodu protokolu diskutujte oba mechanismy nukleofilní substituce, vliv rozpouštědla a substituentů.
+literature:
+    - E. V. Anslyn, D. A. Dougherty. Modern Physical Organic Chemistry. University Science Books, Sausalito, 2006.

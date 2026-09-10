@@ -1,0 +1,17 @@
+title: Bod tání ledů
+difficulty: 5
+supervisor: Jiří Kolafa
+keywords:
+    - molekulová dynamika
+    - led
+    - fázové rovnováhy
+    - MACSIMUS
+story:
+    - Molekulové simulace umožňují studovat fázové rovnováhy.
+instruction:
+    - Stanovte bod tání hexagonálního (Ih) nebo kubického (Ic) ledu přímou metodou.
+    - Použijte nějaký lepší klasický model vody, např. TIP4P/2005 (případně OPC, Nada-Eerden, BK3, POL4D).
+    - K dispozici budete mít krystal ledu s náhodnou orientací protonů, který z poloviny roztavíte a budete studovat rovnováhu.
+    - Přidejte stručné pojednání o polymorfismu ledu.
+literature:
+    - https://old.vscht.cz/fch/cz/pomucky/kolafa/pchemlm.pdf
